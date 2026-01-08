@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusVR - Immersive VR/AR Platform</title>
+    <meta name="description" content="Experience the future of virtual and augmented reality. Build, explore, and connect in immersive digital worlds.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Orbitron', 'sans-serif'],
+                        body: ['Exo 2', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#A78BFA',
+                        accent: '#F43F5E',
+                        cyan: '#00FFFF',
+                        magenta: '#FF00FF',
+                        background: '#0F0F23',
+                        surface: '#1A1A2E',
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { textShadow: '0 0 10px #7C3AED, 0 0 20px #7C3AED, 0 0 30px #7C3AED' },
+                            '100%': { textShadow: '0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, #0F0F23 0%, #1A1A2E 50%, #0F0F23 100%);
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(124, 58, 237, 0.5);
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px #7C3AED, 0 0 20px #7C3AED, 0 0 30px #7C3AED;
+        }
+
+        .neon-border {
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.5), inset 0 0 10px rgba(124, 58, 237, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #00FFFF, #7C3AED, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(124, 58, 237, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 58, 237, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, #7C3AED 0%, #00FFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.8);
+        }
+
+        .btn-secondary {
+            border: 2px solid #7C3AED;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(124, 58, 237, 0.1);
+            border-color: #00FFFF;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .vr-headset {
+            position: relative;
+        }
+
+        .vr-headset::after {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse-slow 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass-card rounded-2xl px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-cyan rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </div>
+                    <span class="font-heading font-bold text-xl tracking-wider">NEXUSVR</span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-gray-300 hover:text-cyan transition-colors cursor-pointer">Features</a>
+                    <a href="#platforms" class="text-gray-300 hover:text-cyan transition-colors cursor-pointer">Platforms</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-cyan transition-colors cursor-pointer">Pricing</a>
+                    <a href="#community" class="text-gray-300 hover:text-cyan transition-colors cursor-pointer">Community</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button class="hidden sm:block text-gray-300 hover:text-white transition-colors cursor-pointer">Sign In</button>
+                    <button class="btn-primary px-6 py-2 rounded-full font-semibold text-white cursor-pointer">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg pt-24 pb-16 px-4">
+        <div class="hero-glow top-20 left-1/4"></div>
+        <div class="hero-glow bottom-20 right-1/4" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="mb-8 inline-block">
+                <span class="glass-card px-6 py-2 rounded-full text-sm font-medium text-cyan inline-flex items-center gap-2 cursor-pointer hover:border-cyan/50 transition-all">
+                    <span class="w-2 h-2 bg-cyan rounded-full animate-pulse"></span>
+                    Next-Gen VR/AR Platform
+                </span>
+            </div>
+
+            <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
+                <span class="gradient-text">STEP INTO</span><br>
+                <span class="text-white animate-glow">THE FUTURE</span>
+            </h1>
+
+            <p class="font-body text-lg sm:text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+                Experience immersive virtual and augmented reality like never before. Build, explore, and connect in limitless digital worlds.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                <button class="btn-primary px-8 py-4 rounded-full font-heading font-bold text-lg text-white cursor-pointer flex items-center gap-2 group">
+                    Start Free Trial
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </button>
+                <button class="btn-secondary px-8 py-4 rounded-full font-heading font-bold text-lg text-white cursor-pointer">
+                    Watch Demo
+                </button>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="stat-card glass-card rounded-xl p-6 text-center cursor-pointer">
+                    <div class="font-heading text-3xl md:text-4xl font-bold text-cyan mb-2">2M+</div>
+                    <div class="text-gray-400 text-sm">Active Users</div>
+                </div>
+                <div class="stat-card glass-card rounded-xl p-6 text-center cursor-pointer">
+                    <div class="font-heading text-3xl md:text-4xl font-bold text-magenta mb-2">500K+</div>
+                    <div class="text-gray-400 text-sm">VR Experiences</div>
+                </div>
+                <div class="stat-card glass-card rounded-xl p-6 text-center cursor-pointer">
+                    <div class="font-heading text-3xl md:text-4xl font-bold text-primary mb-2">99.9%</div>
+                    <div class="text-gray-400 text-sm">Uptime</div>
+                </div>
+                <div class="stat-card glass-card rounded-xl p-6 text-center cursor-pointer">
+                    <div class="font-heading text-3xl md:text-4xl font-bold text-accent mb-2">4.9★</div>
+                    <div class="text-gray-400 text-sm">User Rating</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-cyan font-heading font-semibold tracking-wider text-sm uppercase">Features</span>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mt-4 mb-6 gradient-text">Powerful Capabilities</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Everything you need to create, deploy, and scale immersive VR/AR experiences</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass-card rounded-2xl p-8 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-cyan/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7 feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">Cross-Platform Support</h3>
+                    <p class="text-gray-400 leading-relaxed">Deploy seamlessly across Meta Quest, HTC Vive, Valve Index, and mobile AR platforms</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card rounded-2xl p-8 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-cyan/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7 feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">Real-Time Rendering</h3>
+                    <p class="text-gray-400 leading-relaxed">Ultra-low latency graphics engine with 120fps support for buttery smooth experiences</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card rounded-2xl p-8 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-cyan/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7 feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">Multiplayer Networking</h3>
+                    <p class="text-gray-400 leading-relaxed">Connect thousands of users in shared virtual spaces with our distributed cloud infrastructure</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card rounded-2xl p-8 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-cyan/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7 feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">No-Code Builder</h3>
+                    <p class="text-gray-400 leading-relaxed">Drag-and-drop interface lets anyone create stunning VR/AR experiences without programming</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-card rounded-2xl p-8 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-cyan/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7 feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">Enterprise Security</h3>
+                    <p class="text-gray-400 leading-relaxed">SOC 2 Type II certified with end-to-end encryption, SSO, and advanced access controls</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-card rounded-2xl p-8 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-cyan/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7 feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">Custom Branding</h3>
+                    <p class="text-gray-400 leading-relaxed">White-label solutions with custom UI themes, branded environments, and personalized experiences</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section id="platforms" class="py-24 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-cyan font-heading font-semibold tracking-wider text-sm uppercase">Supported Platforms</span>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mt-4 mb-6">Works Everywhere</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Seamless integration across all major VR/AR hardware and platforms</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover:scale-105 transition-transform group">
+                    <svg class="w-16 h-16 text-gray-400 group-hover:text-cyan transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-300">Quest</span>
+                </div>
+
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover:scale-105 transition-transform group">
+                    <svg class="w-16 h-16 text-gray-400 group-hover:text-cyan transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-300">Vive</span>
+                </div>
+
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover:scale-105 transition-transform group">
+                    <svg class="w-16 h-16 text-gray-400 group-hover:text-cyan transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.86L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 13c-2.49 0-4.5 2.01-4.5 4.5S.51 22 3 22s4.5-2.01 4.5-4.5S5.49 13 3 13zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-300">Valve</span>
+                </div>
+
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover:scale-105 transition-transform group">
+                    <svg class="w-16 h-16 text-gray-400 group-hover:text-cyan transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-300">iOS AR</span>
+                </div>
+
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover:scale-105 transition-transform group">
+                    <svg class="w-16 h-16 text-gray-400 group-hover:text-cyan transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 13c-2.49 0-4.5 2.01-4.5 4.5S.51 22 3 22s4.5-2.01 4.5-4.5S5.49 13 3 13zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-300">Android AR</span>
+                </div>
+
+                <div class="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover:scale-105 transition-transform group">
+                    <svg class="w-16 h-16 text-gray-400 group-hover:text-cyan transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 18V6h16v12H4z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-300">WebXR</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-cyan font-heading font-semibold tracking-wider text-sm uppercase">Pricing</span>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mt-4 mb-6 gradient-text">Choose Your Plan</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Flexible pricing for creators, teams, and enterprises</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Starter Plan -->
+                <div class="glass-card rounded-2xl p-8 cursor-pointer transition-all duration-300 hover:border-primary/50">
+                    <div class="text-center mb-8">
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">Starter</h3>
+                        <p class="text-gray-400 mb-6">For individual creators</p>
+                        <div class="flex items-baseline justify-center gap-1">
+                            <span class="font-heading text-5xl font-bold text-white">$0</span>
+                            <span class="text-gray-400">/month</span>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            3 projects
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Basic templates
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Community support
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-500">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            Multiplayer
+                        </li>
+                    </ul>
+
+                    <button class="btn-secondary w-full py-3 rounded-full font-heading font-semibold text-white cursor-pointer">Get Started</button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="glass-card rounded-2xl p-8 cursor-pointer transition-all duration-300 border-2 border-primary relative neon-border">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-cyan px-4 py-1 rounded-full">
+                        <span class="text-sm font-heading font-bold text-white">POPULAR</span>
+                    </div>
+
+                    <div class="text-center mb-8">
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">Pro</h3>
+                        <p class="text-gray-400 mb-6">For growing teams</p>
+                        <div class="flex items-baseline justify-center gap-1">
+                            <span class="font-heading text-5xl font-bold text-white">$49</span>
+                            <span class="text-gray-400">/month</span>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Unlimited projects
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Advanced templates
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Priority support
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Multiplayer up to 50
+                        </li>
+                    </ul>
+
+                    <button class="btn-primary w-full py-3 rounded-full font-heading font-semibold text-white cursor-pointer">Start Free Trial</button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass-card rounded-2xl p-8 cursor-pointer transition-all duration-300 hover:border-primary/50">
+                    <div class="text-center mb-8">
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">Enterprise</h3>
+                        <p class="text-gray-400 mb-6">For large organizations</p>
+                        <div class="flex items-baseline justify-center gap-1">
+                            <span class="font-heading text-5xl font-bold text-white">Custom</span>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Everything in Pro
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Custom integrations
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Dedicated support
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Unlimited multiplayer
+                        </li>
+                    </ul>
+
+                    <button class="btn-secondary w-full py-3 rounded-full font-heading font-semibold text-white cursor-pointer">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="py-24 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/5 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-cyan font-heading font-semibold tracking-wider text-sm uppercase">Community</span>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mt-4 mb-6 gradient-text">Join Creators Worldwide</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Be part of the fastest-growing VR/AR creator community</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+                <div class="glass-card rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform">
+                    <div class="font-heading text-4xl font-bold text-cyan mb-2">50K+</div>
+                    <div class="text-gray-400">Discord Members</div>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform">
+                    <div class="font-heading text-4xl font-bold text-magenta mb-2">1K+</div>
+                    <div class="text-gray-400">Weekly Workshops</div>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform">
+                    <div class="font-heading text-4xl font-bold text-primary mb-2">100+</div>
+                    <div class="text-gray-400">Countries</div>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div class="glass-card rounded-2xl p-8 cursor-pointer">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary to-cyan rounded-full flex items-center justify-center">
+                            <span class="font-heading font-bold text-white">SK</span>
+                        </div>
+                        <div>
+                            <div class="font-heading font-semibold text-white">Sarah Kim</div>
+                            <div class="text-gray-400 text-sm">VR Developer, Studio X</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">"NexusVR has completely transformed how we prototype and deploy VR experiences. The no-code builder is incredibly powerful yet intuitive."</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 cursor-pointer">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-magenta to-accent rounded-full flex items-center justify-center">
+                            <span class="font-heading font-bold text-white">MJ</span>
+                        </div>
+                        <div>
+                            <div class="font-heading font-semibold text-white">Marcus Johnson</div>
+                            <div class="text-gray-400 text-sm">CTO, TechCorp</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">"The enterprise features and security were exactly what we needed. Our training program is now 100% VR and employee engagement is through the roof."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card rounded-3xl p-12 text-center relative overflow-hidden neon-border">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-cyan/10"></div>
+                <div class="relative z-10">
+                    <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">Ready to Step Into the Future?</h2>
+                    <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">Join thousands of creators building the next generation of immersive experiences</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="btn-primary px-8 py-4 rounded-full font-heading font-bold text-lg text-white cursor-pointer">
+                            Start Building Free
+                        </button>
+                        <button class="btn-secondary px-8 py-4 rounded-full font-heading font-bold text-lg text-white cursor-pointer">
+                            Schedule Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary to-cyan rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </div>
+                        <span class="font-heading font-bold text-xl">NEXUSVR</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Building the future of immersive experiences, one virtual world at a time.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold text-white mb-4">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Platforms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Changelog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold text-white mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Community</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold text-white mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">About</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Privacy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm">© 2024 NexusVR. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-cyan transition-colors cursor-pointer">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                nav.style.transform = 'translateY(0)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.glass-card, .stat-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Reduced motion check
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.glass-card, .stat-card').forEach(card => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            });
+        }
+    </script>
+</body>
+</html>

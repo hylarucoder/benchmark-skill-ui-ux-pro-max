@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpatialOS - The Future of Computing</title>
+    <meta name="description" content="Experience the next generation of computing with SpatialOS. Immersive spatial computing platform for AR, VR, and mixed reality applications.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Exo 2', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#00FFFF',
+                            dark: '#00CCCC',
+                            light: '#66FFFF',
+                        },
+                        secondary: {
+                            DEFAULT: '#7C3AED',
+                            dark: '#6D28D9',
+                            light: '#A78BFA',
+                        },
+                        accent: {
+                            DEFAULT: '#F97316',
+                            dark: '#EA580C',
+                            light: '#FDBA74',
+                        },
+                        dark: {
+                            bg: '#0A0E27',
+                            surface: '#121829',
+                            card: '#1A1F35',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'grid-move': 'grid-move 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '1', boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)' },
+                            '50%': { opacity: '0.8', boxShadow: '0 0 40px rgba(0, 255, 255, 0.6)' },
+                        },
+                        'grid-move': {
+                            '0%': { transform: 'translate(0, 0)' },
+                            '100%': { transform: 'translate(50px, 50px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #0A0E27;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(26, 31, 53, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease-out;
+        }
+
+        .glass-card:hover {
+            background: rgba(26, 31, 53, 0.8);
+            border-color: rgba(0, 255, 255, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.1);
+        }
+
+        /* Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            animation: grid-move 20s linear infinite;
+        }
+
+        /* Gradient Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        /* Text Glow */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #00FFFF 0%, #00CCCC 100%);
+            color: #0A0E27;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease-out;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #00FFFF;
+            font-weight: 500;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease-out;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #00FFFF;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0A0E27;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 255, 0.5);
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-body">
+    <!-- Background Elements -->
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass rounded-2xl px-6 py-4 flex items-center justify-between">
+                <a href="#" class="flex items-center space-x-2 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center transition-transform group-hover:scale-110">
+                        <svg class="w-6 h-6 text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                    <span class="font-heading font-bold text-xl text-white">SpatialOS</span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-primary transition-colors duration-200">Features</a>
+                    <a href="#capabilities" class="text-gray-300 hover:text-primary transition-colors duration-200">Capabilities</a>
+                    <a href="#developers" class="text-gray-300 hover:text-primary transition-colors duration-200">Developers</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-primary transition-colors duration-200">Pricing</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hidden sm:block text-gray-300 hover:text-white transition-colors duration-200">Sign In</a>
+                    <a href="#get-started" class="btn-primary text-sm rounded-lg">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center space-x-2 glass-card rounded-full px-4 py-2 mb-8">
+                <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                <span class="text-sm text-gray-300">Now in Public Beta</span>
+            </div>
+
+            <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+                <span class="text-white">The Future of</span><br>
+                <span class="text-primary text-glow">Computing is Here</span>
+            </h1>
+
+            <p class="font-body text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+                Experience computing like never before. SpatialOS brings together AR, VR, and mixed reality
+                in one seamless platform. Build immersive applications that transcend physical boundaries.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="#get-started" class="btn-primary w-full sm:w-auto text-lg px-8 py-4 rounded-xl flex items-center justify-center space-x-2 cursor-pointer">
+                    <span>Start Building</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                </a>
+                <a href="#demo" class="btn-secondary w-full sm:w-auto text-lg px-8 py-4 rounded-xl flex items-center justify-center space-x-2 cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>Watch Demo</span>
+                </a>
+            </div>
+
+            <!-- Hero Visual -->
+            <div class="relative max-w-5xl mx-auto">
+                <div class="glass-card rounded-3xl p-4 sm:p-8 animate-float">
+                    <div class="aspect-video rounded-2xl bg-gradient-to-br from-dark-card via-dark-surface to-dark-bg relative overflow-hidden">
+                        <!-- Mock Interface -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="relative w-full h-full">
+                                <!-- Simulated spatial interface -->
+                                <div class="absolute top-1/4 left-1/4 w-32 h-32 sm:w-48 sm:h-48 border-2 border-primary/30 rounded-lg"></div>
+                                <div class="absolute top-1/3 right-1/4 w-24 h-24 sm:w-40 sm:h-40 border-2 border-secondary/30 rounded-lg"></div>
+                                <div class="absolute bottom-1/4 left-1/3 w-40 h-40 sm:w-56 sm:h-56 border-2 border-accent/30 rounded-lg"></div>
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-24 sm:h-24 bg-primary/20 rounded-full animate-pulse-glow"></div>
+
+                                <!-- Connection Lines -->
+                                <svg class="absolute inset-0 w-full h-full opacity-30">
+                                    <line x1="30%" y1="35%" x2="50%" y2="50%" stroke="url(#gradient1)" stroke-width="1"/>
+                                    <line x1="70%" y1="40%" x2="50%" y2="50%" stroke="url(#gradient2)" stroke-width="1"/>
+                                    <line x1="40%" y1="65%" x2="50%" y2="50%" stroke="url(#gradient3)" stroke-width="1"/>
+                                    <defs>
+                                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:0" />
+                                            <stop offset="100%" style="stop-color:#00FFFF;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#7C3AED;stop-opacity:0" />
+                                            <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#F97316;stop-opacity:0" />
+                                            <stop offset="100%" style="stop-color:#F97316;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos Section -->
+    <section class="relative py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-center text-gray-500 mb-8 font-medium">Trusted by innovative teams worldwide</p>
+            <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-12 opacity-50">
+                <div class="text-2xl font-heading font-bold text-gray-400">Meta</div>
+                <div class="text-2xl font-heading font-bold text-gray-400">Apple</div>
+                <div class="text-2xl font-heading font-bold text-gray-400">Microsoft</div>
+                <div class="text-2xl font-heading font-bold text-gray-400">Google</div>
+                <div class="text-2xl font-heading font-bold text-gray-400">Unity</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-4">
+                    Powerful <span class="text-primary">Features</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Everything you need to build the next generation of spatial computing applications
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">Immersive Rendering</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Real-time AR/VR rendering with advanced spatial mapping and light estimation capabilities.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">Spatial Tracking</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Precise 6DOF tracking with hand, eye, and body tracking for natural interactions.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">Multi-Device Sync</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Seamless synchronization across AR glasses, VR headsets, and mobile devices.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">High Performance</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Optimized engine delivering 120fps with minimal latency for smooth experiences.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">AI Integration</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Built-in machine learning for gesture recognition, object detection, and scene understanding.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-3">Collaboration</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Real-time multi-user experiences with spatial audio and shared virtual spaces.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities Section -->
+    <section id="capabilities" class="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-6">
+                        Built for <span class="text-primary">Scale</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        From prototype to production, SpatialOS scales with your needs. Our infrastructure
+                        handles millions of concurrent users across the globe.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-heading text-lg font-bold text-white mb-1">Global Edge Network</h4>
+                                <p class="text-gray-400">50+ data centers worldwide for ultra-low latency</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-heading text-lg font-bold text-white mb-1">Enterprise Security</h4>
+                                <p class="text-gray-400">SOC 2 compliant with end-to-end encryption</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-heading text-lg font-bold text-white mb-1">99.99% Uptime SLA</h4>
+                                <p class="text-gray-400">Battle-tested reliability for mission-critical apps</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="glass-card rounded-3xl p-8">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center p-6 rounded-2xl bg-dark-surface">
+                                <div class="text-4xl sm:text-5xl font-heading font-bold text-primary mb-2">10M+</div>
+                                <div class="text-gray-400 text-sm">Active Users</div>
+                            </div>
+                            <div class="text-center p-6 rounded-2xl bg-dark-surface">
+                                <div class="text-4xl sm:text-5xl font-heading font-bold text-secondary mb-2">50+</div>
+                                <div class="text-gray-400 text-sm">Countries</div>
+                            </div>
+                            <div class="text-center p-6 rounded-2xl bg-dark-surface">
+                                <div class="text-4xl sm:text-5xl font-heading font-bold text-accent mb-2">120</div>
+                                <div class="text-gray-400 text-sm">FPS Rendering</div>
+                            </div>
+                            <div class="text-center p-6 rounded-2xl bg-dark-surface">
+                                <div class="text-4xl sm:text-5xl font-heading font-bold text-primary mb-2">&lt;20ms</div>
+                                <div class="text-gray-400 text-sm">Latency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developers Section -->
+    <section id="developers" class="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-4">
+                    Developer <span class="text-primary">First</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Intuitive APIs and comprehensive documentation to get you building in minutes
+                </p>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 sm:p-8 mb-12">
+                <div class="flex items-center space-x-2 mb-6">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="text-gray-500 text-sm ml-4">Quick Start</span>
+                </div>
+                <pre class="text-sm sm:text-base overflow-x-auto"><code class="text-gray-300"><span class="text-secondary">import</span> { SpatialOS } <span class="text-secondary">from</span> <span class="text-accent">'@spatial/sdk'</span>;
+
+<span class="text-secondary">const</span> app = <span class="text-secondary">new</span> <span class="text-primary">SpatialOS</span>({
+  apiKey: <span class="text-accent">'your-api-key'</span>,
+  mode: <span class="text-accent">'immersive'</span>
+});
+
+<span class="text-gray-500">// Create a spatial scene</span>
+<span class="text-secondary">const</span> scene = <span class="text-secondary">await</span> app.<span class="text-primary">createScene</span>({
+  tracking: <span class="text-accent">'6dof'</span>,
+  rendering: <span class="text-accent">'high-quality'</span>
+});
+
+<span class="text-gray-500">// Add interactive objects</span>
+scene.<span class="text-primary">addObject</span>({
+  position: [0, 0, -2],
+  geometry: <span class="text-accent">'cube'</span>,
+  interactive: <span class="text-secondary">true</span>
+});</code></pre>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300">
+                    <div class="text-3xl mb-3">📘</div>
+                    <h4 class="font-heading font-bold text-white mb-2">Documentation</h4>
+                    <p class="text-gray-400 text-sm">Comprehensive guides & API reference</p>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300">
+                    <div class="text-3xl mb-3">🎯</div>
+                    <h4 class="font-heading font-bold text-white mb-2">SDKs</h4>
+                    <p class="text-gray-400 text-sm">JavaScript, Python, C++, Unity</p>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300">
+                    <div class="text-3xl mb-3">💡</div>
+                    <h4 class="font-heading font-bold text-white mb-2">Examples</h4>
+                    <p class="text-gray-400 text-sm">50+ sample projects to learn from</p>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300">
+                    <div class="text-3xl mb-3">👥</div>
+                    <h4 class="font-heading font-bold text-white mb-2">Community</h4>
+                    <p class="text-gray-400 text-sm">Active Discord & developer forums</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-4">
+                    Simple <span class="text-primary">Pricing</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Start free, scale as you grow. No hidden fees.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Free Plan -->
+                <div class="glass-card rounded-2xl p-8">
+                    <h3 class="font-heading text-xl font-bold text-white mb-2">Starter</h3>
+                    <p class="text-gray-400 mb-6">Perfect for learning and prototyping</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-heading font-bold text-white">$0</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            1,000 MAU
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Basic tracking
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Community support
+                        </li>
+                    </ul>
+                    <button class="w-full btn-secondary rounded-xl">Get Started</button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="glass-card rounded-2xl p-8 border-2 border-primary relative transform md:-translate-y-4">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-primary text-dark-bg px-4 py-1 rounded-full text-sm font-bold">POPULAR</span>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-2">Pro</h3>
+                    <p class="text-gray-400 mb-6">For growing applications</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-heading font-bold text-white">$99</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            50,000 MAU
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Advanced tracking
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Priority support
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Analytics dashboard
+                        </li>
+                    </ul>
+                    <button class="w-full btn-primary rounded-xl">Start Free Trial</button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass-card rounded-2xl p-8">
+                    <h3 class="font-heading text-xl font-bold text-white mb-2">Enterprise</h3>
+                    <p class="text-gray-400 mb-6">For large-scale deployments</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-heading font-bold text-white">Custom</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Unlimited MAU
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Custom integrations
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Dedicated support
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            SLA guarantee
+                        </li>
+                    </ul>
+                    <button class="w-full btn-secondary rounded-xl">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="get-started" class="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="glass-card rounded-3xl p-12 sm:p-16">
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-6">
+                    Ready to Build the <span class="text-primary">Future</span>?
+                </h2>
+                <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
+                    Join thousands of developers building the next generation of spatial computing experiences.
+                    Start building today for free.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#" class="btn-primary text-lg px-10 py-4 rounded-xl w-full sm:w-auto cursor-pointer">
+                        Start Building Free
+                    </a>
+                    <a href="#" class="btn-secondary text-lg px-10 py-4 rounded-xl w-full sm:w-auto cursor-pointer">
+                        Schedule Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-16 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2 lg:col-span-1">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                            <svg class="w-6 h-6 text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                            </svg>
+                        </div>
+                        <span class="font-heading font-bold text-xl text-white">SpatialOS</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Building the future of spatial computing.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-bold text-white mb-4">Product</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#features" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Features</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Releases</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-bold text-white mb-4">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">About</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Press</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-bold text-white mb-4">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Community</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Examples</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-bold text-white mb-4">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Privacy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Security</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-gray-500 text-sm">© 2025 SpatialOS. All rights reserved.</p>
+                <p class="text-gray-500 text-sm">Built for the spatial computing revolution</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

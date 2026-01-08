@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official government portal providing access to public services, resources, and information for citizens.">
+    <title>City of Metroville | Official Government Portal</title>
+
+    <!-- Fonts: Lexend + Source Sans 3 for accessibility and professionalism -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Lexend', 'sans-serif'],
+                        body: ['Source Sans 3', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0F172A',
+                        secondary: '#334155',
+                        cta: '#0369A1',
+                        'cta-dark': '#0284C7',
+                        background: '#F8FAFC',
+                        text: '#020617',
+                        border: '#E2E8F0',
+                        accent: '#DC2626',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Accessibility improvements */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #0369A1;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus visible for keyboard navigation */
+        *:focus-visible {
+            outline: 2px solid #0369A1;
+            outline-offset: 2px;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="font-body text-text bg-background antialiased">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="font-heading font-semibold text-base md:text-lg text-primary">City of Metroville</h1>
+                        <p class="text-xs md:text-sm text-secondary">Official Government Portal</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+                    <a href="#services" class="text-secondary hover:text-primary transition-colors duration-200 font-medium">Services</a>
+                    <a href="#resources" class="text-secondary hover:text-primary transition-colors duration-200 font-medium">Resources</a>
+                    <a href="#news" class="text-secondary hover:text-primary transition-colors duration-200 font-medium">News</a>
+                    <a href="#contact" class="text-secondary hover:text-primary transition-colors duration-200 font-medium">Contact</a>
+                    <a href="#" class="bg-cta hover:bg-cta-dark text-white px-5 py-2.5 rounded-lg font-medium transition-colors duration-200">Citizen Login</a>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <button type="button" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200" aria-label="Open menu" aria-expanded="false" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="md:hidden hidden bg-white border-t border-border" id="mobile-menu" role="navigation">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#services" class="block py-2 text-secondary hover:text-primary transition-colors duration-200 font-medium">Services</a>
+                <a href="#resources" class="block py-2 text-secondary hover:text-primary transition-colors duration-200 font-medium">Resources</a>
+                <a href="#news" class="block py-2 text-secondary hover:text-primary transition-colors duration-200 font-medium">News</a>
+                <a href="#contact" class="block py-2 text-secondary hover:text-primary transition-colors duration-200 font-medium">Contact</a>
+                <a href="#" class="block w-full text-center bg-cta hover:bg-cta-dark text-white px-5 py-2.5 rounded-lg font-medium transition-colors duration-200 mt-4">Citizen Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-br from-primary via-primary to-secondary" aria-labelledby="hero-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h2 id="hero-heading" class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                        Your Government,<br class="hidden sm:block"> Working for You
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-300 mb-8 md:mb-10 leading-relaxed">
+                        Access public services, find resources, and stay informed about your community. We're here to serve you better.
+                    </p>
+
+                    <!-- Search Bar -->
+                    <div class="max-w-2xl mx-auto">
+                        <form role="search" class="flex flex-col sm:flex-row gap-3">
+                            <label for="search-input" class="sr-only">Search services and resources</label>
+                            <input
+                                type="search"
+                                id="search-input"
+                                placeholder="Search services, resources, forms..."
+                                class="flex-1 px-5 py-4 rounded-lg text-base border-0 focus:ring-2 focus:ring-cta shadow-lg"
+                                aria-describedby="search-hint"
+                            >
+                            <button type="submit" class="bg-cta hover:bg-cta-dark text-white px-8 py-4 rounded-lg font-semibold transition-colors duration-200 cursor-pointer shadow-lg whitespace-nowrap">
+                                <span class="flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                    Search
+                                </span>
+                            </button>
+                        </form>
+                        <p id="search-hint" class="text-sm text-gray-400 mt-3">Popular: Building permits, trash collection, voter registration</p>
+                    </div>
+
+                    <!-- Quick Access Buttons -->
+                    <div class="flex flex-wrap justify-center gap-3 mt-8">
+                        <a href="#services" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full font-medium transition-colors duration-200 border border-white/20">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                            </svg>
+                            Online Services
+                        </a>
+                        <a href="#" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full font-medium transition-colors duration-200 border border-white/20">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Report an Issue
+                        </a>
+                        <a href="#contact" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-full font-medium transition-colors duration-200 border border-white/20">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Alert Banner -->
+        <div class="bg-accent text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                <div class="flex items-center gap-3">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <p class="text-sm font-medium">
+                        <strong>Alert:</strong> COVID-19 vaccination sites now open. <a href="#" class="underline hover:no-underline">Learn more</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 md:py-24 bg-background" aria-labelledby="services-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 md:mb-16">
+                    <h2 id="services-heading" class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">Popular Services</h2>
+                    <p class="text-secondary text-lg max-w-2xl mx-auto">Quick access to the most frequently used government services</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service Card 1 -->
+                    <a href="#" class="group bg-white rounded-xl p-6 border border-border hover:border-cta hover:shadow-lg transition-all duration-200 cursor-pointer">
+                        <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors duration-200">
+                            <svg class="w-7 h-7 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Building Permits</h3>
+                        <p class="text-secondary mb-4">Apply for residential and commercial building permits online</p>
+                        <span class="text-cta font-medium flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+                            Apply Now
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- Service Card 2 -->
+                    <a href="#" class="group bg-white rounded-xl p-6 border border-border hover:border-cta hover:shadow-lg transition-all duration-200 cursor-pointer">
+                        <div class="w-14 h-14 bg-green-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-100 transition-colors duration-200">
+                            <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Trash Collection</h3>
+                        <p class="text-secondary mb-4">Check collection schedules and request bulk pickup services</p>
+                        <span class="text-cta font-medium flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+                            View Schedule
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- Service Card 3 -->
+                    <a href="#" class="group bg-white rounded-xl p-6 border border-border hover:border-cta hover:shadow-lg transition-all duration-200 cursor-pointer">
+                        <div class="w-14 h-14 bg-purple-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-100 transition-colors duration-200">
+                            <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Voter Registration</h3>
+                        <p class="text-secondary mb-4">Register to vote or update your voter information online</p>
+                        <span class="text-cta font-medium flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+                            Register Now
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- Service Card 4 -->
+                    <a href="#" class="group bg-white rounded-xl p-6 border border-border hover:border-cta hover:shadow-lg transition-all duration-200 cursor-pointer">
+                        <div class="w-14 h-14 bg-orange-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-100 transition-colors duration-200">
+                            <svg class="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Parks & Recreation</h3>
+                        <p class="text-secondary mb-4">Reserve facilities, find parks, and register for programs</p>
+                        <span class="text-cta font-medium flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+                            Explore Parks
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- Service Card 5 -->
+                    <a href="#" class="group bg-white rounded-xl p-6 border border-border hover:border-cta hover:shadow-lg transition-all duration-200 cursor-pointer">
+                        <div class="w-14 h-14 bg-red-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-100 transition-colors duration-200">
+                            <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Emergency Services</h3>
+                        <p class="text-secondary mb-4">Report emergencies and access critical contact information</p>
+                        <span class="text-cta font-medium flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+                            Get Help
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- Service Card 6 -->
+                    <a href="#" class="group bg-white rounded-xl p-6 border border-border hover:border-cta hover:shadow-lg transition-all duration-200 cursor-pointer">
+                        <div class="w-14 h-14 bg-teal-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-teal-100 transition-colors duration-200">
+                            <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Business Licenses</h3>
+                        <p class="text-secondary mb-4">Apply for or renew business licenses and permits</p>
+                        <span class="text-cta font-medium flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+                            Get Licensed
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+
+                <div class="text-center mt-10">
+                    <a href="#" class="inline-flex items-center gap-2 text-cta hover:text-cta-dark font-medium transition-colors duration-200">
+                        View All Services
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="py-16 md:py-24 bg-white" aria-labelledby="resources-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 id="resources-heading" class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">Government Resources</h2>
+                        <p class="text-secondary text-lg mb-8 leading-relaxed">
+                            Access important documents, forms, and information to help you navigate government services efficiently.
+                        </p>
+
+                        <div class="space-y-4">
+                            <a href="#" class="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-200 group cursor-pointer">
+                                <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 transition-colors duration-200">
+                                    <svg class="w-6 h-6 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading font-semibold text-lg text-primary mb-1">Forms & Documents</h3>
+                                    <p class="text-secondary">Download applications, permits, and official forms</p>
+                                </div>
+                            </a>
+
+                            <a href="#" class="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-200 group cursor-pointer">
+                                <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-green-100 transition-colors duration-200">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading font-semibold text-lg text-primary mb-1">City Council Meetings</h3>
+                                    <p class="text-secondary">Access agendas, minutes, and meeting recordings</p>
+                                </div>
+                            </a>
+
+                            <a href="#" class="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-200 group cursor-pointer">
+                                <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-purple-100 transition-colors duration-200">
+                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading font-semibold text-lg text-primary mb-1">Budget & Finance</h3>
+                                    <p class="text-secondary">Review city budget reports and financial transparency</p>
+                                </div>
+                            </a>
+
+                            <a href="#" class="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-200 group cursor-pointer">
+                                <div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-orange-100 transition-colors duration-200">
+                                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading font-semibold text-lg text-primary mb-1">FAQs</h3>
+                                    <p class="text-secondary">Find answers to commonly asked questions</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-cta to-cta-dark rounded-2xl p-8 md:p-10 text-white">
+                        <h3 class="font-heading text-2xl md:text-3xl font-bold mb-4">Need Help?</h3>
+                        <p class="text-white/90 mb-6 text-lg">Our citizen support team is here to assist you with any questions about government services.</p>
+
+                        <div class="space-y-4">
+                            <a href="tel:+15551234567" class="flex items-center gap-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors duration-200">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold">Call Us</p>
+                                    <p class="text-white/80">(555) 123-4567</p>
+                                </div>
+                            </a>
+
+                            <a href="mailto:info@metroville.gov" class="flex items-center gap-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors duration-200">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold">Email Us</p>
+                                    <p class="text-white/80">info@metroville.gov</p>
+                                </div>
+                            </a>
+
+                            <a href="#contact" class="flex items-center gap-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors duration-200">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold">Visit In Person</p>
+                                    <p class="text-white/80">100 City Hall, Metroville</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news" class="py-16 md:py-24 bg-background" aria-labelledby="news-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+                    <div>
+                        <h2 id="news-heading" class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">Latest News & Announcements</h2>
+                        <p class="text-secondary text-lg">Stay informed about what's happening in your community</p>
+                    </div>
+                    <a href="#" class="text-cta hover:text-cta-dark font-medium mt-4 md:mt-0 inline-flex items-center gap-2">
+                        View All News
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- News Card 1 -->
+                    <article class="bg-white rounded-xl overflow-hidden border border-border hover:shadow-lg transition-shadow duration-200">
+                        <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-white/30" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 text-sm text-secondary mb-3">
+                                <time datetime="2025-01-15">January 15, 2025</time>
+                                <span class="w-1 h-1 bg-secondary rounded-full"></span>
+                                <span>Press Release</span>
+                            </div>
+                            <h3 class="font-heading font-semibold text-xl text-primary mb-2 hover:text-cta transition-colors duration-200">
+                                <a href="#">New Community Center Opens in East Metroville</a>
+                            </h3>
+                            <p class="text-secondary mb-4">State-of-the-art facility features recreational programs, meeting spaces, and youth activities.</p>
+                            <a href="#" class="text-cta hover:text-cta-dark font-medium inline-flex items-center gap-1 transition-colors duration-200">
+                                Read More
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- News Card 2 -->
+                    <article class="bg-white rounded-xl overflow-hidden border border-border hover:shadow-lg transition-shadow duration-200">
+                        <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-white/30" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 text-sm text-secondary mb-3">
+                                <time datetime="2025-01-12">January 12, 2025</time>
+                                <span class="w-1 h-1 bg-secondary rounded-full"></span>
+                                <span>Infrastructure</span>
+                            </div>
+                            <h3 class="font-heading font-semibold text-xl text-primary mb-2 hover:text-cta transition-colors duration-200">
+                                <a href="#">Main Street Renovation Project Completed</a>
+                            </h3>
+                            <p class="text-secondary mb-4">$2.5 million improvement project enhances downtown with new sidewalks, lighting, and green spaces.</p>
+                            <a href="#" class="text-cta hover:text-cta-dark font-medium inline-flex items-center gap-1 transition-colors duration-200">
+                                Read More
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- News Card 3 -->
+                    <article class="bg-white rounded-xl overflow-hidden border border-border hover:shadow-lg transition-shadow duration-200">
+                        <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-white/30" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 text-sm text-secondary mb-3">
+                                <time datetime="2025-01-10">January 10, 2025</time>
+                                <span class="w-1 h-1 bg-secondary rounded-full"></span>
+                                <span>Community</span>
+                            </div>
+                            <h3 class="font-heading font-semibold text-xl text-primary mb-2 hover:text-cta transition-colors duration-200">
+                                <a href="#">Annual Summer Concert Series Announced</a>
+                            </h3>
+                            <p class="text-secondary mb-4">Free outdoor concerts begin in June featuring local bands and special guest performances.</p>
+                            <a href="#" class="text-cta hover:text-cta-dark font-medium inline-flex items-center gap-1 transition-colors duration-200">
+                                Read More
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-white" aria-labelledby="contact-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 id="contact-heading" class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">Contact Us</h2>
+                    <p class="text-secondary text-lg max-w-2xl mx-auto">We're here to help. Reach out with questions, feedback, or assistance.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Contact Info -->
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-semibold text-lg text-primary mb-1">Mailing Address</h3>
+                                <p class="text-secondary">100 City Hall Plaza<br>Metroville, ST 12345</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-semibold text-lg text-primary mb-1">Phone</h3>
+                                <p class="text-secondary">Main: (555) 123-4567<br>Hours: Mon-Fri 8am-5pm</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-semibold text-lg text-primary mb-1">Email</h3>
+                                <p class="text-secondary">General: info@metroville.gov<br>Support: support@metroville.gov</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-semibold text-lg text-primary mb-1">Office Hours</h3>
+                                <p class="text-secondary">Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday - Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-2">
+                        <form class="bg-background rounded-xl p-6 md:p-8 border border-border">
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="first-name" class="block text-sm font-medium text-primary mb-2">First Name *</label>
+                                    <input
+                                        type="text"
+                                        id="first-name"
+                                        name="first-name"
+                                        required
+                                        class="w-full px-4 py-3 rounded-lg border border-border focus:border-cta focus:ring-2 focus:ring-cta/20 transition-colors duration-200"
+                                        aria-required="true"
+                                    >
+                                </div>
+                                <div>
+                                    <label for="last-name" class="block text-sm font-medium text-primary mb-2">Last Name *</label>
+                                    <input
+                                        type="text"
+                                        id="last-name"
+                                        name="last-name"
+                                        required
+                                        class="w-full px-4 py-3 rounded-lg border border-border focus:border-cta focus:ring-2 focus:ring-cta/20 transition-colors duration-200"
+                                        aria-required="true"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-primary mb-2">Email Address *</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        required
+                                        class="w-full px-4 py-3 rounded-lg border border-border focus:border-cta focus:ring-2 focus:ring-cta/20 transition-colors duration-200"
+                                        aria-required="true"
+                                    >
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-primary mb-2">Phone Number</label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        class="w-full px-4 py-3 rounded-lg border border-border focus:border-cta focus:ring-2 focus:ring-cta/20 transition-colors duration-200"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="subject" class="block text-sm font-medium text-primary mb-2">Subject *</label>
+                                <select
+                                    id="subject"
+                                    name="subject"
+                                    required
+                                    class="w-full px-4 py-3 rounded-lg border border-border focus:border-cta focus:ring-2 focus:ring-cta/20 transition-colors duration-200 bg-white"
+                                    aria-required="true"
+                                >
+                                    <option value="">Select a topic</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="services">Services & Permits</option>
+                                    <option value="billing">Billing & Payments</option>
+                                    <option value="report">Report an Issue</option>
+                                    <option value="feedback">Feedback & Suggestions</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="message" class="block text-sm font-medium text-primary mb-2">Message *</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="5"
+                                    required
+                                    class="w-full px-4 py-3 rounded-lg border border-border focus:border-cta focus:ring-2 focus:ring-cta/20 transition-colors duration-200 resize-none"
+                                    aria-required="true"
+                                ></textarea>
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="w-full bg-cta hover:bg-cta-dark text-white px-8 py-4 rounded-lg font-semibold transition-colors duration-200 cursor-pointer"
+                            >
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12 md:py-16" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-heading font-semibold text-lg">City of Metroville</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Serving our community with transparency, integrity, and commitment to excellence.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold text-base mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Building Permits</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Business Licenses</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Trash Collection</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Parks & Recreation</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold text-base mb-4">Government</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Mayor's Office</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">City Council</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Departments</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Meeting Agendas</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold text-base mb-4">Connect</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Emergency Alerts</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Social Media</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">News & Updates</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-400">&copy; 2025 City of Metroville. All rights reserved.</p>
+                <div class="flex items-center gap-6 text-sm text-gray-400">
+                    <a href="#" class="hover:text-white transition-colors duration-200">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors duration-200">Accessibility</a>
+                    <a href="#" class="hover:text-white transition-colors duration-200">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Form submission handler (prevent default for demo)
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! This is a demo form.');
+            });
+        }
+    </script>
+</body>
+</html>

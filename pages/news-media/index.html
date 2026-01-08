@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Herald - Your Trusted News Source</title>
+    <meta name="description" content="Breaking news, in-depth analysis, and trusted journalism from around the world. Stay informed with The Daily Herald.">
+
+    <!-- Fonts: News Editorial pairing -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Newsreader', 'serif'],
+                        sans: ['Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#DC2626',
+                            dark: '#0A0A0A',
+                            darker: '#050505',
+                            gray: '#1A1A1A',
+                            light: '#E5E5E5',
+                            muted: '#9CA3AF',
+                        }
+                    },
+                    animation: {
+                        'ticker': 'ticker 30s linear infinite',
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                    },
+                    keyframes: {
+                        ticker: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            .animate-ticker {
+                animation: none;
+            }
+            .animate-fade-in {
+                animation: none;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Ticker wrapper */
+        .ticker-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 30s linear infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ticker-content {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-brand-darker text-white font-sans antialiased">
+
+    <!-- Breaking News Ticker -->
+    <div class="bg-brand-red text-white py-2 overflow-hidden">
+        <div class="ticker-wrapper">
+            <div class="ticker-content">
+                <span class="mx-8 font-medium">🔴 BREAKING: Global climate summit reaches historic agreement on emissions targets</span>
+                <span class="mx-8">⚡ MARKETS: Tech stocks surge as AI investments hit record $200B</span>
+                <span class="mx-8">🏥 HEALTH: New breakthrough in cancer treatment shows 90% success rate</span>
+                <span class="mx-8">🌍 WORLD: Major peace talks scheduled in Geneva next week</span>
+                <span class="mx-8">🔴 BREAKING: Global climate summit reaches historic agreement on emissions targets</span>
+                <span class="mx-8">⚡ MARKETS: Tech stocks surge as AI investments hit record $200B</span>
+                <span class="mx-8">🏥 HEALTH: New breakthrough in cancer treatment shows 90% success rate</span>
+                <span class="mx-8">🌍 WORLD: Major peace talks scheduled in Geneva next week</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-brand-dark/95 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-brand-red flex items-center justify-center">
+                            <span class="font-serif font-bold text-xl">H</span>
+                        </div>
+                        <span class="font-serif font-bold text-xl hidden sm:block">The Daily Herald</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-white hover:text-brand-red transition-colors duration-200 font-medium">Home</a>
+                    <a href="#" class="text-brand-light hover:text-brand-red transition-colors duration-200">Politics</a>
+                    <a href="#" class="text-brand-light hover:text-brand-red transition-colors duration-200">Business</a>
+                    <a href="#" class="text-brand-light hover:text-brand-red transition-colors duration-200">Technology</a>
+                    <a href="#" class="text-brand-light hover:text-brand-red transition-colors duration-200">Sports</a>
+                    <a href="#" class="text-brand-light hover:text-brand-red transition-colors duration-200">Entertainment</a>
+                    <a href="#" class="text-brand-light hover:text-brand-red transition-colors duration-200">Health</a>
+                </div>
+
+                <!-- Search & Subscribe -->
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 hover:bg-gray-800 rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </button>
+                    <a href="#subscribe" class="bg-brand-red hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 cursor-pointer">
+                        Subscribe
+                    </a>
+
+                    <!-- Mobile menu button -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 hover:bg-gray-800 rounded-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-gray border-t border-gray-800">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#" class="block text-white hover:text-brand-red py-2">Home</a>
+                <a href="#" class="block text-brand-light hover:text-brand-red py-2">Politics</a>
+                <a href="#" class="block text-brand-light hover:text-brand-red py-2">Business</a>
+                <a href="#" class="block text-brand-light hover:text-brand-red py-2">Technology</a>
+                <a href="#" class="block text-brand-light hover:text-brand-red py-2">Sports</a>
+                <a href="#" class="block text-brand-light hover:text-brand-red py-2">Entertainment</a>
+                <a href="#" class="block text-brand-light hover:text-brand-red py-2">Health</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Main Featured Story -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2 text-brand-red font-medium">
+                        <span class="w-2 h-2 bg-brand-red rounded-full animate-pulse"></span>
+                        <span>TOP STORY</span>
+                    </div>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                        Historic Climate Agreement Signed by 195 Nations
+                    </h1>
+                    <p class="text-brand-light text-lg lg:text-xl leading-relaxed">
+                        In an unprecedented global effort, world leaders have agreed to cut carbon emissions by 50% before 2030, marking a turning point in the fight against climate change.
+                    </p>
+                    <div class="flex items-center space-x-4 pt-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Author" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <p class="font-medium">Michael Chen</p>
+                            <p class="text-sm text-brand-muted">December 15, 2024 · 8 min read</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Image -->
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=800&h=600&fit=crop" alt="Climate Summit" class="w-full h-64 sm:h-96 object-cover rounded-2xl shadow-2xl">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-2xl">
+                        <span class="bg-brand-red text-white px-3 py-1 rounded-full text-sm font-medium">LIVE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Navigation -->
+    <section class="bg-brand-gray border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-1 py-4 overflow-x-auto scrollbar-hide">
+                <a href="#" class="flex-shrink-0 px-4 py-2 bg-brand-red text-white rounded-full font-medium text-sm cursor-pointer hover:bg-red-700 transition-colors duration-200">All News</a>
+                <a href="#" class="flex-shrink-0 px-4 py-2 text-brand-light hover:bg-gray-800 rounded-full font-medium text-sm cursor-pointer transition-colors duration-200">Politics</a>
+                <a href="#" class="flex-shrink-0 px-4 py-2 text-brand-light hover:bg-gray-800 rounded-full font-medium text-sm cursor-pointer transition-colors duration-200">Business</a>
+                <a href="#" class="flex-shrink-0 px-4 py-2 text-brand-light hover:bg-gray-800 rounded-full font-medium text-sm cursor-pointer transition-colors duration-200">Technology</a>
+                <a href="#" class="flex-shrink-0 px-4 py-2 text-brand-light hover:bg-gray-800 rounded-full font-medium text-sm cursor-pointer transition-colors duration-200">Sports</a>
+                <a href="#" class="flex-shrink-0 px-4 py-2 text-brand-light hover:bg-gray-800 rounded-full font-medium text-sm cursor-pointer transition-colors duration-200">Entertainment</a>
+                <a href="#" class="flex-shrink-0 px-4 py-2 text-brand-light hover:bg-gray-800 rounded-full font-medium text-sm cursor-pointer transition-colors duration-200">Health</a>
+                <a href="#" class="flex-shrink-0 px-4 py-2 text-brand-light hover:bg-gray-800 rounded-full font-medium text-sm cursor-pointer transition-colors duration-200">Science</a>
+                <a href="#" class="flex-shrink-0 px-4 py-2 text-brand-light hover:bg-gray-800 rounded-full font-medium text-sm cursor-pointer transition-colors duration-200">Opinion</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured News Grid -->
+    <section class="py-16 bg-brand-darker">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="font-serif text-3xl font-bold">Latest Stories</h2>
+                <a href="#" class="text-brand-red hover:text-red-400 font-medium flex items-center space-x-1 cursor-pointer">
+                    <span>View All</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Card 1 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop" alt="AI Technology" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">TECHNOLOGY</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2 group-hover:text-brand-red transition-colors duration-200">
+                        AI Revolution: How Machine Learning is Transforming Healthcare
+                    </h3>
+                    <p class="text-brand-muted mb-4 line-clamp-2">
+                        Artificial intelligence is reshaping medical diagnosis and treatment planning with unprecedented accuracy.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-brand-muted">
+                        <span>Sarah Johnson</span>
+                        <span>5 min read</span>
+                    </div>
+                </article>
+
+                <!-- News Card 2 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Stock Market" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-medium">BUSINESS</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2 group-hover:text-brand-red transition-colors duration-200">
+                        Markets Rally as Tech Giants Report Record Earnings
+                    </h3>
+                    <p class="text-brand-muted mb-4 line-clamp-2">
+                        Major technology companies exceeded analyst expectations, driving the S&P 500 to new heights.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-brand-muted">
+                        <span>David Park</span>
+                        <span>4 min read</span>
+                    </div>
+                </article>
+
+                <!-- News Card 3 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=600&h=400&fit=crop" alt="Sports" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-medium">SPORTS</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2 group-hover:text-brand-red transition-colors duration-200">
+                        Championship Finals: Underdogs Stun Favorites in Historic Upset
+                    </h3>
+                    <p class="text-brand-muted mb-4 line-clamp-2">
+                        The team nobody believed in defied all odds to claim the championship title in dramatic fashion.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-brand-muted">
+                        <span>James Miller</span>
+                        <span>6 min read</span>
+                    </div>
+                </article>
+
+                <!-- News Card 4 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1551836022-4c4c79ecde51?w=600&h=400&fit=crop" alt="Politics" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-medium">POLITICS</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2 group-hover:text-brand-red transition-colors duration-200">
+                        Election 2024: Key Races to Watch in the Upcoming Primaries
+                    </h3>
+                    <p class="text-brand-muted mb-4 line-clamp-2">
+                        Political analysts break down the most consequential contests that could shape the future.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-brand-muted">
+                        <span>Emily Roberts</span>
+                        <span>7 min read</span>
+                    </div>
+                </article>
+
+                <!-- News Card 5 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop" alt="Entertainment" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-pink-600 text-white px-3 py-1 rounded-full text-xs font-medium">ENTERTAINMENT</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2 group-hover:text-brand-red transition-colors duration-200">
+                        Awards Season Preview: Top Contenders for Best Picture
+                    </h3>
+                    <p class="text-brand-muted mb-4 line-clamp-2">
+                        Film critics predict this year's most likely nominees in what promises to be a tight race.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-brand-muted">
+                        <span>Lisa Chen</span>
+                        <span>3 min read</span>
+                    </div>
+                </article>
+
+                <!-- News Card 6 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop" alt="Health" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-teal-600 text-white px-3 py-1 rounded-full text-xs font-medium">HEALTH</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2 group-hover:text-brand-red transition-colors duration-200">
+                        Breakthrough Study Reveals New Treatment for Chronic Pain
+                    </h3>
+                    <p class="text-brand-muted mb-4 line-clamp-2">
+                        Researchers announce promising results from clinical trials of a revolutionary pain management therapy.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-brand-muted">
+                        <span>Dr. Amanda Lee</span>
+                        <span>5 min read</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Topics -->
+    <section class="py-16 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-3xl font-bold mb-8">Trending Now</h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Trending Topic 1 -->
+                <div class="bg-brand-gray p-6 rounded-xl hover:bg-gray-800 transition-colors duration-200 cursor-pointer">
+                    <div class="flex items-start space-x-4">
+                        <span class="text-3xl font-bold text-brand-red">01</span>
+                        <div>
+                            <h4 class="font-semibold mb-1">#ClimateAction</h4>
+                            <p class="text-sm text-brand-muted">45.2K mentions today</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending Topic 2 -->
+                <div class="bg-brand-gray p-6 rounded-xl hover:bg-gray-800 transition-colors duration-200 cursor-pointer">
+                    <div class="flex items-start space-x-4">
+                        <span class="text-3xl font-bold text-brand-red">02</span>
+                        <div>
+                            <h4 class="font-semibold mb-1">#TechEarnings</h4>
+                            <p class="text-sm text-brand-muted">38.7K mentions today</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending Topic 3 -->
+                <div class="bg-brand-gray p-6 rounded-xl hover:bg-gray-800 transition-colors duration-200 cursor-pointer">
+                    <div class="flex items-start space-x-4">
+                        <span class="text-3xl font-bold text-brand-red">03</span>
+                        <div>
+                            <h4 class="font-semibold mb-1">#WorldCup2026</h4>
+                            <p class="text-sm text-brand-muted">32.1K mentions today</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending Topic 4 -->
+                <div class="bg-brand-gray p-6 rounded-xl hover:bg-gray-800 transition-colors duration-200 cursor-pointer">
+                    <div class="flex items-start space-x-4">
+                        <span class="text-3xl font-bold text-brand-red">04</span>
+                        <div>
+                            <h4 class="font-semibold mb-1">#SpaceExploration</h4>
+                            <p class="text-sm text-brand-muted">28.5K mentions today</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="subscribe" class="py-20 bg-gradient-to-br from-brand-dark to-brand-darker relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-brand-red rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-600 rounded-full filter blur-3xl"></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="font-serif text-4xl font-bold mb-4">Stay Informed</h2>
+            <p class="text-brand-light text-lg mb-8">
+                Get the latest news and analysis delivered to your inbox every morning. Join 2M+ subscribers.
+            </p>
+
+            <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    class="flex-1 px-6 py-4 bg-brand-gray border border-gray-700 rounded-xl text-white placeholder-brand-muted focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 transition-all duration-200"
+                    required
+                >
+                <button
+                    type="submit"
+                    class="px-8 py-4 bg-brand-red hover:bg-red-700 text-white font-semibold rounded-xl transition-colors duration-200 cursor-pointer whitespace-nowrap"
+                >
+                    Subscribe Free
+                </button>
+            </form>
+
+            <p class="text-sm text-brand-muted mt-4">
+                By subscribing, you agree to our <a href="#" class="text-brand-red hover:underline">Terms of Service</a> and <a href="#" class="text-brand-red hover:underline">Privacy Policy</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Social Media Integration -->
+    <section class="py-16 bg-brand-darker border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-3xl font-bold mb-4">Follow Us Everywhere</h2>
+                <p class="text-brand-light">Stay connected with real-time updates and exclusive content</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Twitter/X -->
+                <a href="#" class="flex items-center justify-center space-x-3 p-6 bg-brand-gray rounded-xl hover:bg-gray-800 transition-all duration-200 cursor-pointer group">
+                    <svg class="w-8 h-8 text-brand-muted group-hover:text-white transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    <div class="text-left">
+                        <p class="font-semibold">1.2M</p>
+                        <p class="text-sm text-brand-muted">Followers</p>
+                    </div>
+                </a>
+
+                <!-- Facebook -->
+                <a href="#" class="flex items-center justify-center space-x-3 p-6 bg-brand-gray rounded-xl hover:bg-gray-800 transition-all duration-200 cursor-pointer group">
+                    <svg class="w-8 h-8 text-brand-muted group-hover:text-white transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    <div class="text-left">
+                        <p class="font-semibold">890K</p>
+                        <p class="text-sm text-brand-muted">Followers</p>
+                    </div>
+                </a>
+
+                <!-- Instagram -->
+                <a href="#" class="flex items-center justify-center space-x-3 p-6 bg-brand-gray rounded-xl hover:bg-gray-800 transition-all duration-200 cursor-pointer group">
+                    <svg class="w-8 h-8 text-brand-muted group-hover:text-white transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    <div class="text-left">
+                        <p class="font-semibold">650K</p>
+                        <p class="text-sm text-brand-muted">Followers</p>
+                    </div>
+                </a>
+
+                <!-- YouTube -->
+                <a href="#" class="flex items-center justify-center space-x-3 p-6 bg-brand-gray rounded-xl hover:bg-gray-800 transition-all duration-200 cursor-pointer group">
+                    <svg class="w-8 h-8 text-brand-muted group-hover:text-white transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    <div class="text-left">
+                        <p class="font-semibold">2.1M</p>
+                        <p class="text-sm text-brand-muted">Subscribers</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <!-- Brand -->
+                <div class="col-span-2 md:col-span-4 lg:col-span-1">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-brand-red flex items-center justify-center">
+                            <span class="font-serif font-bold text-xl">H</span>
+                        </div>
+                        <span class="font-serif font-bold text-xl">The Daily Herald</span>
+                    </div>
+                    <p class="text-brand-muted text-sm mb-4">
+                        Your trusted source for breaking news, in-depth analysis, and quality journalism.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- News Sections -->
+                <div>
+                    <h4 class="font-semibold mb-4">News</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Politics</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Business</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Technology</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Science</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Health</a></li>
+                    </ul>
+                </div>
+
+                <!-- Features -->
+                <div>
+                    <h4 class="font-semibold mb-4">Features</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Opinion</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Analysis</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Investigative</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Podcasts</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Video</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">About Us</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Careers</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Press</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Contact</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Advertise</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Terms of Service</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Privacy Policy</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Cookie Policy</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Accessibility</a></li>
+                        <li><a href="#" class="text-brand-muted hover:text-white transition-colors duration-200">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between">
+                <p class="text-brand-muted text-sm mb-4 md:mb-0">
+                    © 2024 The Daily Herald. All rights reserved.
+                </p>
+                <div class="flex items-center space-x-6 text-sm text-brand-muted">
+                    <a href="#" class="hover:text-white transition-colors duration-200">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors duration-200">Terms</a>
+                    <a href="#" class="hover:text-white transition-colors duration-200">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>

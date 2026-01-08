@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkySync - Autonomous Drone Fleet Manager</title>
+    <meta name="description" content="Next-generation fleet management for autonomous drones. Real-time monitoring, intelligent routing, predictive maintenance, and advanced analytics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            black: '#0A0E27',
+                            dark: '#0D1117',
+                            cyan: '#00FFFF',
+                            blue: '#0080FF',
+                            purple: '#8B5CF6',
+                            green: '#10B981',
+                        }
+                    },
+                    animation: {
+                        'scan': 'scan 3s linear infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'grid': 'grid 20s linear infinite',
+                    },
+                    keyframes: {
+                        scan: {
+                            '0%, 100%': { transform: 'translateY(-100%)' },
+                            '50%': { transform: 'translateY(100%)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '1', boxShadow: '0 0 20px rgba(0, 255, 255, 0.5)' },
+                            '50%': { opacity: '0.8', boxShadow: '0 0 40px rgba(0, 255, 255, 0.8)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        grid: {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(50%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .cyber-grid {
+            background-image:
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5),
+                         0 0 20px rgba(0, 255, 255, 0.3),
+                         0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .glow-border {
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3),
+                        inset 0 0 10px rgba(0, 255, 255, 0.1);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease-out;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        .scan-line {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scan-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00FFFF, transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-scan, .animate-pulse-glow, .animate-float, .animate-grid {
+                animation: none;
+            }
+            .card-hover {
+                transition: none;
+            }
+            .card-hover:hover {
+                transform: none;
+            }
+        }
+
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
+            border-radius: 1rem;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, #00FFFF, #0080FF);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+    </style>
+</head>
+<body class="bg-cyber-black text-white font-body antialiased overflow-x-hidden">
+
+    <!-- Animated Grid Background -->
+    <div class="fixed inset-0 cyber-grid pointer-events-none opacity-50"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50">
+        <div class="max-w-7xl mx-auto backdrop-blur-xl bg-cyber-dark/80 rounded-2xl border border-cyber-cyan/20 px-6 py-4 glow-border">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-cyan to-cyber-blue flex items-center justify-center">
+                        <svg class="w-6 h-6 text-cyber-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                    </div>
+                    <span class="font-heading font-bold text-xl glow-text">SkySync</span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200 cursor-pointer">Features</a>
+                    <a href="#how-it-works" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200 cursor-pointer">How It Works</a>
+                    <a href="#benefits" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200 cursor-pointer">Benefits</a>
+                    <a href="#contact" class="text-gray-300 hover:text-cyber-cyan transition-colors duration-200 cursor-pointer">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button class="hidden sm:block px-4 py-2 text-cyber-cyan border border-cyber-cyan/50 rounded-lg hover:bg-cyber-cyan/10 transition-all duration-200 cursor-pointer">
+                        Login
+                    </button>
+                    <button class="px-6 py-2 bg-gradient-to-r from-cyber-cyan to-cyber-blue text-cyber-black font-semibold rounded-lg hover:shadow-lg hover:shadow-cyber-cyan/50 transition-all duration-200 cursor-pointer">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center px-4 pt-32 pb-20">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyber-cyan/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-blue/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyber-cyan/30 bg-cyber-cyan/5 mb-8">
+                <span class="w-2 h-2 bg-cyber-green rounded-full animate-pulse"></span>
+                <span class="text-sm text-gray-300">Next-Gen Fleet Intelligence</span>
+            </div>
+
+            <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight">
+                <span class="text-white">Autonomous</span><br>
+                <span class="glow-text text-cyber-cyan">Drone Fleet</span><br>
+                <span class="text-white">Management</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12">
+                Command your entire drone fleet with AI-powered precision. Real-time monitoring, intelligent routing, predictive maintenance, and advanced analytics—all in one unified platform.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <button class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyber-cyan to-cyber-blue text-cyber-black font-bold rounded-lg hover:shadow-xl hover:shadow-cyber-cyan/50 transition-all duration-200 cursor-pointer">
+                    Start Free Trial
+                </button>
+                <button class="w-full sm:w-auto px-8 py-4 border border-cyber-cyan/50 rounded-lg hover:bg-cyber-cyan/10 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 group">
+                    <svg class="w-5 h-5 text-cyber-cyan group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    Watch Demo
+                </button>
+            </div>
+
+            <!-- Dashboard Preview -->
+            <div class="relative max-w-5xl mx-auto">
+                <div class="gradient-border rounded-2xl p-1 scan-line">
+                    <div class="bg-cyber-dark/95 rounded-xl p-6 backdrop-blur-xl">
+                        <div class="grid grid-cols-4 gap-4 mb-6">
+                            <div class="bg-cyber-cyan/5 border border-cyber-cyan/20 rounded-lg p-4">
+                                <div class="text-2xl font-bold text-cyber-cyan mb-1">247</div>
+                                <div class="text-xs text-gray-400">Active Drones</div>
+                            </div>
+                            <div class="bg-cyber-green/5 border border-cyber-green/20 rounded-lg p-4">
+                                <div class="text-2xl font-bold text-cyber-green mb-1">98.7%</div>
+                                <div class="text-xs text-gray-400">Success Rate</div>
+                            </div>
+                            <div class="bg-cyber-blue/5 border border-cyber-blue/20 rounded-lg p-4">
+                                <div class="text-2xl font-bold text-cyber-blue mb-1">12.4k</div>
+                                <div class="text-xs text-gray-400">Missions Today</div>
+                            </div>
+                            <div class="bg-cyber-purple/5 border border-cyber-purple/20 rounded-lg p-4">
+                                <div class="text-2xl font-bold text-cyber-purple mb-1">0.3ms</div>
+                                <div class="text-xs text-gray-400">Latency</div>
+                            </div>
+                        </div>
+                        <div class="h-64 bg-gradient-to-br from-cyber-cyan/5 to-cyber-blue/5 rounded-lg border border-cyber-cyan/10 flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-cyber-cyan/10 border-2 border-cyber-cyan flex items-center justify-center animate-pulse-glow">
+                                    <svg class="w-8 h-8 text-cyber-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-400 text-sm">Live Fleet Dashboard</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-cyber-cyan text-sm font-semibold tracking-wider uppercase mb-4 block">Features</span>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6">
+                    Everything You Need to
+                    <span class="glow-text text-cyber-cyan">Command Your Fleet</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Powerful tools designed for maximum fleet efficiency and minimum downtime
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Fleet Monitoring -->
+                <div class="card-hover gradient-border p-8 rounded-2xl cursor-pointer">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-cyan/20 to-cyber-blue/20 border border-cyber-cyan/30 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-cyber-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-4 text-white">Real-Time Fleet Monitoring</h3>
+                    <p class="text-gray-400 mb-6">
+                        Track every drone in your fleet with live video feeds, GPS positioning, battery status, and telemetry data. All visible in a unified, intuitive dashboard.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Live HD video streaming
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Precision GPS tracking
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Environmental sensors
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Autonomous Routing -->
+                <div class="card-hover gradient-border p-8 rounded-2xl cursor-pointer">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-cyan/20 to-cyber-blue/20 border border-cyber-cyan/30 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-cyber-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-4 text-white">AI-Powered Autonomous Routing</h3>
+                    <p class="text-gray-400 mb-6">
+                        Let our AI optimize flight paths dynamically. Avoid obstacles, manage airspace, and coordinate multi-drone missions automatically.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Dynamic obstacle avoidance
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Weather-aware routing
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Swarm coordination
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Predictive Maintenance -->
+                <div class="card-hover gradient-border p-8 rounded-2xl cursor-pointer">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-cyan/20 to-cyber-blue/20 border border-cyber-cyan/30 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-cyber-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-4 text-white">Predictive Maintenance</h3>
+                    <p class="text-gray-400 mb-6">
+                        AI analyzes sensor data to predict component failures before they happen. Schedule maintenance proactively and reduce downtime by up to 73%.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Component health tracking
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Automated work orders
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Parts inventory management
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Real-Time Analytics -->
+                <div class="card-hover gradient-border p-8 rounded-2xl cursor-pointer">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-cyan/20 to-cyber-blue/20 border border-cyber-cyan/30 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-cyber-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-4 text-white">Advanced Analytics & Insights</h3>
+                    <p class="text-gray-400 mb-6">
+                        Transform raw data into actionable intelligence. Performance metrics, mission reports, and custom dashboards for complete visibility.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Custom report builder
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            ROI optimization tools
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-cyber-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Trend forecasting
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-24 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-cyber-cyan text-sm font-semibold tracking-wider uppercase mb-4 block">How It Works</span>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6">
+                    Deploy in
+                    <span class="glow-text text-cyber-cyan">Three Simple Steps</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="relative">
+                    <div class="text-8xl font-heading font-bold text-cyber-cyan/10 absolute -top-4 -left-4">01</div>
+                    <div class="relative z-10 pt-8">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyber-cyan to-cyber-blue flex items-center justify-center mb-6 shadow-lg shadow-cyber-cyan/30">
+                            <svg class="w-8 h-8 text-cyber-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-4 text-white">Connect Your Fleet</h3>
+                        <p class="text-gray-400">
+                            Integrate any drone model via our universal API. Supports DJI, Autel, Skydio, and custom-built drones. Set up takes under 10 minutes.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="text-8xl font-heading font-bold text-cyber-cyan/10 absolute -top-4 -left-4">02</div>
+                    <div class="relative z-10 pt-8">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyber-cyan to-cyber-blue flex items-center justify-center mb-6 shadow-lg shadow-cyber-cyan/30">
+                            <svg class="w-8 h-8 text-cyber-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-4 text-white">Configure Missions</h3>
+                        <p class="text-gray-400">
+                            Use our drag-and-drop mission builder or API. Define flight paths, waypoints, and automated actions. The AI optimizes everything.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="text-8xl font-heading font-bold text-cyber-cyan/10 absolute -top-4 -left-4">03</div>
+                    <div class="relative z-10 pt-8">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyber-cyan to-cyber-blue flex items-center justify-center mb-6 shadow-lg shadow-cyber-cyan/30">
+                            <svg class="w-8 h-8 text-cyber-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-4 text-white">Launch & Monitor</h3>
+                        <p class="text-gray-400">
+                            Deploy with one click. Monitor missions in real-time, receive instant alerts, and analyze performance. Scale from 1 to 10,000+ drones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-24 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="gradient-border rounded-3xl p-12 md:p-16">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-cyber-cyan text-sm font-semibold tracking-wider uppercase mb-4 block">Why SkySync</span>
+                        <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6 text-white">
+                            Built for Scale,
+                            <span class="glow-text text-cyber-cyan">Designed for Success</span>
+                        </h2>
+                        <p class="text-gray-400 text-lg mb-8">
+                            Enterprise-grade reliability with startup-speed agility. Join the fleet managers who trust SkySync to power their operations.
+                        </p>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-lg bg-cyber-cyan/10 border border-cyber-cyan/30 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 text-cyber-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-heading text-xl font-bold text-white mb-2">99.99% Uptime SLA</h4>
+                                    <p class="text-gray-400">Mission-critical reliability with redundant infrastructure across multiple regions.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-lg bg-cyber-green/10 border border-cyber-green/30 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 text-cyber-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-heading text-xl font-bold text-white mb-2">SOC 2 Type II Certified</h4>
+                                    <p class="text-gray-400">Bank-level security with end-to-end encryption and role-based access control.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-lg bg-cyber-blue/10 border border-cyber-blue/30 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 text-cyber-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-heading text-xl font-bold text-white mb-2">24/7 Expert Support</h4>
+                                    <p class="text-gray-400">Dedicated success managers and round-the-clock technical assistance from drone experts.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-cyber-dark/50 backdrop-blur-sm border border-cyber-cyan/20 rounded-2xl p-6 text-center">
+                            <div class="text-4xl font-heading font-bold text-cyber-cyan mb-2">73%</div>
+                            <div class="text-gray-400 text-sm">Less Downtime</div>
+                        </div>
+                        <div class="bg-cyber-dark/50 backdrop-blur-sm border border-cyber-cyan/20 rounded-2xl p-6 text-center">
+                            <div class="text-4xl font-heading font-bold text-cyber-green mb-2">40%</div>
+                            <div class="text-gray-400 text-sm">Cost Reduction</div>
+                        </div>
+                        <div class="bg-cyber-dark/50 backdrop-blur-sm border border-cyber-cyan/20 rounded-2xl p-6 text-center">
+                            <div class="text-4xl font-heading font-bold text-cyber-blue mb-2">5x</div>
+                            <div class="text-gray-400 text-sm">Faster Deployment</div>
+                        </div>
+                        <div class="bg-cyber-dark/50 backdrop-blur-sm border border-cyber-cyan/20 rounded-2xl p-6 text-center">
+                            <div class="text-4xl font-heading font-bold text-cyber-purple mb-2">2.1M+</div>
+                            <div class="text-gray-400 text-sm">Missions Flown</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-24 px-4 relative">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="gradient-border rounded-3xl p-12 md:p-16">
+                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6 text-white">
+                    Ready to
+                    <span class="glow-text text-cyber-cyan">Transform Your Fleet?</span>
+                </h2>
+                <p class="text-gray-400 text-lg mb-10">
+                    Join hundreds of enterprise teams using SkySync to scale their drone operations. Start your free 14-day trial today.
+                </p>
+
+                <form class="max-w-md mx-auto space-y-4">
+                    <div class="relative">
+                        <input type="email" placeholder="Enter your work email" class="w-full px-6 py-4 bg-cyber-dark/80 border border-cyber-cyan/30 rounded-lg focus:outline-none focus:border-cyber-cyan text-white placeholder-gray-500 transition-colors">
+                    </div>
+                    <button type="submit" class="w-full px-8 py-4 bg-gradient-to-r from-cyber-cyan to-cyber-blue text-cyber-black font-bold rounded-lg hover:shadow-xl hover:shadow-cyber-cyan/50 transition-all duration-200 cursor-pointer">
+                        Start Free Trial
+                    </button>
+                    <p class="text-gray-500 text-sm mt-4">
+                        No credit card required • 14-day free trial • Cancel anytime
+                    </p>
+                </form>
+
+                <div class="flex items-center justify-center gap-8 mt-12 pt-8 border-t border-cyber-cyan/10">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white">500+</div>
+                        <div class="text-gray-400 text-sm">Enterprise Clients</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white">50K+</div>
+                        <div class="text-gray-400 text-sm">Drones Managed</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white">99.9%</div>
+                        <div class="text-gray-400 text-sm">Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t border-cyber-cyan/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-cyan to-cyber-blue flex items-center justify-center">
+                            <svg class="w-6 h-6 text-cyber-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                            </svg>
+                        </div>
+                        <span class="font-heading font-bold text-xl">SkySync</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        The future of autonomous drone fleet management. Scale your operations with AI-powered intelligence.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-bold text-white mb-4">Product</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#features" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Integrations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">API Docs</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-bold text-white mb-4">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">About</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Blog</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-bold text-white mb-4">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Security</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors cursor-pointer">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-cyber-cyan/10 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-gray-500 text-sm">© 2025 SkySync. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="w-10 h-10 rounded-lg border border-cyber-cyan/20 flex items-center justify-center hover:bg-cyber-cyan/10 transition-colors cursor-pointer">
+                        <svg class="w-5 h-5 text-cyber-cyan" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-lg border border-cyber-cyan/20 flex items-center justify-center hover:bg-cyber-cyan/10 transition-colors cursor-pointer">
+                        <svg class="w-5 h-5 text-cyber-cyan" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-lg border border-cyber-cyan/20 flex items-center justify-center hover:bg-cyber-cyan/10 transition-colors cursor-pointer">
+                        <svg class="w-5 h-5 text-cyber-cyan" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

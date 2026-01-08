@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioGen Labs | Pioneering Life Sciences</title>
+    <meta name="description" content="Leading biotechnology company advancing human health through innovative research in genomics, immunotherapy, and molecular diagnostics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0EA5E9;
+            --primary-dark: #0284C7;
+            --secondary: #06B6D4;
+            --cta: #10B981;
+            --cta-dark: #059669;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --text: #0F172A;
+            --text-muted: #475569;
+            --text-light: #94A3B8;
+            --border: #E2E8F0;
+            --border-light: #F1F5F9;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--cta));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.2s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--cta);
+            color: white;
+            padding: 0.625rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            background: var(--cta-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            color: var(--text);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #E0F2FE 0%, #ECFEFF 50%, #F0FDFA 100%);
+            z-index: -2;
+        }
+
+        .hero-dna-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--primary-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(14, 165, 233, 0.2);
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--cta);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--cta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--cta);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--cta-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            padding: 0.875rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(14, 165, 233, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInRight 0.8s ease;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(16, 185, 129, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .dna-helix {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating-cards {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .float-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            box-shadow: var(--shadow-lg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-card:nth-child(1) {
+            top: 10%;
+            left: -20px;
+            animation-delay: 0s;
+        }
+
+        .float-card:nth-child(2) {
+            top: 60%;
+            right: -20px;
+            animation-delay: 2s;
+        }
+
+        .float-card:nth-child(3) {
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .float-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .float-card h4 {
+            font-size: 0.875rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .float-card p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(16, 185, 129, 0.15));
+            border-radius: 20px;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content h2 {
+            font-size: 2.25rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.0625rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-text p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* Research Areas */
+        .research {
+            background: var(--background);
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .research-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--cta));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .research-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+
+        .research-card:hover::before {
+            opacity: 1;
+        }
+
+        .research-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(16, 185, 129, 0.15));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-card h3 {
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+
+        .research-card p {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .research-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: gap 0.2s ease;
+        }
+
+        .research-card:hover .research-link {
+            gap: 0.75rem;
+        }
+
+        /* Technology Section */
+        .technology {
+            background: white;
+        }
+
+        .tech-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .tech-content h3 {
+            font-size: 1.75rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .tech-content p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .tech-features-list {
+            list-style: none;
+        }
+
+        .tech-feature-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--background);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .tech-feature-item:hover {
+            background: rgba(14, 165, 233, 0.05);
+            transform: translateX(4px);
+        }
+
+        .tech-check-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--cta);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .tech-feature-text {
+            flex: 1;
+        }
+
+        .tech-feature-text h4 {
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .tech-feature-text p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .tech-visual {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(16, 185, 129, 0.1));
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Team Section */
+        .team {
+            background: var(--background);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--cta));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .team-card h3 {
+            font-size: 1.125rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-role {
+            font-size: 0.875rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .team-bio {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Publications Section */
+        .publications {
+            background: white;
+        }
+
+        .publications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .publication-card {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: var(--background);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .publication-card:hover {
+            background: white;
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+            transform: translateX(8px);
+        }
+
+        .pub-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--cta));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .pub-content h3 {
+            font-size: 1.125rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .pub-meta {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-excerpt {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+        }
+
+        .pub-link {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .pub-link:hover {
+            color: var(--cta-dark);
+            gap: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(16, 185, 129, 0.05));
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            font-size: 1.0625rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-text p {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            color: var(--text);
+            transition: all 0.2s ease;
+            background: var(--background);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+            background: white;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            background: var(--cta);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .form-submit:hover {
+            background: var(--cta-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.9375rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            font-size: 0.9375rem;
+            color: var(--text-light);
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.125rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                order: 1;
+            }
+
+            .hero-visual {
+                order: 2;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-ctas {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .about-grid,
+            .tech-showcase,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .research-grid,
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                height: 350px;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .research-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-wrapper {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .publication-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .pub-icon {
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus states for keyboard navigation */
+        a:focus,
+        button:focus,
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🧬</div>
+                BioGen Labs
+            </a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#research" class="nav-link">Research</a>
+                <a href="#technology" class="nav-link">Technology</a>
+                <a href="#team" class="nav-link">Team</a>
+                <a href="#publications" class="nav-link">Publications</a>
+                <a href="#contact" class="nav-cta">Contact Us</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-dna-pattern"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Leading Innovation in Life Sciences
+                </div>
+                <h1>Pioneering the Future of <span>Genetic Medicine</span></h1>
+                <p class="hero-description">
+                    We're advancing human health through breakthrough research in genomics, immunotherapy, and molecular diagnostics. Join us in shaping tomorrow's healthcare.
+                </p>
+                <div class="hero-ctas">
+                    <button class="btn-primary">
+                        Explore Research
+                        <span>→</span>
+                    </button>
+                    <button class="btn-secondary">Learn More</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">150+</span>
+                        <span class="stat-label">Research Papers</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">50+</span>
+                        <span class="stat-label">Clinical Trials</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">25+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <div class="hero-image">
+                        <div class="dna-helix">🧬</div>
+                    </div>
+                </div>
+                <div class="floating-cards">
+                    <div class="float-card">
+                        <div class="float-card-icon" style="background: rgba(14, 165, 233, 0.1);">🔬</div>
+                        <h4>Genomics</h4>
+                        <p>DNA Sequencing</p>
+                    </div>
+                    <div class="float-card">
+                        <div class="float-card-icon" style="background: rgba(16, 185, 129, 0.1);">💉</div>
+                        <h4>Immunotherapy</h4>
+                        <p>Cancer Treatment</p>
+                    </div>
+                    <div class="float-card">
+                        <div class="float-card-icon" style="background: rgba(6, 182, 212, 0.1);">🧪</div>
+                        <h4>Diagnostics</h4>
+                        <p>Early Detection</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <div style="font-size: 8rem;">🔬</div>
+                </div>
+                <div class="about-content">
+                    <div class="section-badge">About Us</div>
+                    <h2>Advancing Science, Transforming Lives</h2>
+                    <p>
+                        At BioGen Labs, we believe in the power of genetic research to revolutionize healthcare. Our world-class team of scientists and researchers work tirelessly to unlock the mysteries of the human genome and develop innovative therapies.
+                    </p>
+                    <p>
+                        Founded in 1998, we've been at the forefront of biotechnology innovation, consistently pushing the boundaries of what's possible in life sciences. Our state-of-the-art facilities and collaborative approach enable us to tackle the most challenging healthcare problems.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="feature-icon">🎯</div>
+                            <div class="feature-text">
+                                <h4>Mission-Driven</h4>
+                                <p>Improving lives through innovation</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-icon">🌍</div>
+                            <div class="feature-text">
+                                <h4>Global Impact</h4>
+                                <p>Research across 30+ countries</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-icon">🏆</div>
+                            <div class="feature-text">
+                                <h4>Award-Winning</h4>
+                                <p>Excellence in biotechnology</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-icon">🤝</div>
+                            <div class="feature-text">
+                                <h4>Collaborative</h4>
+                                <p>Partnerships with leading institutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Areas -->
+    <section class="research" id="research">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Our Research</div>
+                <h2 class="section-title">Pioneering Research Areas</h2>
+                <p class="section-description">
+                    Our multidisciplinary approach spans across cutting-edge fields in biotechnology and life sciences
+                </p>
+            </div>
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-icon">🧬</div>
+                    <h3>Genomics & DNA Sequencing</h3>
+                    <p>
+                        Advanced genomic analysis and next-generation sequencing technologies to understand genetic variations and develop personalized medicine approaches.
+                    </p>
+                    <a href="#" class="research-link">Learn More →</a>
+                </div>
+                <div class="research-card">
+                    <div class="research-icon">🛡️</div>
+                    <h3>Immunotherapy</h3>
+                    <p>
+                        Revolutionary treatments that harness the body's immune system to fight cancer and other diseases, with breakthrough CAR-T cell therapies.
+                    </p>
+                    <a href="#" class="research-link">Learn More →</a>
+                </div>
+                <div class="research-card">
+                    <div class="research-icon">🔍</div>
+                    <h3>Molecular Diagnostics</h3>
+                    <p>
+                        Cutting-edge diagnostic tools for early disease detection, precision biomarkers, and real-time monitoring of treatment responses.
+                    </p>
+                    <a href="#" class="research-link">Learn More →</a>
+                </div>
+                <div class="research-card">
+                    <div class="research-icon">💊</div>
+                    <h3>Drug Discovery</h3>
+                    <p>
+                        AI-powered drug discovery platforms and high-throughput screening methods to identify promising therapeutic compounds faster.
+                    </p>
+                    <a href="#" class="research-link">Learn More →</a>
+                </div>
+                <div class="research-card">
+                    <div class="research-icon">🧪</div>
+                    <h3>CRISPR & Gene Editing</h3>
+                    <p>
+                        Pioneering work in CRISPR-Cas9 gene editing technology to correct genetic defects and develop next-generation therapies.
+                    </p>
+                    <a href="#" class="research-link">Learn More →</a>
+                </div>
+                <div class="research-card">
+                    <div class="research-icon">🦠</div>
+                    <h3>Microbiome Research</h3>
+                    <p>
+                        Studying the gut microbiome's role in health and disease, developing probiotic therapies and microbiome-based diagnostics.
+                    </p>
+                    <a href="#" class="research-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="technology" id="technology">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Our Technology</div>
+                <h2 class="section-title">Innovative Platforms & Solutions</h2>
+                <p class="section-description">
+                    Leveraging cutting-edge technology to accelerate discovery and deliver breakthrough therapies
+                </p>
+            </div>
+            <div class="tech-showcase">
+                <div class="tech-content">
+                    <h3>Next-Generation Sequencing Platform</h3>
+                    <p>
+                        Our proprietary NGS platform delivers unprecedented accuracy and speed in genomic analysis, enabling researchers to unlock critical insights faster than ever before.
+                    </p>
+                    <ul class="tech-features-list">
+                        <li class="tech-feature-item">
+                            <div class="tech-check-icon">✓</div>
+                            <div class="tech-feature-text">
+                                <h4>99.9% Accuracy Rate</h4>
+                                <p>Industry-leading sequencing accuracy</p>
+                            </div>
+                        </li>
+                        <li class="tech-feature-item">
+                            <div class="tech-check-icon">✓</div>
+                            <div class="tech-feature-text">
+                                <h4>48-Hour Turnaround</h4>
+                                <p>Rapid results for critical diagnostics</p>
+                            </div>
+                        </li>
+                        <li class="tech-feature-item">
+                            <div class="tech-check-icon">✓</div>
+                            <div class="tech-feature-text">
+                                <h4>AI-Powered Analysis</h4>
+                                <p>Machine learning for variant interpretation</p>
+                            </div>
+                        </li>
+                        <li class="tech-feature-item">
+                            <div class="tech-check-icon">✓</div>
+                            <div class="tech-feature-text">
+                                <h4>Cloud Integration</h4>
+                                <p>Secure data sharing and collaboration</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tech-visual">
+                    <div style="font-size: 8rem;">🧬</div>
+                </div>
+            </div>
+            <div class="tech-showcase">
+                <div class="tech-visual">
+                    <div style="font-size: 8rem;">🤖</div>
+                </div>
+                <div class="tech-content">
+                    <h3>Drug Discovery AI Platform</h3>
+                    <p>
+                        Our artificial intelligence platform accelerates drug discovery by predicting molecule behavior, optimizing compounds, and identifying promising candidates.
+                    </p>
+                    <ul class="tech-features-list">
+                        <li class="tech-feature-item">
+                            <div class="tech-check-icon">✓</div>
+                            <div class="tech-feature-text">
+                                <h4>Virtual Screening</h4>
+                                <p>Screen millions of compounds in hours</p>
+                            </div>
+                        </li>
+                        <li class="tech-feature-item">
+                            <div class="tech-check-icon">✓</div>
+                            <div class="tech-feature-text">
+                                <h4>Predictive Modeling</h4>
+                                <p>Forecast efficacy and safety profiles</p>
+                            </div>
+                        </li>
+                        <li class="tech-feature-item">
+                            <div class="tech-check-icon">✓</div>
+                            <div class="tech-feature-text">
+                                <h4>Cost Reduction</h4>
+                                <p>Reduce R&D costs by up to 60%</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Leadership</div>
+                <h2 class="section-title">Meet Our Experts</h2>
+                <p class="section-description">
+                    World-renowned scientists and industry leaders driving innovation in biotechnology
+                </p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">👩‍🔬</div>
+                    <h3>Dr. Sarah Chen</h3>
+                    <p class="team-role">CEO & Chief Scientific Officer</p>
+                    <p class="team-bio">Pioneer in genomic research with 20+ years of experience in personalized medicine</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👨‍🔬</div>
+                    <h3>Dr. Michael Torres</h3>
+                    <p class="team-role">VP of Research</p>
+                    <p class="team-bio">Expert in immunotherapy and cancer research, published 100+ papers</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👩‍💼</div>
+                    <h3>Emily Watson</h3>
+                    <p class="team-role">Chief Technology Officer</p>
+                    <p class="team-bio">AI and machine learning specialist, former Google Health lead</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👨‍⚕️</div>
+                    <h3>Dr. James Park</h3>
+                    <p class="team-role">Medical Director</p>
+                    <p class="team-bio">Board-certified oncologist leading clinical trials and drug development</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="publications" id="publications">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Publications</div>
+                <h2 class="section-title">Latest Research & News</h2>
+                <p class="section-description">
+                    Stay updated with our latest breakthroughs, publications, and industry insights
+                </p>
+            </div>
+            <div class="publications-list">
+                <div class="publication-card">
+                    <div class="pub-icon">📄</div>
+                    <div class="pub-content">
+                        <h3>Breakthrough in CRISPR Gene Editing for Rare Genetic Disorders</h3>
+                        <p class="pub-meta">Published in Nature Medicine | January 2025</p>
+                        <p class="pub-excerpt">Our team demonstrates successful gene correction in patients with rare genetic mutations using novel CRISPR delivery systems.</p>
+                    </div>
+                    <a href="#" class="pub-link">Read More →</a>
+                </div>
+                <div class="publication-card">
+                    <div class="pub-icon">🏆</div>
+                    <div class="pub-content">
+                        <h3>BioGen Labs Receives FDA Breakthrough Therapy Designation</h3>
+                        <p class="pub-meta">Press Release | December 2024</p>
+                        <p class="pub-excerpt">Our CAR-T cell therapy for solid tumors receives breakthrough designation, accelerating path to patient access.</p>
+                    </div>
+                    <a href="#" class="pub-link">Read More →</a>
+                </div>
+                <div class="publication-card">
+                    <div class="pub-icon">🔬</div>
+                    <div class="pub-content">
+                        <h3>AI-Driven Drug Discovery Platform Identifies Novel Cancer Targets</h3>
+                        <p class="pub-meta">Published in Cell | November 2024</p>
+                        <p class="pub-excerpt">Machine learning algorithms uncover new therapeutic targets for previously undruggable cancer mutations.</p>
+                    </div>
+                    <a href="#" class="pub-link">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="section-badge">Get In Touch</div>
+                    <h2>Partner With Us</h2>
+                    <p>
+                        Interested in collaboration, career opportunities, or learning more about our research? We'd love to hear from you.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-text">
+                                <h4>Headquarters</h4>
+                                <p>500 Innovation Drive, Cambridge, MA 02142</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@biogenlabs.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>+1 (617) 555-0123</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a topic</option>
+                            <option value="collaboration">Research Collaboration</option>
+                            <option value="career">Career Opportunities</option>
+                            <option value="inquiry">General Inquiry</option>
+                            <option value="media">Media & Press</option>
+                            <option value="investment">Investor Relations</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us about your interest..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">🧬</div>
+                        BioGen Labs
+                    </a>
+                    <p>
+                        Pioneering breakthrough discoveries in genomics, immunotherapy, and molecular diagnostics to transform human health.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#team">Leadership</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#news">News & Media</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Research</h4>
+                    <ul class="footer-links">
+                        <li><a href="#research">Research Areas</a></li>
+                        <li><a href="#publications">Publications</a></li>
+                        <li><a href="#clinical">Clinical Trials</a></li>
+                        <li><a href="#technology">Technology</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#investors">Investor Relations</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2025 BioGen Labs. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                    <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                    <a href="#" class="social-link" aria-label="YouTube">▶</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Here you would typically send the data to a server
+            console.log('Form submitted:', data);
+
+            // Show success message
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animation to sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Mobile menu toggle (for future enhancement)
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        mobileMenuBtn.addEventListener('click', () => {
+            // Toggle mobile menu
+            console.log('Mobile menu toggled');
+        });
+    </script>
+</body>
+</html>

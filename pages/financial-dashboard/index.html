@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceFlow - Smart Financial Dashboard for Modern Business</title>
+    <meta name="description" content="Real-time financial insights, powerful analytics, and intelligent forecasting. Take control of your business finances with FinanceFlow.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        secondary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        accent: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .gradient-hero {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #f0fdf4 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-slate-800 bg-white">
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 bg-white/80 backdrop-blur-lg rounded-2xl shadow-sm border border-slate-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-slate-900">FinanceFlow</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 font-medium">Features</a>
+                    <a href="#metrics" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 font-medium">Metrics</a>
+                    <a href="#pricing" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 font-medium">Pricing</a>
+                    <a href="#testimonials" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 font-medium">Testimonials</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="hidden sm:block text-slate-700 hover:text-primary-600 font-medium transition-colors duration-200">Sign In</button>
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-200 shadow-lg shadow-primary-600/25 hover:shadow-xl hover:shadow-primary-600/30 cursor-pointer">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-hero pt-32 pb-20 sm:pt-40 sm:pb-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center px-4 py-2 bg-primary-50 rounded-full mb-6 border border-primary-100">
+                        <span class="w-2 h-2 bg-secondary-500 rounded-full mr-2 animate-pulse"></span>
+                        <span class="text-sm font-semibold text-primary-700">New: AI-Powered Forecasting</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6 tracking-tight">
+                        Your Finances,<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-800">Crystal Clear</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        Real-time insights, powerful analytics, and intelligent forecasting. Take control of your business finances with the dashboard built for modern companies.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-xl shadow-primary-600/25 hover:shadow-2xl hover:shadow-primary-600/30 cursor-pointer flex items-center justify-center">
+                            Start Free Trial
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </button>
+                        <button class="bg-white hover:bg-slate-50 text-slate-700 px-8 py-4 rounded-xl font-bold text-lg border-2 border-slate-200 transition-all duration-200 cursor-pointer flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            Watch Demo
+                        </button>
+                    </div>
+                    <div class="mt-10 flex items-center justify-center lg:justify-start space-x-6">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 border-2 border-white flex items-center justify-center text-white font-semibold text-sm">JD</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-secondary-400 to-secondary-600 border-2 border-white flex items-center justify-center text-white font-semibold text-sm">SK</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accent-400 to-accent-600 border-2 border-white flex items-center justify-center text-white font-semibold text-sm">MR</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white flex items-center justify-center text-white font-semibold text-sm">+5k</div>
+                        </div>
+                        <div class="text-left">
+                            <div class="flex items-center">
+                                <span class="text-yellow-500 flex">★★★★★</span>
+                                <span class="ml-2 text-sm font-semibold text-slate-700">4.9/5</span>
+                            </div>
+                            <p class="text-sm text-slate-500">from 2,847 reviews</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative animate-float">
+                    <div class="bg-white rounded-3xl shadow-2xl p-6 border border-slate-200">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold text-slate-900">Revenue Overview</h3>
+                            <select class="text-sm bg-slate-100 border-0 rounded-lg px-3 py-1.5 text-slate-600 font-medium cursor-pointer">
+                                <option>Last 30 days</option>
+                                <option>Last 90 days</option>
+                                <option>This year</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl p-4">
+                                <p class="text-xs font-semibold text-primary-700 mb-1">Revenue</p>
+                                <p class="text-2xl font-bold text-primary-900">$284.5K</p>
+                                <p class="text-xs text-secondary-600 font-medium mt-1">↑ 23.5%</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-secondary-50 to-secondary-100 rounded-xl p-4">
+                                <p class="text-xs font-semibold text-secondary-700 mb-1">Expenses</p>
+                                <p class="text-2xl font-bold text-secondary-900">$142.8K</p>
+                                <p class="text-xs text-secondary-600 font-medium mt-1">↓ 8.2%</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-accent-50 to-accent-100 rounded-xl p-4">
+                                <p class="text-xs font-semibold text-accent-700 mb-1">Profit</p>
+                                <p class="text-2xl font-bold text-accent-900">$141.7K</p>
+                                <p class="text-xs text-secondary-600 font-medium mt-1">↑ 31.2%</p>
+                            </div>
+                        </div>
+                        <div class="h-48 bg-gradient-to-t from-slate-50 to-white rounded-xl flex items-end justify-around p-4 border border-slate-100">
+                            <div class="w-8 bg-primary-200 rounded-t-lg" style="height: 40%"></div>
+                            <div class="w-8 bg-primary-300 rounded-t-lg" style="height: 55%"></div>
+                            <div class="w-8 bg-primary-400 rounded-t-lg" style="height: 45%"></div>
+                            <div class="w-8 bg-primary-500 rounded-t-lg" style="height: 70%"></div>
+                            <div class="w-8 bg-primary-600 rounded-t-lg" style="height: 85%"></div>
+                            <div class="w-8 bg-secondary-500 rounded-t-lg" style="height: 100%"></div>
+                            <div class="w-8 bg-secondary-400 rounded-t-lg" style="height: 90%"></div>
+                        </div>
+                        <div class="flex justify-between mt-4 text-xs text-slate-500 font-medium">
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                            <span>Sun</span>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-xl p-4 border border-slate-200">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900">Payment Received</p>
+                                <p class="text-xs text-slate-500">$12,500 from Acme Corp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="py-12 bg-white border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm font-semibold text-slate-500 mb-8 tracking-wide uppercase">Trusted by 5,000+ businesses worldwide</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 sm:gap-12 opacity-60">
+                <div class="text-2xl font-bold text-slate-400">Stripe</div>
+                <div class="text-2xl font-bold text-slate-400">Shopify</div>
+                <div class="text-2xl font-bold text-slate-400">Notion</div>
+                <div class="text-2xl font-bold text-slate-400">Webflow</div>
+                <div class="text-2xl font-bold text-slate-400">Figma</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 sm:py-28 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-primary-600 font-bold text-sm tracking-wide uppercase">Features</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mt-4 mb-6">Everything you need to master your finances</h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">Powerful tools designed to give you complete visibility and control over your business financial health.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 card-hover cursor-pointer">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary-600/25">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Real-Time Analytics</h3>
+                    <p class="text-slate-600 leading-relaxed">Monitor your financial metrics in real-time with live dashboards that update instantly as transactions occur.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 card-hover cursor-pointer">
+                    <div class="w-14 h-14 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-secondary-600/25">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">AI Forecasting</h3>
+                    <p class="text-slate-600 leading-relaxed">Predict future revenue and expenses with machine learning models that learn from your historical data.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 card-hover cursor-pointer">
+                    <div class="w-14 h-14 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-accent-600/25">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Bank-Level Security</h3>
+                    <p class="text-slate-600 leading-relaxed">Your financial data is protected with 256-bit encryption and SOC 2 Type II compliance.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 card-hover cursor-pointer">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-purple-600/25">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Smart Reports</h3>
+                    <p class="text-slate-600 leading-relaxed">Generate professional financial reports automatically. Customize, export, and share with stakeholders.</p>
+                </div>
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 card-hover cursor-pointer">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-pink-600/25">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">100+ Integrations</h3>
+                    <p class="text-slate-600 leading-relaxed">Connect seamlessly with your existing tools: accounting software, banks, payment processors, and more.</p>
+                </div>
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 card-hover cursor-pointer">
+                    <div class="w-14 h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-cyan-600/25">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Team Collaboration</h3>
+                    <p class="text-slate-600 leading-relaxed">Invite your team, set permissions, and collaborate on financial planning with role-based access control.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section id="metrics" class="py-20 sm:py-28 bg-gradient-to-br from-slate-900 to-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-primary-400 font-bold text-sm tracking-wide uppercase">Results</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-6">Numbers that speak for themselves</h2>
+                <p class="text-lg text-slate-300 max-w-3xl mx-auto">Join thousands of businesses who have transformed their financial operations with FinanceFlow.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="stat-card rounded-2xl p-8 text-center border border-slate-700/50">
+                    <div class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-500 mb-2">5,000+</div>
+                    <p class="text-slate-300 font-medium">Active Businesses</p>
+                </div>
+                <div class="stat-card rounded-2xl p-8 text-center border border-slate-700/50">
+                    <div class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-secondary-400 to-secondary-500 mb-2">$2.8B</div>
+                    <p class="text-slate-300 font-medium">Transactions Tracked</p>
+                </div>
+                <div class="stat-card rounded-2xl p-8 text-center border border-slate-700/50">
+                    <div class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-500 mb-2">37%</div>
+                    <p class="text-slate-300 font-medium">Average Cost Savings</p>
+                </div>
+                <div class="stat-card rounded-2xl p-8 text-center border border-slate-700/50">
+                    <div class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-500 mb-2">99.9%</div>
+                    <p class="text-slate-300 font-medium">Uptime SLA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 sm:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-primary-600 font-bold text-sm tracking-wide uppercase">Pricing</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mt-4 mb-6">Simple, transparent pricing</h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">No hidden fees. No surprises. Choose the plan that fits your business needs.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Starter Plan -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 card-hover cursor-pointer">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Starter</h3>
+                    <p class="text-slate-600 mb-6">For small businesses and startups</p>
+                    <div class="mb-6">
+                        <span class="text-5xl font-extrabold text-slate-900">$29</span>
+                        <span class="text-slate-600 font-medium">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-700">Up to 100 transactions/month</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-700">Basic analytics dashboard</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-700">5 integrations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-700">Email support</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-xl font-bold transition-all duration-200 cursor-pointer">
+                        Get Started
+                    </button>
+                </div>
+                <!-- Professional Plan -->
+                <div class="bg-gradient-to-br from-primary-600 to-primary-700 rounded-3xl p-8 shadow-2xl shadow-primary-600/25 border border-primary-500 card-hover relative cursor-pointer transform scale-105">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-accent-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">MOST POPULAR</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Professional</h3>
+                    <p class="text-primary-100 mb-6">For growing businesses</p>
+                    <div class="mb-6">
+                        <span class="text-5xl font-extrabold text-white">$79</span>
+                        <span class="text-primary-100 font-medium">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-accent-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">Unlimited transactions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-accent-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">Advanced analytics + AI forecasting</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-accent-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">50+ integrations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-accent-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">Priority support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-accent-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">Custom reports</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-white hover:bg-slate-50 text-primary-700 py-4 rounded-xl font-bold transition-all duration-200 cursor-pointer shadow-lg">
+                        Get Started
+                    </button>
+                </div>
+                <!-- Enterprise Plan -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 card-hover cursor-pointer">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Enterprise</h3>
+                    <p class="text-slate-600 mb-6">For large organizations</p>
+                    <div class="mb-6">
+                        <span class="text-5xl font-extrabold text-slate-900">$199</span>
+                        <span class="text-slate-600 font-medium">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-700">Everything in Professional</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-700">Unlimited team members</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-700">100+ integrations + custom API</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-700">Dedicated account manager</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-slate-700">24/7 phone support</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-xl font-bold transition-all duration-200 cursor-pointer">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 sm:py-28 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-primary-600 font-bold text-sm tracking-wide uppercase">Testimonials</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mt-4 mb-6">Loved by finance teams everywhere</h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">See what our customers have to say about their experience with FinanceFlow.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <div class="flex items-center mb-4">
+                        <span class="text-yellow-500 text-lg">★★★★★</span>
+                    </div>
+                    <p class="text-slate-700 mb-6 leading-relaxed">"FinanceFlow has completely transformed how we manage our company finances. The AI forecasting alone has saved us countless hours and helped us make better decisions."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-lg mr-4">SK</div>
+                        <div>
+                            <p class="font-bold text-slate-900">Sarah Kim</p>
+                            <p class="text-sm text-slate-500">CFO, TechVentures Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <div class="flex items-center mb-4">
+                        <span class="text-yellow-500 text-lg">★★★★★</span>
+                    </div>
+                    <p class="text-slate-700 mb-6 leading-relaxed">"The real-time analytics dashboard is a game-changer. We can now see exactly where our money is going at any moment. The integrations work flawlessly with our existing tools."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-secondary-400 to-secondary-600 flex items-center justify-center text-white font-bold text-lg mr-4">MR</div>
+                        <div>
+                            <p class="font-bold text-slate-900">Michael Rodriguez</p>
+                            <p class="text-sm text-slate-500">CEO, GrowthLabs</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <div class="flex items-center mb-4">
+                        <span class="text-yellow-500 text-lg">★★★★★</span>
+                    </div>
+                    <p class="text-slate-700 mb-6 leading-relaxed">"We switched from our old accounting software to FinanceFlow and never looked back. The interface is beautiful, intuitive, and the support team is incredibly responsive."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent-400 to-accent-600 flex items-center justify-center text-white font-bold text-lg mr-4">JD</div>
+                        <div>
+                            <p class="font-bold text-slate-900">Jennifer Davis</p>
+                            <p class="text-sm text-slate-500">Finance Director, ScaleUp Co.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 sm:py-28 bg-gradient-to-br from-primary-600 to-primary-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">Ready to take control of your finances?</h2>
+            <p class="text-xl text-primary-100 mb-10 max-w-2xl mx-auto">Join 5,000+ businesses already using FinanceFlow to make smarter financial decisions.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white hover:bg-slate-50 text-primary-700 px-10 py-5 rounded-xl font-bold text-lg transition-all duration-200 shadow-xl cursor-pointer">
+                    Start Your Free Trial
+                </button>
+                <button class="bg-primary-700 hover:bg-primary-900 text-white px-10 py-5 rounded-xl font-bold text-lg border-2 border-primary-500 transition-all duration-200 cursor-pointer">
+                    Schedule a Demo
+                </button>
+            </div>
+            <p class="mt-6 text-primary-200 text-sm">No credit card required • 14-day free trial • Cancel anytime</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-5 gap-8 mb-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold text-white">FinanceFlow</span>
+                    </div>
+                    <p class="text-slate-400 mb-6 max-w-sm">The modern financial dashboard for businesses that demand clarity, control, and confidence.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Product</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#features" class="hover:text-white transition-colors duration-200 cursor-pointer">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-white transition-colors duration-200 cursor-pointer">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Integrations</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Changelog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">About</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Careers</a></li>
+                        <li><a href="#testimonials" class="hover:text-white transition-colors duration-200 cursor-pointer">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">API Reference</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© 2024 FinanceFlow. All rights reserved.</p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition-colors duration-200 cursor-pointer">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

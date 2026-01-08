@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Interface | Next-Generation Quantum Computing Platform</title>
+    <meta name="description" content="Access the power of quantum computing through our intuitive interface. Build, simulate, and deploy quantum algorithms with ease.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        quantum: {
+                            primary: '#6366f1',
+                            secondary: '#8b5cf6',
+                            accent: '#06b6d4',
+                            dark: '#0a0e27',
+                            darker: '#050816',
+                            card: 'rgba(15, 23, 42, 0.6)',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.3)' },
+                            '100%': { boxShadow: '0 0 40px rgba(99, 102, 241, 0.6)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1e1b4b 50%, #0a0e27 100%);
+            min-height: 100vh;
+        }
+
+        .quantum-bg {
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-quantum {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-quantum:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+        }
+
+        .quantum-ring {
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50%;
+            animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.05);
+            }
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(99, 102, 241, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .nav-glass {
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .section-divider {
+            background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.3) 50%, transparent 100%);
+            height: 1px;
+        }
+    </style>
+</head>
+<body class="font-body text-gray-100 quantum-bg overflow-x-hidden">
+
+    <!-- Floating Particles Background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 40%; left: 20%; animation-delay: 1s;"></div>
+        <div class="particle" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 80%; left: 70%; animation-delay: 3s;"></div>
+        <div class="particle" style="top: 30%; left: 90%; animation-delay: 4s;"></div>
+        <div class="particle" style="top: 70%; left: 30%; animation-delay: 5s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="font-heading font-bold text-xl text-white">Quantum<span class="text-gradient">Interface</span></span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-white transition-colors duration-200">Features</a>
+                    <a href="#how-it-works" class="text-gray-300 hover:text-white transition-colors duration-200">How it Works</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-white transition-colors duration-200">Pricing</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-200">Contact</a>
+                    <button class="btn-quantum px-6 py-2.5 rounded-lg text-white font-medium">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button class="md:hidden text-white p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card mx-4 mb-4 rounded-lg">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#features" class="block text-gray-300 hover:text-white transition-colors">Features</a>
+                <a href="#how-it-works" class="block text-gray-300 hover:text-white transition-colors">How it Works</a>
+                <a href="#pricing" class="block text-gray-300 hover:text-white transition-colors">Pricing</a>
+                <a href="#contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
+                <button class="w-full btn-quantum px-6 py-2.5 rounded-lg text-white font-medium">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Hero Content -->
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full glass-card-light mb-6">
+                        <span class="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
+                        <span class="text-sm text-gray-300">Now in Public Beta</span>
+                    </div>
+
+                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                        Harness the Power of
+                        <span class="text-gradient">Quantum Computing</span>
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Build, simulate, and deploy quantum algorithms with our intuitive interface. No PhD required—just your curiosity and code.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button class="btn-quantum px-8 py-4 rounded-xl text-white font-semibold text-lg cursor-pointer">
+                            Start Building Free
+                        </button>
+                        <button class="glass-card-light px-8 py-4 rounded-xl text-white font-semibold text-lg hover:bg-white/10 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/>
+                            </svg>
+                            Watch Demo
+                        </button>
+                    </div>
+
+                    <div class="mt-12 flex items-center justify-center lg:justify-start gap-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-gradient font-heading">10K+</div>
+                            <div class="text-sm text-gray-400">Active Users</div>
+                        </div>
+                        <div class="w-px h-12 bg-gray-700"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-gradient font-heading">99.9%</div>
+                            <div class="text-sm text-gray-400">Uptime</div>
+                        </div>
+                        <div class="w-px h-12 bg-gray-700"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-gradient font-heading">50+</div>
+                            <div class="text-sm text-gray-400">Qubits Access</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual -->
+                <div class="relative flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <!-- Outer Ring -->
+                        <div class="quantum-ring w-80 h-80 md:w-96 md:h-96 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                        <div class="quantum-ring w-64 h-64 md:w-80 md:h-80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animation-delay-1000"></div>
+
+                        <!-- Central Quantum Visual -->
+                        <div class="relative w-72 h-72 md:w-96 md:h-96 glass-card rounded-full flex items-center justify-center animate-float">
+                            <div class="text-center">
+                                <svg class="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 text-gradient" fill="none" stroke="url(#gradient)" viewBox="0 0 24 24">
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6366f1"/>
+                                            <stop offset="100%" style="stop-color:#06b6d4"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                <div class="text-white font-heading font-semibold">Quantum Core</div>
+                                <div class="text-sm text-gray-400">Processing...</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Elements -->
+                        <div class="absolute top-0 right-0 glass-card-light p-4 rounded-xl animate-float" style="animation-delay: 0.5s;">
+                            <div class="text-2xl font-bold text-cyan-400">|ψ⟩</div>
+                            <div class="text-xs text-gray-400">Qubit State</div>
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 glass-card-light p-4 rounded-xl animate-float" style="animation-delay: 1s;">
+                            <div class="text-2xl font-bold text-indigo-400">H</div>
+                            <div class="text-xs text-gray-400">Hadamard</div>
+                        </div>
+
+                        <div class="absolute top-1/2 -left-4 glass-card-light p-3 rounded-xl animate-float" style="animation-delay: 1.5s;">
+                            <div class="text-lg font-bold text-purple-400">CNOT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-center text-gray-500 mb-8 text-sm uppercase tracking-wider">Trusted by leading research institutions and companies</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+                <div class="text-gray-400 font-heading font-semibold text-xl">MIT</div>
+                <div class="text-gray-400 font-heading font-semibold text-xl">IBM Research</div>
+                <div class="text-gray-400 font-heading font-semibold text-xl">Google Quantum AI</div>
+                <div class="text-gray-400 font-heading font-semibold text-xl">Stanford</div>
+                <div class="text-gray-400 font-heading font-semibold text-xl">NASA</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 md:py-32 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                    Everything You Need to Build
+                    <span class="text-gradient">Quantum Solutions</span>
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    From circuit design to deployment, our platform provides all the tools you need to accelerate your quantum computing journey.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 hover:border-indigo-500/40 transition-all duration-300 cursor-pointer group">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">Visual Circuit Designer</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Drag-and-drop interface to build quantum circuits visually. Real-time validation and optimization suggestions.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 hover:border-cyan-500/40 transition-all duration-300 cursor-pointer group">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">Real-Time Simulator</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Simulate up to 50 qubits in real-time with high-fidelity results. Debug and optimize before deployment.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 hover:border-purple-500/40 transition-all duration-300 cursor-pointer group">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">Code Generation</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Auto-generate optimized Qiskit, Cirq, or Q# code from your visual circuits. Export with one click.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 hover:border-indigo-500/40 transition-all duration-300 cursor-pointer group">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">Cloud Deployment</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Deploy to real quantum hardware instantly. Access IBM Quantum, Rigetti, and IonQ through unified API.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 hover:border-cyan-500/40 transition-all duration-300 cursor-pointer group">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">Advanced Analytics</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Visualize measurement outcomes, state vectors, and density matrices with interactive charts and graphs.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 hover:border-purple-500/40 transition-all duration-300 cursor-pointer group">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">Learning Resources</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Comprehensive tutorials, documentation, and community forums. From basics to advanced algorithms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 md:py-32 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                    From Idea to
+                    <span class="text-gradient">Quantum Reality</span>
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    Three simple steps to transform your quantum algorithms into working applications.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+                <!-- Step 1 -->
+                <div class="relative text-center">
+                    <div class="glass-card w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-gradient">
+                        1
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">Design Your Circuit</h3>
+                    <p class="text-gray-400">
+                        Use our visual drag-and-drop editor to create quantum circuits. Choose from gates, measurements, and custom operations.
+                    </p>
+                    <div class="hidden md:block absolute top-10 left-[60%] w-[80%] border-t-2 border-dashed border-indigo-500/30"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative text-center">
+                    <div class="glass-card w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-gradient">
+                        2
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">Simulate & Optimize</h3>
+                    <p class="text-gray-400">
+                        Run simulations instantly, analyze results, and optimize your circuit for better performance and accuracy.
+                    </p>
+                    <div class="hidden md:block absolute top-10 left-[60%] w-[80%] border-t-2 border-dashed border-cyan-500/30"></div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="glass-card w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-gradient">
+                        3
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">Deploy to Hardware</h3>
+                    <p class="text-gray-400">
+                        With one click, run your circuit on real quantum processors. Get results and analyze measurement outcomes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 md:py-32 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="glass-card rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+                <!-- Background decoration -->
+                <div class="absolute inset-0 opacity-30">
+                    <div class="absolute top-0 left-0 w-64 h-64 bg-indigo-500 rounded-full filter blur-3xl"></div>
+                    <div class="absolute bottom-0 right-0 w-64 h-64 bg-cyan-500 rounded-full filter blur-3xl"></div>
+                </div>
+
+                <div class="relative z-10">
+                    <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                        Ready to Enter the
+                        <span class="text-gradient">Quantum Era?</span>
+                    </h2>
+                    <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+                        Join thousands of researchers, developers, and innovators building the future of computing. Start free, scale when you need.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="btn-quantum px-10 py-4 rounded-xl text-white font-semibold text-lg cursor-pointer">
+                            Start Free Trial
+                        </button>
+                        <button class="glass-card-light px-10 py-4 rounded-xl text-white font-semibold text-lg hover:bg-white/10 transition-all duration-200 cursor-pointer">
+                            Schedule Demo
+                        </button>
+                    </div>
+
+                    <p class="mt-8 text-sm text-gray-400">
+                        No credit card required • Free tier includes 50 qubits simulation • Cancel anytime
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="border-t border-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <span class="font-heading font-bold text-xl text-white">QuantumInterface</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Making quantum computing accessible to everyone. Build the future with us.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-heading font-semibold text-white mb-4">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API Reference</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h4 class="font-heading font-semibold text-white mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    © 2024 QuantumInterface. All rights reserved.
+                </p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(10, 14, 39, 0.95)';
+            } else {
+                nav.style.background = 'rgba(10, 14, 39, 0.8)';
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply to all cards and sections
+        document.querySelectorAll('.glass-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

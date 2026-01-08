@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXÉ - Premium Luxury Collection</title>
+    <meta name="description" content="Discover our exclusive collection of luxury fashion, accessories, and lifestyle products.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1C1917',
+                        secondary: '#44403C',
+                        cta: '#CA8A04',
+                        background: '#FAFAF9',
+                        text: '#0C0A09',
+                        border: '#D6D3D1',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .glass-dark {
+            background: rgba(28, 25, 23, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Liquid glass effect */
+        .liquid-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Hover effects */
+        .hover-lift {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FAFAF9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #44403C;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1C1917;
+        }
+    </style>
+</head>
+<body class="font-sans text-text bg-background antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 glass rounded-2xl shadow-lg animate-fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2 group" aria-label="LUXÉ Home">
+                    <span class="font-serif text-2xl font-bold text-primary group-hover:text-cta transition-colors duration-300">LUXÉ</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#collections" class="text-sm font-medium text-secondary hover:text-primary transition-colors duration-200">Collections</a>
+                    <a href="#featured" class="text-sm font-medium text-secondary hover:text-primary transition-colors duration-200">Featured</a>
+                    <a href="#about" class="text-sm font-medium text-secondary hover:text-primary transition-colors duration-200">About</a>
+                    <a href="#testimonials" class="text-sm font-medium text-secondary hover:text-primary transition-colors duration-200">Reviews</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-secondary hover:text-primary transition-colors duration-200" aria-label="Search">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </button>
+                    <button class="hidden sm:block px-6 py-2.5 bg-primary text-white text-sm font-medium rounded-full hover:bg-cta transition-colors duration-300 shadow-md hover:shadow-xl cursor-pointer">
+                        Shop Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-background opacity-95"></div>
+
+        <!-- Decorative elements -->
+        <div class="absolute top-20 right-10 w-72 h-72 bg-cta/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-cta/5 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+            <div class="animate-slide-up">
+                <p class="font-sans text-cta text-sm font-medium tracking-[0.3em] uppercase mb-6">Exclusive Collection 2024</p>
+                <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+                    Timeless<br/>Elegance
+                </h1>
+                <p class="font-sans text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-10 font-light">
+                    Discover our curated selection of luxury fashion and accessories, crafted for those who appreciate the finer things in life.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#collections" class="group px-10 py-4 bg-cta text-white text-sm font-semibold rounded-full hover:bg-yellow-600 transition-all duration-300 shadow-lg hover:shadow-2xl cursor-pointer flex items-center space-x-2">
+                        <span>Explore Collection</span>
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                    <a href="#featured" class="px-10 py-4 border-2 border-white/30 text-white text-sm font-semibold rounded-full hover:bg-white/10 transition-all duration-300 cursor-pointer">
+                        View Lookbook
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+                    <div class="text-center">
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-white">500+</p>
+                        <p class="font-sans text-xs text-gray-400 mt-1 uppercase tracking-wider">Products</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-white">50K+</p>
+                        <p class="font-sans text-xs text-gray-400 mt-1 uppercase tracking-wider">Customers</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-white">4.9★</p>
+                        <p class="font-sans text-xs text-gray-400 mt-1 uppercase tracking-wider">Rating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections" class="py-20 lg:py-32 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <p class="font-sans text-cta text-sm font-medium tracking-[0.2em] uppercase mb-4">Our Collections</p>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-primary mb-6">Curated Excellence</h2>
+                <p class="font-sans text-secondary max-w-2xl mx-auto text-lg">Each collection tells a story of craftsmanship, sophistication, and timeless beauty.</p>
+            </div>
+
+            <!-- Collections Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Collection 1 -->
+                <article class="group cursor-pointer hover-lift">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 aspect-[3/4] mb-6">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-24 h-24 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="text-white font-sans text-sm font-medium">Explore →</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-primary mb-2">Handbags & Accessories</h3>
+                    <p class="font-sans text-secondary text-sm">Premium leather craftsmanship</p>
+                </article>
+
+                <!-- Collection 2 -->
+                <article class="group cursor-pointer hover-lift">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 aspect-[3/4] mb-6">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-24 h-24 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="text-white font-sans text-sm font-medium">Explore →</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-primary mb-2">Timepieces</h3>
+                    <p class="font-sans text-secondary text-sm">Swiss precision engineering</p>
+                </article>
+
+                <!-- Collection 3 -->
+                <article class="group cursor-pointer hover-lift">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 aspect-[3/4] mb-6">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-24 h-24 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="text-white font-sans text-sm font-medium">Explore →</span>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-primary mb-2">Fine Jewelry</h3>
+                    <p class="font-sans text-secondary text-sm">Diamonds and precious gems</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="featured" class="py-20 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+                <div>
+                    <p class="font-sans text-cta text-sm font-medium tracking-[0.2em] uppercase mb-4">Featured</p>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold text-primary mb-4">Bestsellers</h2>
+                </div>
+                <a href="#" class="font-sans text-sm font-medium text-primary hover:text-cta transition-colors duration-200 cursor-pointer inline-flex items-center space-x-2 mt-4 md:mt-0">
+                    <span>View All Products</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                <!-- Product 1 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-stone-100 to-stone-200 aspect-square mb-4">
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-cta text-white text-xs font-semibold rounded-full z-10">New</span>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                        </div>
+                        <button class="absolute bottom-4 left-4 right-4 py-3 bg-primary text-white text-sm font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" aria-label="Add to bag">
+                            Add to Bag
+                        </button>
+                    </div>
+                    <h3 class="font-serif text-lg font-semibold text-primary mb-1 group-hover:text-cta transition-colors duration-200">The Classic Tote</h3>
+                    <p class="font-sans text-secondary text-sm mb-2">Italian Leather</p>
+                    <p class="font-sans font-semibold text-primary">$2,450</p>
+                </article>
+
+                <!-- Product 2 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-stone-100 to-stone-200 aspect-square mb-4">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <button class="absolute bottom-4 left-4 right-4 py-3 bg-primary text-white text-sm font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" aria-label="Add to bag">
+                            Add to Bag
+                        </button>
+                    </div>
+                    <h3 class="font-serif text-lg font-semibold text-primary mb-1 group-hover:text-cta transition-colors duration-200">Chronograph Elite</h3>
+                    <p class="font-sans text-secondary text-sm mb-2">Swiss Made</p>
+                    <p class="font-sans font-semibold text-primary">$8,900</p>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-stone-100 to-stone-200 aspect-square mb-4">
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-red-600 text-white text-xs font-semibold rounded-full z-10">-20%</span>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                            </svg>
+                        </div>
+                        <button class="absolute bottom-4 left-4 right-4 py-3 bg-primary text-white text-sm font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" aria-label="Add to bag">
+                            Add to Bag
+                        </button>
+                    </div>
+                    <h3 class="font-serif text-lg font-semibold text-primary mb-1 group-hover:text-cta transition-colors duration-200">Diamond Pendant</h3>
+                    <p class="font-sans text-secondary text-sm mb-2">18K White Gold</p>
+                    <p class="font-sans font-semibold text-primary">$4,200 <span class="text-secondary line-through ml-2">$5,250</span></p>
+                </article>
+
+                <!-- Product 4 -->
+                <article class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-stone-100 to-stone-200 aspect-square mb-4">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                        </div>
+                        <button class="absolute bottom-4 left-4 right-4 py-3 bg-primary text-white text-sm font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" aria-label="Add to bag">
+                            Add to Bag
+                        </button>
+                    </div>
+                    <h3 class="font-serif text-lg font-semibold text-primary mb-1 group-hover:text-cta transition-colors duration-200">Evening Clutch</h3>
+                    <p class="font-sans text-secondary text-sm mb-2">Exotic Leather</p>
+                    <p class="font-sans font-semibold text-primary">$1,850</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 lg:py-32 bg-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">The LUXÉ Experience</h2>
+                <p class="font-sans text-gray-400 max-w-2xl mx-auto text-lg">Every detail meticulously crafted to exceed your expectations.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="text-center p-8">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-cta/10">
+                        <svg class="w-8 h-8 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-3">Artisan Crafted</h3>
+                    <p class="font-sans text-gray-400 text-sm leading-relaxed">Each piece is handcrafted by master artisans with decades of experience, ensuring unparalleled quality and attention to detail.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="text-center p-8">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-cta/10">
+                        <svg class="w-8 h-8 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-3">Lifetime Warranty</h3>
+                    <p class="font-sans text-gray-400 text-sm leading-relaxed">We stand behind our products with comprehensive lifetime warranty coverage, giving you complete peace of mind.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="text-center p-8">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-cta/10">
+                        <svg class="w-8 h-8 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-3">Free Global Shipping</h3>
+                    <p class="font-sans text-gray-400 text-sm leading-relaxed">Enjoy complimentary express shipping worldwide on all orders, with secure packaging and real-time tracking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 lg:py-32 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="relative">
+                    <div class="aspect-[4/5] rounded-2xl bg-gradient-to-br from-stone-200 to-stone-300 overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-32 h-32 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-8 -right-8 w-64 h-64 bg-cta/10 rounded-full blur-3xl"></div>
+                </div>
+
+                <div>
+                    <p class="font-sans text-cta text-sm font-medium tracking-[0.2em] uppercase mb-4">Our Story</p>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold text-primary mb-6">A Legacy of Excellence</h2>
+                    <div class="space-y-4 text-secondary text-lg leading-relaxed">
+                        <p>Founded in 1987, LUXÉ has been at the forefront of luxury fashion and accessories for over three decades. Our commitment to excellence has made us a trusted name among discerning customers worldwide.</p>
+                        <p>Every piece in our collection represents the pinnacle of craftsmanship, sourced from the finest materials and created by master artisans who share our passion for perfection.</p>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-serif text-3xl font-bold text-primary">37+</p>
+                            <p class="font-sans text-sm text-secondary">Years of Excellence</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-3xl font-bold text-primary">120+</p>
+                            <p class="font-sans text-sm text-secondary">Countries Served</p>
+                        </div>
+                    </div>
+
+                    <a href="#" class="inline-flex items-center space-x-2 mt-8 text-primary font-semibold hover:text-cta transition-colors duration-200 cursor-pointer">
+                        <span>Learn More About Us</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="font-sans text-cta text-sm font-medium tracking-[0.2em] uppercase mb-4">Testimonials</p>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-primary mb-6">What Our Clients Say</h2>
+                <p class="font-sans text-secondary max-w-2xl mx-auto text-lg">Real experiences from our valued customers around the world.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <article class="liquid-glass rounded-2xl p-8 hover-lift">
+                    <div class="flex items-center mb-6" role="img" aria-label="5 star rating">
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <blockquote class="mb-6">
+                        <p class="font-sans text-secondary text-lg leading-relaxed">"The quality is absolutely exceptional. My wife was thrilled with the handbag, and the customer service was impeccable. Highly recommend!"</p>
+                    </blockquote>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-stone-200 to-stone-300 flex items-center justify-center mr-4">
+                            <span class="font-serif font-bold text-primary">JM</span>
+                        </div>
+                        <div>
+                            <p class="font-serif font-semibold text-primary">James Morrison</p>
+                            <p class="font-sans text-sm text-secondary">New York, USA</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Testimonial 2 -->
+                <article class="liquid-glass rounded-2xl p-8 hover-lift">
+                    <div class="flex items-center mb-6" role="img" aria-label="5 star rating">
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <blockquote class="mb-6">
+                        <p class="font-sans text-secondary text-lg leading-relaxed">"I've been collecting watches for years, and the Chronograph Elite from LUXÉ is now the crown jewel of my collection. Simply stunning."</p>
+                    </blockquote>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-stone-200 to-stone-300 flex items-center justify-center mr-4">
+                            <span class="font-serif font-bold text-primary">SW</span>
+                        </div>
+                        <div>
+                            <p class="font-serif font-semibold text-primary">Sophia Wellington</p>
+                            <p class="font-sans text-sm text-secondary">London, UK</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Testimonial 3 -->
+                <article class="liquid-glass rounded-2xl p-8 hover-lift">
+                    <div class="flex items-center mb-6" role="img" aria-label="5 star rating">
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-cta" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <blockquote class="mb-6">
+                        <p class="font-sans text-secondary text-lg leading-relaxed">"Fast shipping to Tokyo, beautiful packaging, and the product exceeded all expectations. This is what luxury shopping should be."</p>
+                    </blockquote>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-stone-200 to-stone-300 flex items-center justify-center mr-4">
+                            <span class="font-serif font-bold text-primary">YT</span>
+                        </div>
+                        <div>
+                            <p class="font-serif font-semibold text-primary">Yuki Tanaka</p>
+                            <p class="font-sans text-sm text-secondary">Tokyo, Japan</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 lg:py-32 bg-gradient-to-br from-primary to-secondary">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">Join the Exclusive Circle</h2>
+            <p class="font-sans text-gray-300 text-lg mb-10">Be the first to know about new collections, exclusive offers, and private events.</p>
+
+            <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto" onsubmit="event.preventDefault();">
+                <label for="email-input" class="sr-only">Email address</label>
+                <input
+                    type="email"
+                    id="email-input"
+                    placeholder="Enter your email"
+                    required
+                    class="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-cta focus:ring-2 focus:ring-cta/20 transition-all duration-200"
+                >
+                <button
+                    type="submit"
+                    class="px-8 py-4 bg-cta text-white font-semibold rounded-full hover:bg-yellow-600 transition-colors duration-300 shadow-lg hover:shadow-xl cursor-pointer whitespace-nowrap"
+                >
+                    Subscribe
+                </button>
+            </form>
+
+            <p class="font-sans text-gray-400 text-sm mt-6">By subscribing, you agree to our Privacy Policy and consent to receive updates.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+                <!-- Brand Column -->
+                <div class="col-span-2 md:col-span-1">
+                    <a href="#" class="font-serif text-2xl font-bold text-white mb-4 inline-block">LUXÉ</a>
+                    <p class="font-sans text-gray-400 text-sm leading-relaxed mb-6">Crafting timeless luxury since 1987. Experience the pinnacle of elegance and sophistication.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-cta transition-colors duration-200" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-cta transition-colors duration-200" aria-label="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-cta transition-colors duration-200" aria-label="Twitter">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-serif text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">New Arrivals</a></li>
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Best Sellers</a></li>
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Collections</a></li>
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Lookbook</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div>
+                    <h4 class="font-serif text-white font-semibold mb-4">Customer Service</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Contact Us</a></li>
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Shipping Info</a></li>
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Returns</a></li>
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-serif text-white font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Privacy Policy</a></li>
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Terms of Service</a></li>
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Cookie Policy</a></li>
+                        <li><a href="#" class="font-sans text-gray-400 text-sm hover:text-cta transition-colors duration-200">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="font-sans text-gray-400 text-sm">&copy; 2024 LUXÉ. All rights reserved.</p>
+                <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='25' viewBox='0 0 40 25'%3E%3Crect fill='%231C1917' width='40' height='25' rx='3'/%3E%3Ctext x='20' y='16' font-family='Arial' font-size='8' fill='%23fff' text-anchor='middle'%3EVISA%3C/text%3E%3C/svg%3E" alt="Visa" class="h-6 opacity-50">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='25' viewBox='0 0 40 25'%3E%3Crect fill='%231C1917' width='40' height='25' rx='3'/%3E%3Ctext x='20' y='16' font-family='Arial' font-size='7' fill='%23fff' text-anchor='middle'%3EMaster%3C/text%3E%3C/svg%3E" alt="Mastercard" class="h-6 opacity-50">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='25' viewBox='0 0 40 25'%3E%3Crect fill='%231C1917' width='40' height='25' rx='3'/%3E%3Ctext x='20' y='16' font-family='Arial' font-size='7' fill='%23fff' text-anchor='middle'%3EAMEX%3C/text%3E%3C/svg%3E" alt="Amex" class="h-6 opacity-50">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

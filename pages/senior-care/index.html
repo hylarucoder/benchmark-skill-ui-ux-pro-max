@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComfortCare - Compassionate Senior Care Services</title>
+    <meta name="description" content="Professional senior care services with compassion, dignity, and respect. 24/7 support for your loved ones.">
+
+    <!-- Google Fonts - Optimized for readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Lexend', 'sans-serif'],
+                        body: ['Source Sans 3', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#60A5FA',
+                        cta: '#F97316',
+                        background: '#F8FAFC',
+                        text: '#1E293B',
+                        border: '#E2E8F0',
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px rgba(59, 130, 246, 0.08)',
+                        'soft-lg': '0 8px 40px rgba(59, 130, 246, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Accessibility improvements */
+        * {
+            scroll-behavior: smooth;
+        }
+
+        /* Skip link for keyboard navigation */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #3B82F6;
+            color: white;
+            padding: 8px 16px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus visible for keyboard navigation */
+        *:focus-visible {
+            outline: 3px solid #3B82F6;
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .card-hover {
+                border: 2px solid #1E293B;
+            }
+        }
+    </style>
+</head>
+<body class="font-body text-text bg-background antialiased">
+
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 bg-white/95 backdrop-blur-sm rounded-2xl shadow-soft border border-border" role="navigation" aria-label="Main navigation">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="flex items-center gap-3 group" aria-label="ComfortCare Home">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="font-heading text-2xl font-bold text-text">ComfortCare</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#services" class="text-lg font-medium text-text hover:text-primary transition-colors duration-200">Services</a>
+                    <a href="#why-us" class="text-lg font-medium text-text hover:text-primary transition-colors duration-200">Why Us</a>
+                    <a href="#testimonials" class="text-lg font-medium text-text hover:text-primary transition-colors duration-200">Testimonials</a>
+                    <a href="#contact" class="text-lg font-medium text-text hover:text-primary transition-colors duration-200">Contact</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 bg-cta hover:bg-orange-600 text-white font-semibold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
+                        <span>Get Started</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 cursor-pointer" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle menu">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-white/95 backdrop-blur-sm">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#services" class="block text-lg font-medium text-text hover:text-primary transition-colors duration-200 py-2">Services</a>
+                <a href="#why-us" class="block text-lg font-medium text-text hover:text-primary transition-colors duration-200 py-2">Why Us</a>
+                <a href="#testimonials" class="block text-lg font-medium text-text hover:text-primary transition-colors duration-200 py-2">Testimonials</a>
+                <a href="#contact" class="block text-lg font-medium text-text hover:text-primary transition-colors duration-200 py-2">Contact</a>
+                <a href="#contact" class="block w-full text-center px-6 py-3 bg-cta hover:bg-orange-600 text-white font-semibold rounded-xl transition-all duration-200 mt-4">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="pt-32 pb-20 lg:pt-40 lg:pb-32 px-4 sm:px-6 lg:px-8" aria-labelledby="hero-heading">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <!-- Hero Content -->
+                    <div class="text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full mb-6">
+                            <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                            <span class="text-sm font-semibold text-primary">Trusted by 500+ Families</span>
+                        </div>
+
+                        <h1 id="hero-heading" class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-text leading-tight mb-6">
+                            Compassionate Care for Your
+                            <span class="text-primary">Loved Ones</span>
+                        </h1>
+
+                        <p class="text-lg lg:text-xl text-slate-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                            Professional senior care services designed with dignity, respect, and warmth. We help seniors live comfortably and safely at home.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#contact" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cta hover:bg-orange-600 text-white font-semibold text-lg rounded-xl transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
+                                <span>Schedule a Consultation</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </a>
+                            <a href="#services" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white hover:bg-gray-50 text-text font-semibold text-lg rounded-xl border-2 border-border hover:border-primary transition-all duration-200 cursor-pointer">
+                                <span>Learn More</span>
+                            </a>
+                        </div>
+
+                        <!-- Trust Indicators -->
+                        <div class="mt-12 flex flex-wrap items-center justify-center lg:justify-start gap-8">
+                            <div class="text-center">
+                                <p class="font-heading text-3xl lg:text-4xl font-bold text-primary">15+</p>
+                                <p class="text-sm font-medium text-slate-600">Years Experience</p>
+                            </div>
+                            <div class="w-px h-12 bg-border hidden sm:block"></div>
+                            <div class="text-center">
+                                <p class="font-heading text-3xl lg:text-4xl font-bold text-primary">500+</p>
+                                <p class="text-sm font-medium text-slate-600">Families Served</p>
+                            </div>
+                            <div class="w-px h-12 bg-border hidden sm:block"></div>
+                            <div class="text-center">
+                                <p class="font-heading text-3xl lg:text-4xl font-bold text-primary">24/7</p>
+                                <p class="text-sm font-medium text-slate-600">Support Available</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Image -->
+                    <div class="relative">
+                        <div class="relative z-10 rounded-3xl overflow-hidden shadow-soft-lg bg-gradient-to-br from-blue-50 to-indigo-50 aspect-[4/3] flex items-center justify-center">
+                            <!-- Illustration placeholder - warm caring image -->
+                            <svg class="w-3/4 h-3/4 text-primary opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <!-- Decorative elements -->
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-secondary/20 rounded-full blur-2xl"></div>
+                        <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 bg-white" aria-labelledby="services-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <span class="inline-block px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-sm font-semibold text-primary mb-4">Our Services</span>
+                    <h2 id="services-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text mb-4">
+                        Comprehensive Care Solutions
+                    </h2>
+                    <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                        We offer personalized care services tailored to meet the unique needs of each senior we serve.
+                    </p>
+                </div>
+
+                <!-- Services Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <article class="card-hover bg-white p-8 rounded-2xl border-2 border-border hover:border-primary hover:shadow-soft transition-all duration-300 cursor-pointer group">
+                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
+                            <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">In-Home Care</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Professional caregivers provide personalized assistance with daily activities, medication reminders, and companionship in the comfort of home.
+                        </p>
+                    </article>
+
+                    <!-- Service Card 2 -->
+                    <article class="card-hover bg-white p-8 rounded-2xl border-2 border-border hover:border-primary hover:shadow-soft transition-all duration-300 cursor-pointer group">
+                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
+                            <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">Personal Care</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Assistance with bathing, grooming, dressing, and mobility support provided with dignity and respect for your loved one's privacy.
+                        </p>
+                    </article>
+
+                    <!-- Service Card 3 -->
+                    <article class="card-hover bg-white p-8 rounded-2xl border-2 border-border hover:border-primary hover:shadow-soft transition-all duration-300 cursor-pointer group">
+                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
+                            <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">24/7 Live-In Care</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Round-the-clock care and supervision for seniors who need continuous support and peace of mind for their families.
+                        </p>
+                    </article>
+
+                    <!-- Service Card 4 -->
+                    <article class="card-hover bg-white p-8 rounded-2xl border-2 border-border hover:border-primary hover:shadow-soft transition-all duration-300 cursor-pointer group">
+                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
+                            <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">Medication Management</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Certified caregivers ensure medications are taken correctly and on schedule, with detailed tracking and family updates.
+                        </p>
+                    </article>
+
+                    <!-- Service Card 5 -->
+                    <article class="card-hover bg-white p-8 rounded-2xl border-2 border-border hover:border-primary hover:shadow-soft transition-all duration-300 cursor-pointer group">
+                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
+                            <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">Companionship</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Friendly caregivers provide social interaction, engage in hobbies, and accompany seniors to appointments and activities.
+                        </p>
+                    </article>
+
+                    <!-- Service Card 6 -->
+                    <article class="card-hover bg-white p-8 rounded-2xl border-2 border-border hover:border-primary hover:shadow-soft transition-all duration-300 cursor-pointer group">
+                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
+                            <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">Respite Care</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Temporary relief for family caregivers, providing professional care coverage for a few hours to several weeks.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-us" class="py-20 bg-gradient-to-br from-blue-50 to-indigo-50" aria-labelledby="why-us-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Content -->
+                    <div>
+                        <span class="inline-block px-4 py-2 bg-white border border-blue-200 rounded-full text-sm font-semibold text-primary mb-4">Why Choose Us</span>
+                        <h2 id="why-us-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text mb-6">
+                            Trusted Caregivers You Can Rely On
+                        </h2>
+                        <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                            We understand that choosing senior care is one of the most important decisions you'll make. Here's why families trust ComfortCare.
+                        </p>
+
+                        <!-- Features List -->
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading text-xl font-bold text-text mb-2">Background-Checked Caregivers</h3>
+                                    <p class="text-slate-600">All caregivers undergo thorough background checks, drug screenings, and reference verification.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading text-xl font-bold text-text mb-2">Certified & Trained Staff</h3>
+                                    <p class="text-slate-600">Continuous training in senior care, CPR certification, and specialized dementia care programs.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading text-xl font-bold text-text mb-2">Personalized Care Plans</h3>
+                                    <p class="text-slate-600">Custom care plans designed to meet individual needs, preferences, and schedule requirements.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading text-xl font-bold text-text mb-2">24/7 Support & Communication</h3>
+                                    <p class="text-slate-600">Round-the-clock availability and regular family updates ensure peace of mind always.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image/Illustration -->
+                    <div class="relative">
+                        <div class="bg-white rounded-3xl p-8 shadow-soft-lg">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center">
+                                    <p class="font-heading text-4xl font-bold text-primary mb-2">98%</p>
+                                    <p class="text-sm font-medium text-slate-600">Client Satisfaction</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 text-center">
+                                    <p class="font-heading text-4xl font-bold text-cta mb-2">50+</p>
+                                    <p class="text-sm font-medium text-slate-600">Certified Caregivers</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 text-center">
+                                    <p class="font-heading text-4xl font-bold text-green-600 mb-2">24/7</p>
+                                    <p class="text-sm font-medium text-slate-600">Always Available</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 text-center">
+                                    <p class="font-heading text-4xl font-bold text-purple-600 mb-2">0</p>
+                                    <p class="text-sm font-medium text-slate-600">Hidden Fees</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Decorative elements -->
+                        <div class="absolute -top-4 -right-4 w-32 h-32 bg-secondary/20 rounded-full blur-3xl"></div>
+                        <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-cta/20 rounded-full blur-2xl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 bg-white" aria-labelledby="testimonials-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <span class="inline-block px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-sm font-semibold text-primary mb-4">Testimonials</span>
+                    <h2 id="testimonials-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text mb-4">
+                        What Families Say About Us
+                    </h2>
+                    <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                        Hear from families who have experienced our compassionate care firsthand.
+                    </p>
+                </div>
+
+                <!-- Testimonials Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <article class="bg-white p-8 rounded-2xl border-2 border-border shadow-soft">
+                        <div class="flex items-center gap-1 mb-4" aria-label="5 star rating">
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </div>
+                        <blockquote class="text-slate-700 mb-6 leading-relaxed italic">
+                            "ComfortCare has been a blessing for our family. The caregivers are genuinely compassionate and treat my mother with such dignity. We finally have peace of mind knowing she's in good hands."
+                        </blockquote>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-lg">
+                                M
+                            </div>
+                            <div>
+                                <p class="font-heading font-bold text-text">Margaret Thompson</p>
+                                <p class="text-sm text-slate-600">Daughter of Client</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Testimonial 2 -->
+                    <article class="bg-white p-8 rounded-2xl border-2 border-border shadow-soft">
+                        <div class="flex items-center gap-1 mb-4" aria-label="5 star rating">
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </div>
+                        <blockquote class="text-slate-700 mb-6 leading-relaxed italic">
+                            "After my father's surgery, we needed someone trustworthy to help with his recovery. ComfortCare matched us with Sarah, who's been absolutely wonderful. Professional, kind, and reliable."
+                        </blockquote>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-cta to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                                R
+                            </div>
+                            <div>
+                                <p class="font-heading font-bold text-text">Robert Chen</p>
+                                <p class="text-sm text-slate-600">Son of Client</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Testimonial 3 -->
+                    <article class="bg-white p-8 rounded-2xl border-2 border-border shadow-soft">
+                        <div class="flex items-center gap-1 mb-4" aria-label="5 star rating">
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </div>
+                        <blockquote class="text-slate-700 mb-6 leading-relaxed italic">
+                            "I was overwhelmed trying to care for my mom while working full-time. ComfortCare's flexible scheduling has been a lifesaver. The communication with the care team is excellent."
+                        </blockquote>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                                S
+                            </div>
+                            <div>
+                                <p class="font-heading font-bold text-text">Susan Martinez</p>
+                                <p class="text-sm text-slate-600">Working Mother</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact/CTA Section -->
+        <section id="contact" class="py-20 bg-gradient-to-br from-primary to-secondary" aria-labelledby="contact-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Contact Content -->
+                    <div class="text-white">
+                        <h2 id="contact-heading" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                            Ready to Experience Compassionate Care?
+                        </h2>
+                        <p class="text-lg lg:text-xl text-blue-100 mb-8 leading-relaxed">
+                            Contact us today for a free consultation. We'll listen to your needs and create a personalized care plan for your loved one.
+                        </p>
+
+                        <div class="space-y-6 mb-8">
+                            <div class="flex items-center gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-lg">Call Us 24/7</p>
+                                    <p class="text-blue-100 text-lg">(555) 123-4567</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-lg">Email Us</p>
+                                    <p class="text-blue-100 text-lg">care@comfortcare.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-lg">Service Area</p>
+                                    <p class="text-blue-100 text-lg">Greater Metro Area</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="bg-white rounded-3xl p-8 lg:p-10 shadow-soft-lg">
+                        <h3 class="font-heading text-2xl font-bold text-text mb-6">Request a Free Consultation</h3>
+
+                        <form class="space-y-6" aria-label="Contact form">
+                            <div>
+                                <label for="name" class="block text-sm font-semibold text-text mb-2">Full Name <span class="text-red-500" aria-hidden="true">*</span></label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 border-2 border-border rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/20 outline-none transition-all text-text" placeholder="John Smith" aria-required="true">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-text mb-2">Email Address <span class="text-red-500" aria-hidden="true">*</span></label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 border-2 border-border rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/20 outline-none transition-all text-text" placeholder="john@example.com" aria-required="true">
+                            </div>
+
+                            <div>
+                                <label for="phone" class="block text-sm font-semibold text-text mb-2">Phone Number <span class="text-red-500" aria-hidden="true">*</span></label>
+                                <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border-2 border-border rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/20 outline-none transition-all text-text" placeholder="(555) 123-4567" aria-required="true">
+                            </div>
+
+                            <div>
+                                <label for="service" class="block text-sm font-semibold text-text mb-2">Service Needed</label>
+                                <select id="service" name="service" class="w-full px-4 py-3 border-2 border-border rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/20 outline-none transition-all text-text bg-white">
+                                    <option value="">Select a service</option>
+                                    <option value="in-home">In-Home Care</option>
+                                    <option value="personal">Personal Care</option>
+                                    <option value="24-7">24/7 Live-In Care</option>
+                                    <option value="medication">Medication Management</option>
+                                    <option value="companionship">Companionship</option>
+                                    <option value="respite">Respite Care</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-sm font-semibold text-text mb-2">How Can We Help?</label>
+                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border-2 border-border rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/20 outline-none transition-all resize-none text-text" placeholder="Tell us about your care needs..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 bg-cta hover:bg-orange-600 text-white font-semibold text-lg rounded-xl transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
+                                Submit Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-16" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="font-heading text-2xl font-bold">ComfortCare</span>
+                    </div>
+                    <p class="text-slate-400 text-lg mb-6 max-w-md">
+                        Providing compassionate senior care services with dignity and respect. Trusted by families for over 15 years.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.77,7.46H14.5v-1.9c0-.9.6-1.1,1-1.1h3V.5h-4.33C10.24.5,9.5,3.44,9.5,5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4Z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="Twitter">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.44,4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96,1.32-2.02-.88.52-1.86.9-2.9,1.1-.82-.88-2-1.43-3.3-1.43-2.5,0-4.55,2.04-4.55,4.54,0,.36.03.7.1,1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6,1.45-.6,2.3,0,1.56.8,2.95,2,3.77-.74-.03-1.44-.23-2.05-.57v.06c0,2.2,1.56,4.03,3.64,4.44-.67.2-1.37.2-2.06.08.58,1.8,2.26,3.12,4.25,3.16C5.78,18.1,3.37,18.74,1,18.46c2,1.3,4.4,2.04,6.97,2.04,8.35,0,12.92-6.92,12.92-12.93,0-.2,0-.4-.02-.6.9-.63,1.96-1.22,2.56-2.14Z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="LinkedIn">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45,20.45H16.89V14.88c0-1.33,0-3-1.85-3s-2.14,1.45-2.14,2.94v5.66H9.34V9h3.41v1.56h.05a3.74,3.74,0,0,1,3.37-1.85c3.6,0,4.27,2.37,4.27,5.46v6.27ZM5.34,7.43A2.07,2.07,0,1,1,7.41,5.36,2.07,2.07,0,0,1,5.34,7.43Zm1.78,13H3.56V9H7.12ZM22.22,0H1.77A1.75,1.75,0,0,0,0,1.73V22.27A1.75,1.75,0,0,0,1.77,24H22.22A1.75,1.75,0,0,0,24,22.27V1.73A1.75,1.75,0,0,0,22.22,0Z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-slate-400 hover:text-white transition-colors duration-200">Services</a></li>
+                        <li><a href="#why-us" class="text-slate-400 hover:text-white transition-colors duration-200">Why Choose Us</a></li>
+                        <li><a href="#testimonials" class="text-slate-400 hover:text-white transition-colors duration-200">Testimonials</a></li>
+                        <li><a href="#contact" class="text-slate-400 hover:text-white transition-colors duration-200">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">In-Home Care</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Personal Care</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">24/7 Live-In Care</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Respite Care</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-400 text-sm">
+                    © 2024 ComfortCare. All rights reserved.
+                </p>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Privacy Policy</a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Terms of Service</a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple script for mobile menu toggle -->
+    <script>
+        const mobileMenuButton = document.querySelector('button[aria-controls="mobile-menu"]');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

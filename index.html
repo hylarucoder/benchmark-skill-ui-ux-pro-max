@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield - Next-Gen Cybersecurity Platform</title>
+    <meta name="description" content="Enterprise-grade cybersecurity platform with AI-powered threat detection and real-time monitoring">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['"Share Tech Mono"', 'monospace'],
+                        code: ['"Fira Code"', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            green: '#00FF41',
+                            dark: '#0D0D0D',
+                            darker: '#080808',
+                            border: '#1F1F1F',
+                            text: '#E0E0E0',
+                            muted: '#6B7280',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scan': 'scan 2s linear infinite',
+                        'blink': 'blink 1s step-end infinite',
+                    },
+                    keyframes: {
+                        scan: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' }
+                        },
+                        blink: {
+                            '0%, 50%': { opacity: '1' },
+                            '51%, 100%': { opacity: '0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        .glow-box {
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2), inset 0 0 15px rgba(0, 255, 65, 0.05);
+        }
+        .terminal-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        .scan-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00FF41, transparent);
+            animation: scan 2s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-cyber-darker text-cyber-text font-code antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 bg-cyber-dark/90 backdrop-blur-md border border-cyber-border rounded-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <svg class="size-8 text-cyber-green" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+                        <path d="M12 8v8"/>
+                        <path d="M8 12h8"/>
+                    </svg>
+                    <span class="font-heading text-xl text-cyber-green">CYBERSHIELD</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-cyber-text hover:text-cyber-green transition-colors duration-200 cursor-pointer">Features</a>
+                    <a href="#solutions" class="text-cyber-text hover:text-cyber-green transition-colors duration-200 cursor-pointer">Solutions</a>
+                    <a href="#pricing" class="text-cyber-text hover:text-cyber-green transition-colors duration-200 cursor-pointer">Pricing</a>
+                    <a href="#" class="text-cyber-text hover:text-cyber-green transition-colors duration-200 cursor-pointer">Docs</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="hidden sm:block text-cyber-text hover:text-cyber-green transition-colors duration-200 cursor-pointer">Login</button>
+                    <button class="bg-cyber-green text-cyber-darker px-4 py-2 rounded font-heading hover:bg-cyber-green/90 transition-colors duration-200 cursor-pointer">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 px-4">
+        <!-- Background Grid -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: linear-gradient(#00FF41 1px, transparent 1px), linear-gradient(90deg, #00FF41 1px, transparent 1px); background-size: 50px 50px;"></div>
+        </div>
+        <!-- Glowing orbs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyber-green/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-green/5 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyber-green/30 bg-cyber-green/5 mb-8">
+                <span class="size-2 bg-cyber-green rounded-full animate-pulse"></span>
+                <span class="text-cyber-green font-heading text-sm">AI-POWERED THREAT DETECTION</span>
+            </div>
+
+            <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight">
+                <span class="glow-text">SECURE YOUR DIGITAL</span><br>
+                <span class="text-cyber-green">INFRASTRUCTURE</span>
+            </h1>
+
+            <p class="text-cyber-muted text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                Enterprise-grade cybersecurity with real-time threat intelligence,
+                automated response, and military-grade encryption.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <button class="w-full sm:w-auto bg-cyber-green text-cyber-darker px-8 py-4 rounded font-heading text-lg hover:bg-cyber-green/90 transition-all duration-200 cursor-pointer glow-box">
+                    Start Free Trial
+                </button>
+                <button class="w-full sm:w-auto border border-cyber-border text-cyber-text px-8 py-4 rounded font-heading text-lg hover:border-cyber-green hover:text-cyber-green transition-all duration-200 cursor-pointer">
+                    Watch Demo
+                </button>
+            </div>
+
+            <!-- Terminal Preview -->
+            <div class="relative max-w-3xl mx-auto">
+                <div class="bg-cyber-dark border border-cyber-border rounded-lg overflow-hidden scan-line">
+                    <div class="flex items-center gap-2 px-4 py-3 border-b border-cyber-border">
+                        <div class="size-3 rounded-full bg-red-500"></div>
+                        <div class="size-3 rounded-full bg-yellow-500"></div>
+                        <div class="size-3 rounded-full bg-green-500"></div>
+                        <span class="ml-4 text-cyber-muted text-sm font-heading">cybershell ~ threat-monitor</span>
+                    </div>
+                    <div class="p-6 text-left font-code text-sm sm:text-base">
+                        <div class="text-cyber-green mb-2">$ cybershield scan --deep</div>
+                        <div class="text-cyber-muted mb-1">[INIT] Initializing threat detection engine...</div>
+                        <div class="text-cyber-green mb-1">[OK] Neural network loaded</div>
+                        <div class="text-cyber-green mb-1">[OK] Real-time monitoring active</div>
+                        <div class="text-cyber-green mb-1">[OK] Scanning 847 endpoints...</div>
+                        <div class="text-cyber-muted mb-1">[SCAN] Analyzing traffic patterns...</div>
+                        <div class="text-yellow-400 mb-1">[WARN] 2 suspicious activities detected</div>
+                        <div class="text-cyber-green mb-1">[OK] 3 potential threats neutralized</div>
+                        <div class="text-cyber-muted"><span class="terminal-cursor">_</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="border-y border-cyber-border py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-center text-cyber-muted mb-8 font-heading text-sm">TRUSTED BY LEADING ORGANIZATIONS WORLDWIDE</p>
+            <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-50">
+                <div class="font-heading text-xl text-cyber-muted">TECHCORP</div>
+                <div class="font-heading text-xl text-cyber-muted">DATAGUARD</div>
+                <div class="font-heading text-xl text-cyber-muted">NETSECURE</div>
+                <div class="font-heading text-xl text-cyber-muted">CLOUDSAFE</div>
+                <div class="font-heading text-xl text-cyber-muted">DEFENSE.IO</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 md:py-32 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl text-white mb-6">
+                    <span class="text-cyber-green">NEXT-GEN</span> PROTECTION
+                </h2>
+                <p class="text-cyber-muted text-lg max-w-2xl mx-auto">
+                    Advanced security features powered by machine learning and real-time threat intelligence
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="group p-6 bg-cyber-dark border border-cyber-border rounded-lg hover:border-cyber-green/50 transition-all duration-300 cursor-pointer">
+                    <div class="size-12 bg-cyber-green/10 border border-cyber-green/30 rounded-lg flex items-center justify-center mb-4 group-hover:glow-box transition-all duration-300">
+                        <svg class="size-6 text-cyber-green" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl text-white mb-3">Real-Time Threat Detection</h3>
+                    <p class="text-cyber-muted leading-relaxed">AI-powered analysis detects and neutralizes threats before they impact your systems with sub-second response times.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="group p-6 bg-cyber-dark border border-cyber-border rounded-lg hover:border-cyber-green/50 transition-all duration-300 cursor-pointer">
+                    <div class="size-12 bg-cyber-green/10 border border-cyber-green/30 rounded-lg flex items-center justify-center mb-4 group-hover:glow-box transition-all duration-300">
+                        <svg class="size-6 text-cyber-green" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl text-white mb-3">Zero Trust Architecture</h3>
+                    <p class="text-cyber-muted leading-relaxed">Never trust, always verify. Every access request is authenticated, authorized, and encrypted before granting access.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="group p-6 bg-cyber-dark border border-cyber-border rounded-lg hover:border-cyber-green/50 transition-all duration-300 cursor-pointer">
+                    <div class="size-12 bg-cyber-green/10 border border-cyber-green/30 rounded-lg flex items-center justify-center mb-4 group-hover:glow-box transition-all duration-300">
+                        <svg class="size-6 text-cyber-green" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl text-white mb-3">Military-Grade Encryption</h3>
+                    <p class="text-cyber-muted leading-relaxed">AES-256 encryption protects your data at rest and in transit, meeting the strictest security compliance standards.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="group p-6 bg-cyber-dark border border-cyber-border rounded-lg hover:border-cyber-green/50 transition-all duration-300 cursor-pointer">
+                    <div class="size-12 bg-cyber-green/10 border border-cyber-green/30 rounded-lg flex items-center justify-center mb-4 group-hover:glow-box transition-all duration-300">
+                        <svg class="size-6 text-cyber-green" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl text-white mb-3">Automated Response</h3>
+                    <p class="text-cyber-muted leading-relaxed">Instant containment and remediation workflows activate automatically when threats are detected, minimizing damage.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="group p-6 bg-cyber-dark border border-cyber-border rounded-lg hover:border-cyber-green/50 transition-all duration-300 cursor-pointer">
+                    <div class="size-12 bg-cyber-green/10 border border-cyber-green/30 rounded-lg flex items-center justify-center mb-4 group-hover:glow-box transition-all duration-300">
+                        <svg class="size-6 text-cyber-green" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl text-white mb-3">24/7 Monitoring</h3>
+                    <p class="text-cyber-muted leading-relaxed">Our security operations center monitors your infrastructure around the clock, ready to respond to any incident.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="group p-6 bg-cyber-dark border border-cyber-border rounded-lg hover:border-cyber-green/50 transition-all duration-300 cursor-pointer">
+                    <div class="size-12 bg-cyber-green/10 border border-cyber-green/30 rounded-lg flex items-center justify-center mb-4 group-hover:glow-box transition-all duration-300">
+                        <svg class="size-6 text-cyber-green" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl text-white mb-3">Compliance Reporting</h3>
+                    <p class="text-cyber-muted leading-relaxed">Automated reports for SOC 2, ISO 27001, HIPAA, and GDPR compliance with detailed audit trails and documentation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 px-4 border-y border-cyber-border">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="font-heading text-4xl md:text-5xl text-cyber-green mb-2">99.9%</div>
+                    <div class="text-cyber-muted">Threat Detection Rate</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-heading text-4xl md:text-5xl text-cyber-green mb-2">&lt;1ms</div>
+                    <div class="text-cyber-muted">Response Time</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-heading text-4xl md:text-5xl text-cyber-green mb-2">10K+</div>
+                    <div class="text-cyber-muted">Organizations Protected</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-heading text-4xl md:text-5xl text-cyber-green mb-2">24/7</div>
+                    <div class="text-cyber-muted">Expert Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 md:py-32 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl text-white mb-6">
+                    TRUSTED BY <span class="text-cyber-green">EXPERTS</span>
+                </h2>
+                <p class="text-cyber-muted text-lg max-w-2xl mx-auto">
+                    See what security leaders say about CyberShield
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="p-6 bg-cyber-dark border border-cyber-border rounded-lg">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="text-cyber-muted mb-6 leading-relaxed">"CyberShield detected a sophisticated phishing campaign that other tools missed. Their AI is genuinely next-level."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="size-10 bg-cyber-green/20 rounded-full flex items-center justify-center">
+                            <span class="text-cyber-green font-heading">MK</span>
+                        </div>
+                        <div>
+                            <div class="text-white font-heading">Michael Kim</div>
+                            <div class="text-cyber-muted text-sm">CISO, TechVentures</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="p-6 bg-cyber-dark border border-cyber-border rounded-lg">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="text-cyber-muted mb-6 leading-relaxed">"Implementation was seamless. We were fully protected in under 48 hours. The ROI was visible within the first month."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="size-10 bg-cyber-green/20 rounded-full flex items-center justify-center">
+                            <span class="text-cyber-green font-heading">SR</span>
+                        </div>
+                        <div>
+                            <div class="text-white font-heading">Sarah Rodriguez</div>
+                            <div class="text-cyber-muted text-sm">VP Security, FinanceHub</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="p-6 bg-cyber-dark border border-cyber-border rounded-lg">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="size-5 text-cyber-green" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="text-cyber-muted mb-6 leading-relaxed">"The automated response capabilities have reduced our incident response time by 95%. Game changer for our team."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="size-10 bg-cyber-green/20 rounded-full flex items-center justify-center">
+                            <span class="text-cyber-green font-heading">JC</span>
+                        </div>
+                        <div>
+                            <div class="text-white font-heading">James Chen</div>
+                            <div class="text-cyber-muted text-sm">CTO, CloudScale Inc</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 md:py-32 px-4 border-t border-cyber-border">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl text-white mb-6">
+                    SIMPLE, <span class="text-cyber-green">TRANSPARENT</span> PRICING
+                </h2>
+                <p class="text-cyber-muted text-lg max-w-2xl mx-auto">
+                    Choose the plan that fits your security needs
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Starter Plan -->
+                <div class="p-6 bg-cyber-dark border border-cyber-border rounded-lg">
+                    <div class="font-heading text-lg text-cyber-muted mb-2">STARTER</div>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="font-heading text-4xl text-white">$99</span>
+                        <span class="text-cyber-muted">/month</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-cyber-muted">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Up to 100 endpoints
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-muted">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Basic threat detection
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-muted">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Email support
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-muted">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            7-day log retention
+                        </li>
+                    </ul>
+                    <button class="w-full border border-cyber-border text-cyber-text py-3 rounded font-heading hover:border-cyber-green hover:text-cyber-green transition-all duration-200 cursor-pointer">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Professional Plan (Highlighted) -->
+                <div class="p-6 bg-cyber-dark border-2 border-cyber-green rounded-lg relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyber-green text-cyber-darker px-3 py-1 rounded font-heading text-xs">
+                        MOST POPULAR
+                    </div>
+                    <div class="font-heading text-lg text-cyber-green mb-2">PROFESSIONAL</div>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="font-heading text-4xl text-white">$299</span>
+                        <span class="text-cyber-muted">/month</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-cyber-text">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Up to 1,000 endpoints
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-text">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            AI-powered detection
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-text">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Priority support
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-text">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            30-day log retention
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-text">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Compliance reports
+                        </li>
+                    </ul>
+                    <button class="w-full bg-cyber-green text-cyber-darker py-3 rounded font-heading hover:bg-cyber-green/90 transition-colors duration-200 cursor-pointer glow-box">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="p-6 bg-cyber-dark border border-cyber-border rounded-lg">
+                    <div class="font-heading text-lg text-cyber-muted mb-2">ENTERPRISE</div>
+                    <div class="flex items-baseline gap-1 mb-6">
+                        <span class="font-heading text-4xl text-white">Custom</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-cyber-muted">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Unlimited endpoints
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-muted">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Advanced threat hunting
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-muted">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Dedicated account manager
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-muted">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Unlimited log retention
+                        </li>
+                        <li class="flex items-center gap-3 text-cyber-muted">
+                            <svg class="size-5 text-cyber-green shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Custom integrations
+                        </li>
+                    </ul>
+                    <button class="w-full border border-cyber-border text-cyber-text py-3 rounded font-heading hover:border-cyber-green hover:text-cyber-green transition-all duration-200 cursor-pointer">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 md:py-32 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl text-white mb-6">
+                READY TO <span class="text-cyber-green glow-text">SECURE</span> YOUR FUTURE?
+            </h2>
+            <p class="text-cyber-muted text-lg mb-10 max-w-2xl mx-auto">
+                Join thousands of organizations that trust CyberShield to protect their digital assets. Start your free trial today.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button class="w-full sm:w-auto bg-cyber-green text-cyber-darker px-8 py-4 rounded font-heading text-lg hover:bg-cyber-green/90 transition-all duration-200 cursor-pointer glow-box">
+                    Start Free Trial
+                </button>
+                <button class="w-full sm:w-auto border border-cyber-border text-cyber-text px-8 py-4 rounded font-heading text-lg hover:border-cyber-green hover:text-cyber-green transition-all duration-200 cursor-pointer">
+                    Schedule Demo
+                </button>
+            </div>
+            <p class="text-cyber-muted mt-6 text-sm">No credit card required. 14-day free trial.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyber-border py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="size-6 text-cyber-green" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+                        </svg>
+                        <span class="font-heading text-lg text-cyber-green">CYBERSHIELD</span>
+                    </div>
+                    <p class="text-cyber-muted text-sm">Next-generation cybersecurity for the modern enterprise.</p>
+                </div>
+                <div>
+                    <h4 class="font-heading text-white mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Features</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Pricing</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Integrations</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Changelog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading text-white mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">About</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Careers</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Blog</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading text-white mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Documentation</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">API Reference</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Status</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading text-white mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Privacy</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Terms</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Security</a></li>
+                        <li><a href="#" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-cyber-border">
+                <p class="text-cyber-muted text-sm mb-4 md:mb-0">© 2024 CyberShield. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <a href="#" aria-label="Twitter" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">
+                        <svg class="size-5" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="GitHub" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">
+                        <svg class="size-5" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="text-cyber-muted hover:text-cyber-green transition-colors duration-200 cursor-pointer">
+                        <svg class="size-5" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

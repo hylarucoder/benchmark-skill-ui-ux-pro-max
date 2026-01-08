@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业服务平台 - 提升您的业务效率</title>
+    <meta name="description" content="我们提供专业的企业服务解决方案,帮助您提升效率,降低成本,实现业务增长">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Poppins', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#3B82F6',
+                        cta: '#F97316',
+                        background: '#F8FAFC',
+                        text: '#1E293B',
+                        border: '#E2E8F0',
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                        'soft-lg': '0 10px 40px -15px rgba(0, 0, 0, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+        }
+
+        .hero-pattern {
+            background-image: radial-gradient(#3B82F6 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="font-body text-text bg-background antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-white/90 backdrop-blur-md rounded-2xl shadow-soft border border-border">
+                <div class="px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <!-- Logo -->
+                        <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <span class="font-heading font-semibold text-xl text-primary">ServicePro</span>
+                        </div>
+
+                        <!-- Desktop Menu -->
+                        <div class="hidden md:flex items-center gap-8">
+                            <a href="#features" class="text-sm font-medium text-text hover:text-primary transition-colors duration-200">功能特性</a>
+                            <a href="#testimonials" class="text-sm font-medium text-text hover:text-primary transition-colors duration-200">客户评价</a>
+                            <a href="#pricing" class="text-sm font-medium text-text hover:text-primary transition-colors duration-200">价格方案</a>
+                            <a href="#contact" class="text-sm font-medium text-text hover:text-primary transition-colors duration-200">联系我们</a>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <div class="flex items-center gap-4">
+                            <a href="#get-started" class="hidden sm:inline-flex px-6 py-2.5 bg-primary hover:bg-secondary text-white text-sm font-semibold rounded-xl transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                                立即开始
+                            </a>
+                            <!-- Mobile Menu Button -->
+                            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 cursor-pointer" aria-label="打开菜单">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobile-menu-overlay"></div>
+        <div class="absolute right-0 top-0 h-full w-64 bg-white shadow-xl p-6">
+            <div class="flex flex-col gap-4 mt-16">
+                <a href="#features" class="text-base font-medium text-text hover:text-primary transition-colors duration-200 py-2">功能特性</a>
+                <a href="#testimonials" class="text-base font-medium text-text hover:text-primary transition-colors duration-200 py-2">客户评价</a>
+                <a href="#pricing" class="text-base font-medium text-text hover:text-primary transition-colors duration-200 py-2">价格方案</a>
+                <a href="#contact" class="text-base font-medium text-text hover:text-primary transition-colors duration-200 py-2">联系我们</a>
+                <a href="#get-started" class="mt-4 px-6 py-3 bg-primary text-white text-center font-semibold rounded-xl">立即开始</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center gradient-bg hero-pattern pt-24 pb-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm mb-6">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="text-sm font-medium text-gray-600">已服务 10,000+ 企业客户</span>
+                    </div>
+
+                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-text leading-tight mb-6">
+                        专业的<span class="text-primary">企业服务</span><br>
+                        解决方案
+                    </h1>
+
+                    <p class="text-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        我们提供全方位的企业服务,帮助您提升运营效率,降低成本,实现可持续的业务增长。立即开始,体验专业服务的价值。
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#get-started" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-secondary text-white font-semibold rounded-2xl transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                            <span>免费试用 14 天</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="#demo" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white hover:bg-gray-50 text-text font-semibold rounded-2xl transition-all duration-200 cursor-pointer shadow-soft hover:shadow-soft-lg border border-border">
+                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <span>观看演示</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="mt-12 flex items-center gap-8 justify-center lg:justify-start">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <span class="font-semibold">4.9/5</span>
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            <span class="font-semibold text-text">2,000+</span> 条好评
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            <span class="font-semibold text-text">98%</span> 客户满意度
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content - Hero Image/Illustration -->
+                <div class="relative">
+                    <div class="bg-white rounded-3xl shadow-soft-lg p-8 border border-border">
+                        <div class="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center">
+                            <svg class="w-32 h-32 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                        <div class="mt-6 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">活跃用户</span>
+                                <span class="text-sm font-bold text-primary">12,847</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">任务完成率</span>
+                                <span class="text-sm font-bold text-green-500">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Floating Elements -->
+                    <div class="absolute -top-4 -right-4 bg-white rounded-2xl shadow-soft-lg p-4 border border-border animate-bounce" style="animation-duration: 3s;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold">任务完成</p>
+                                <p class="text-xs text-gray-500">刚刚</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-soft-lg p-4 border border-border">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold">效率提升</p>
+                                <p class="text-xs text-green-500 font-semibold">+47%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos Section -->
+    <section class="py-16 px-4 bg-white border-y border-border">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-center text-sm font-medium text-gray-500 mb-8">受到全球领先企业的信赖</p>
+            <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60">
+                <div class="flex items-center gap-2 text-gray-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <span class="font-bold text-lg">Company 1</span>
+                </div>
+                <div class="flex items-center gap-2 text-gray-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                    <span class="font-bold text-lg">Company 2</span>
+                </div>
+                <div class="flex items-center gap-2 text-gray-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                    <span class="font-bold text-lg">Company 3</span>
+                </div>
+                <div class="flex items-center gap-2 text-gray-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 6 6 1-4 4 1 6-6-3-6 3 1-6-4-4 6-1z"/></svg>
+                    <span class="font-bold text-lg">Company 4</span>
+                </div>
+                <div class="flex items-center gap-2 text-gray-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                    <span class="font-bold text-lg">Company 5</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4">核心功能</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-text mb-4">
+                    为什么选择我们
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    我们提供完整的解决方案,帮助企业实现数字化转型和效率提升
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-border hover:border-primary/30 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-text mb-3">极速部署</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        5分钟即可完成部署,无需复杂配置。我们的专业团队将协助您快速上线,让您的业务立即开始运转。
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-border hover:border-primary/30 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-text mb-3">安全保障</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        采用企业级加密技术,通过多项安全认证。您的数据安全是我们的首要任务,让您无后顾之忧。
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-border hover:border-primary/30 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-text mb-3">数据分析</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        实时数据分析与可视化报告,帮助您做出明智的业务决策。深入了解业务趋势,把握发展机遇。
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-border hover:border-primary/30 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-text mb-3">团队协作</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        强大的团队协作功能,支持多人同时工作。实时同步,权限管理,让团队协作更加高效顺畅。
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-border hover:border-primary/30 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-text mb-3">灵活定制</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        根据您的业务需求灵活定制功能和流程。我们的解决方案高度可配置,完美适配您的业务场景。
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-border hover:border-primary/30 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-text mb-3">专属支持</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        7x24小时专业技术支持,快速响应您的需求。专属客户经理,为您提供个性化的服务体验。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4">客户评价</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-text mb-4">
+                    听听客户怎么说
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    来自各行各业客户的真实反馈
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft border border-border">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed italic">
+                        "自从使用了 ServicePro,我们的工作效率提升了 50%。客户支持团队响应迅速,问题总能得到及时解决。强烈推荐!"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold">
+                            王
+                        </div>
+                        <div>
+                            <p class="font-semibold text-text">王明</p>
+                            <p class="text-sm text-gray-500">科技公司 CEO</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft border border-border">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed italic">
+                        "界面直观,功能强大,让我们的团队协作变得前所未有的顺畅。数据分析功能帮助我们做出了很多明智的决策。"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold">
+                            李
+                        </div>
+                        <div>
+                            <p class="font-semibold text-text">李婷</p>
+                            <p class="text-sm text-gray-500">运营总监</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft border border-border">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed italic">
+                        "我们试过很多类似的平台,ServicePro 是最符合我们需求的。安全性高,定制灵活,而且价格合理。物超所值!"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
+                            张
+                        </div>
+                        <div>
+                            <p class="font-semibold text-text">张伟</p>
+                            <p class="text-sm text-gray-500">IT 经理</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4">价格方案</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-text mb-4">
+                    选择适合您的方案
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    透明的定价,无隐藏费用。所有方案均包含核心功能。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft border border-border hover:border-primary/30 transition-all duration-300">
+                    <h3 class="font-heading text-xl font-semibold text-text mb-2">基础版</h3>
+                    <p class="text-gray-500 text-sm mb-6">适合小型团队</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-text">¥99</span>
+                        <span class="text-gray-500">/月</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            最多 5 个用户
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            10GB 存储空间
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            邮件支持
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            基础数据分析
+                        </li>
+                    </ul>
+                    <a href="#get-started" class="block w-full py-3 px-6 text-center border-2 border-border text-text font-semibold rounded-xl hover:border-primary hover:text-primary transition-colors duration-200 cursor-pointer">
+                        开始使用
+                    </a>
+                </div>
+
+                <!-- Pro Plan (Popular) -->
+                <div class="bg-gradient-to-br from-primary to-secondary rounded-2xl p-8 shadow-soft-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-white/20 text-white text-xs font-semibold rounded-full">最受欢迎</span>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-white mb-2">专业版</h3>
+                    <p class="text-blue-100 text-sm mb-6">适合成长中的企业</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-white">¥299</span>
+                        <span class="text-blue-100">/月</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-white">
+                            <svg class="w-5 h-5 text-blue-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            最多 20 个用户
+                        </li>
+                        <li class="flex items-center gap-3 text-white">
+                            <svg class="w-5 h-5 text-blue-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            100GB 存储空间
+                        </li>
+                        <li class="flex items-center gap-3 text-white">
+                            <svg class="w-5 h-5 text-blue-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            优先邮件支持
+                        </li>
+                        <li class="flex items-center gap-3 text-white">
+                            <svg class="w-5 h-5 text-blue-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            高级数据分析
+                        </li>
+                        <li class="flex items-center gap-3 text-white">
+                            <svg class="w-5 h-5 text-blue-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            API 访问
+                        </li>
+                    </ul>
+                    <a href="#get-started" class="block w-full py-3 px-6 text-center bg-white text-primary font-semibold rounded-xl hover:bg-gray-50 transition-colors duration-200 cursor-pointer shadow-lg">
+                        立即订阅
+                    </a>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="bg-white rounded-2xl p-8 shadow-soft border border-border hover:border-primary/30 transition-all duration-300">
+                    <h3 class="font-heading text-xl font-semibold text-text mb-2">企业版</h3>
+                    <p class="text-gray-500 text-sm mb-6">适合大型组织</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-text">定制</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            无限用户
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            无限存储空间
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            24/7 专属支持
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            定制开发
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            SLA 保障
+                        </li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 px-6 text-center border-2 border-border text-text font-semibold rounded-xl hover:border-primary hover:text-primary transition-colors duration-200 cursor-pointer">
+                        联系我们
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="get-started" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-gradient-to-br from-primary to-secondary rounded-3xl p-12 text-center text-white shadow-soft-lg relative overflow-hidden">
+                <!-- Background Pattern -->
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/2 translate-y-1/2"></div>
+                </div>
+
+                <div class="relative z-10">
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold mb-4">
+                        准备开始了吗?
+                    </h2>
+                    <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+                        加入 10,000+ 家企业,体验专业服务的价值。14 天免费试用,无需信用卡。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-2xl hover:bg-gray-50 transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                            <span>免费试用 14 天</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-2xl hover:bg-white/10 transition-all duration-200 cursor-pointer">
+                            <span>预约演示</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4">联系我们</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-text mb-4">
+                    有任何问题?
+                </h2>
+                <p class="text-lg text-gray-600">
+                    我们很乐意为您提供帮助
+                </p>
+            </div>
+
+            <form class="bg-white rounded-2xl p-8 shadow-soft border border-border">
+                <div class="grid sm:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">姓名</label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors duration-200" placeholder="您的姓名">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">邮箱</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors duration-200" placeholder="your@email.com">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="company" class="block text-sm font-medium text-gray-700 mb-2">公司名称</label>
+                    <input type="text" id="company" name="company" class="w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors duration-200" placeholder="您的公司">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">留言</label>
+                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors duration-200 resize-none" placeholder="告诉我们您的需求..."></textarea>
+                </div>
+                <button type="submit" class="w-full py-4 px-8 bg-primary hover:bg-secondary text-white font-semibold rounded-xl transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                    发送消息
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-border py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <span class="font-heading font-semibold text-xl text-primary">ServicePro</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        专业的企业服务解决方案提供商,助力您的业务增长。
+                    </p>
+                </div>
+
+                <!-- Product -->
+                <div>
+                    <h4 class="font-heading font-semibold text-text mb-4">产品</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">功能特性</a></li>
+                        <li><a href="#pricing" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">价格方案</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">更新日志</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">API 文档</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h4 class="font-heading font-semibold text-text mb-4">公司</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">关于我们</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">加入我们</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">新闻动态</a></li>
+                        <li><a href="#contact" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">联系方式</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-heading font-semibold text-text mb-4">法律</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">隐私政策</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">服务条款</a></li>
+                        <li><a href="#" class="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Cookie 政策</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-500">
+                    © 2025 ServicePro. 保留所有权利。
+                </p>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 cursor-pointer" aria-label="Twitter">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 cursor-pointer" aria-label="LinkedIn">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 cursor-pointer" aria-label="GitHub">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenuOverlay.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Close mobile menu when clicking on links
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('感谢您的留言!我们会尽快与您联系。');
+            form.reset();
+        });
+
+        // Add scroll effect to navbar
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                nav.classList.add('top-2');
+                nav.classList.remove('top-4');
+            } else {
+                nav.classList.add('top-4');
+                nav.classList.remove('top-2');
+            }
+
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - Creative Developer & Designer</title>
+    <meta name="description" content="Portfolio of John Doe - Creative Developer & Designer specializing in modern web experiences">
+
+    <!-- Fonts: Poppins (headings) + Open Sans (body) - Modern Professional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Poppins', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#18181B',
+                        secondary: '#3F3F46',
+                        accent: '#2563EB',
+                        background: '#FAFAFA',
+                        text: '#09090B',
+                        border: '#E4E4E7',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Project card hover effect */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Skill tag hover */
+        .skill-tag {
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Navigation blur effect */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="font-body text-text bg-background antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 bg-white/80 nav-blur rounded-2xl border border-border shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#" class="font-heading font-bold text-xl text-primary hover:text-accent transition-colors duration-200">
+                    JD
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-text hover:text-accent transition-colors duration-200 font-medium">About</a>
+                    <a href="#skills" class="text-text hover:text-accent transition-colors duration-200 font-medium">Skills</a>
+                    <a href="#projects" class="text-text hover:text-accent transition-colors duration-200 font-medium">Projects</a>
+                    <a href="#contact" class="bg-accent text-white px-5 py-2 rounded-lg hover:bg-accent/90 transition-colors duration-200 font-medium cursor-pointer">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pb-4">
+            <div class="flex flex-col space-y-3">
+                <a href="#about" class="text-text hover:text-accent transition-colors duration-200 font-medium py-2">About</a>
+                <a href="#skills" class="text-text hover:text-accent transition-colors duration-200 font-medium py-2">Skills</a>
+                <a href="#projects" class="text-text hover:text-accent transition-colors duration-200 font-medium py-2">Projects</a>
+                <a href="#contact" class="bg-accent text-white px-5 py-2 rounded-lg hover:bg-accent/90 transition-colors duration-200 font-medium text-center">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
+        <div class="max-w-7xl mx-auto text-center">
+            <!-- Avatar -->
+            <div class="mb-8 opacity-0 animate-fade-in-up">
+                <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-accent to-purple-600 p-1">
+                    <div class="w-full h-full rounded-full bg-white flex items-center justify-center">
+                        <span class="font-heading font-bold text-5xl text-primary">JD</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name & Title -->
+            <h1 class="font-heading font-extrabold text-5xl sm:text-6xl lg:text-7xl text-primary mb-6 opacity-0 animate-fade-in-up delay-100">
+                John Doe
+            </h1>
+
+            <p class="font-body text-xl sm:text-2xl text-secondary mb-4 opacity-0 animate-fade-in-up delay-200">
+                Creative Developer & Designer
+            </p>
+
+            <p class="font-body text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-8 opacity-0 animate-fade-in-up delay-300">
+                I craft beautiful, functional digital experiences that make an impact. Specializing in modern web development and user-centered design.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up delay-400">
+                <a href="#projects" class="w-full sm:w-auto bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-all duration-200 font-semibold cursor-pointer">
+                    View My Work
+                </a>
+                <a href="#contact" class="w-full sm:w-auto bg-white text-primary border-2 border-primary px-8 py-3 rounded-lg hover:bg-primary hover:text-white transition-all duration-200 font-semibold cursor-pointer">
+                    Get In Touch
+                </a>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex items-center justify-center gap-6 mt-12 opacity-0 animate-fade-in-up delay-400">
+                <a href="#" class="text-secondary hover:text-accent transition-colors duration-200 cursor-pointer" aria-label="GitHub">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="#" class="text-secondary hover:text-accent transition-colors duration-200 cursor-pointer" aria-label="LinkedIn">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="#" class="text-secondary hover:text-accent transition-colors duration-200 cursor-pointer" aria-label="Twitter">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="mailto:john@example.com" class="text-secondary hover:text-accent transition-colors duration-200 cursor-pointer" aria-label="Email">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="font-heading font-bold text-3xl sm:text-4xl text-primary mb-6">
+                        About Me
+                    </h2>
+                    <p class="font-body text-gray-600 mb-4 leading-relaxed">
+                        Hello! I'm John, a passionate developer and designer based in San Francisco. With over 5 years of experience, I specialize in creating beautiful, functional, and user-centered digital experiences.
+                    </p>
+                    <p class="font-body text-gray-600 mb-4 leading-relaxed">
+                        I believe that design is not just about how things look, but how they work. Every project I take on is an opportunity to solve problems and create something meaningful.
+                    </p>
+                    <p class="font-body text-gray-600 mb-6 leading-relaxed">
+                        When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or enjoying a good cup of coffee while reading about the latest design trends.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-accent"></div>
+                            <span class="text-sm font-medium text-gray-700">Available for freelance</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                            <span class="text-sm font-medium text-gray-700">Open to collaborations</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-background p-6 rounded-2xl border border-border">
+                        <div class="font-heading font-bold text-4xl text-accent mb-2">5+</div>
+                        <div class="font-body text-gray-600">Years Experience</div>
+                    </div>
+                    <div class="bg-background p-6 rounded-2xl border border-border">
+                        <div class="font-heading font-bold text-4xl text-accent mb-2">50+</div>
+                        <div class="font-body text-gray-600">Projects Completed</div>
+                    </div>
+                    <div class="bg-background p-6 rounded-2xl border border-border">
+                        <div class="font-heading font-bold text-4xl text-accent mb-2">30+</div>
+                        <div class="font-body text-gray-600">Happy Clients</div>
+                    </div>
+                    <div class="bg-background p-6 rounded-2xl border border-border">
+                        <div class="font-heading font-bold text-4xl text-accent mb-2">15+</div>
+                        <div class="font-body text-gray-600">Open Source Contributions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading font-bold text-3xl sm:text-4xl text-primary mb-4">
+                    Skills & Expertise
+                </h2>
+                <p class="font-body text-gray-600 max-w-2xl mx-auto">
+                    Technologies and tools I use to bring ideas to life
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend Development -->
+                <div class="bg-white p-8 rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl text-primary mb-3">Frontend Development</h3>
+                    <p class="font-body text-gray-600 mb-4">Building responsive and interactive user interfaces</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">React</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Next.js</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Vue.js</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">TypeScript</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Tailwind CSS</span>
+                    </div>
+                </div>
+
+                <!-- Backend Development -->
+                <div class="bg-white p-8 rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl text-primary mb-3">Backend Development</h3>
+                    <p class="font-body text-gray-600 mb-4">Creating robust and scalable server-side solutions</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Node.js</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Python</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">PostgreSQL</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">MongoDB</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">GraphQL</span>
+                    </div>
+                </div>
+
+                <!-- UI/UX Design -->
+                <div class="bg-white p-8 rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl text-primary mb-3">UI/UX Design</h3>
+                    <p class="font-body text-gray-600 mb-4">Designing intuitive and beautiful user experiences</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Figma</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Adobe XD</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Prototyping</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">User Research</span>
+                    </div>
+                </div>
+
+                <!-- DevOps & Tools -->
+                <div class="bg-white p-8 rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl text-primary mb-3">DevOps & Tools</h3>
+                    <p class="font-body text-gray-600 mb-4">Streamlining development and deployment workflows</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Git</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Docker</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">AWS</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">CI/CD</span>
+                    </div>
+                </div>
+
+                <!-- Mobile Development -->
+                <div class="bg-white p-8 rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl text-primary mb-3">Mobile Development</h3>
+                    <p class="font-body text-gray-600 mb-4">Building cross-platform mobile applications</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">React Native</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Flutter</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">iOS</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Android</span>
+                    </div>
+                </div>
+
+                <!-- Testing & Quality -->
+                <div class="bg-white p-8 rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl text-primary mb-3">Testing & Quality</h3>
+                    <p class="font-body text-gray-600 mb-4">Ensuring code quality and application reliability</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Jest</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Cypress</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">TDD</span>
+                        <span class="skill-tag px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium cursor-pointer">Code Review</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading font-bold text-3xl sm:text-4xl text-primary mb-4">
+                    Featured Projects
+                </h2>
+                <p class="font-body text-gray-600 max-w-2xl mx-auto">
+                    A selection of my recent work and side projects
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-background rounded-2xl overflow-hidden border border-border cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-accent to-purple-600"></div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">E-Commerce Platform</h3>
+                        <p class="font-body text-gray-600 text-sm mb-4">A modern e-commerce solution with real-time inventory, payment processing, and analytics dashboard.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">React</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">Node.js</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">MongoDB</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="#" class="text-accent hover:text-accent/80 font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Live Demo
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card bg-background rounded-2xl overflow-hidden border border-border cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600"></div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Task Management App</h3>
+                        <p class="font-body text-gray-600 text-sm mb-4">Collaborative task management with real-time updates, team chat, and project analytics.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">Next.js</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">Socket.io</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">PostgreSQL</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="#" class="text-accent hover:text-accent/80 font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Live Demo
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card bg-background rounded-2xl overflow-hidden border border-border cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-orange-500 to-pink-600"></div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Social Media Dashboard</h3>
+                        <p class="font-body text-gray-600 text-sm mb-4">Analytics dashboard for social media with scheduled posting and engagement tracking.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">Vue.js</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">Python</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">Redis</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="#" class="text-accent hover:text-accent/80 font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Live Demo
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card bg-background rounded-2xl overflow-hidden border border-border cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-cyan-600"></div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">AI Content Generator</h3>
+                        <p class="font-body text-gray-600 text-sm mb-4">AI-powered tool for generating marketing content, blog posts, and social media captions.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">React</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">OpenAI</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">FastAPI</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="#" class="text-accent hover:text-accent/80 font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Live Demo
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card bg-background rounded-2xl overflow-hidden border border-border cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600"></div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Fitness Tracking App</h3>
+                        <p class="font-body text-gray-600 text-sm mb-4">Mobile app for tracking workouts, nutrition, and health metrics with personalized insights.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">React Native</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">GraphQL</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">Node.js</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="#" class="text-accent hover:text-accent/80 font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Live Demo
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card bg-background rounded-2xl overflow-hidden border border-border cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-rose-500 to-red-600"></div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-semibold text-xl text-primary mb-2">Real-estate Platform</h3>
+                        <p class="font-body text-gray-600 text-sm mb-4">Property listing platform with virtual tours, mortgage calculator, and agent matching.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">Next.js</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">TypeScript</span>
+                            <span class="px-2 py-1 bg-white border border-border rounded text-xs font-medium text-gray-600">AWS</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="#" class="text-accent hover:text-accent/80 font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Live Demo
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-primary font-medium text-sm flex items-center gap-1 cursor-pointer">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-heading font-bold text-3xl sm:text-4xl text-primary mb-4">
+                    Let's Work Together
+                </h2>
+                <p class="font-body text-gray-600 max-w-2xl mx-auto">
+                    Have a project in mind? I'd love to hear about it. Send me a message and let's create something amazing together.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 sm:p-12 border border-border shadow-sm">
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block font-body text-sm font-medium text-gray-700 mb-2">Name</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-3 rounded-lg border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all duration-200 font-body"
+                                placeholder="John Smith">
+                        </div>
+                        <div>
+                            <label for="email" class="block font-body text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 rounded-lg border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all duration-200 font-body"
+                                placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="block font-body text-sm font-medium text-gray-700 mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" required
+                            class="w-full px-4 py-3 rounded-lg border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all duration-200 font-body"
+                            placeholder="Project Inquiry">
+                    </div>
+                    <div>
+                        <label for="message" class="block font-body text-sm font-medium text-gray-700 mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" required
+                            class="w-full px-4 py-3 rounded-lg border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all duration-200 font-body resize-none"
+                            placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-accent text-white px-8 py-4 rounded-lg hover:bg-accent/90 transition-all duration-200 font-semibold font-heading cursor-pointer">
+                        Send Message
+                    </button>
+                </form>
+
+                <!-- Alternative Contact -->
+                <div class="mt-12 pt-8 border-t border-border">
+                    <p class="font-body text-center text-gray-600 mb-6">Or reach out directly</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                        <a href="mailto:john@example.com" class="flex items-center gap-2 text-gray-600 hover:text-accent transition-colors duration-200 cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            john@example.com
+                        </a>
+                        <a href="#" class="flex items-center gap-2 text-gray-600 hover:text-accent transition-colors duration-200 cursor-pointer">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                            @johndoe
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-2">
+                    <span class="font-heading font-bold text-2xl text-white">JD</span>
+                    <span class="text-gray-400">© 2025 All rights reserved</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer" aria-label="GitHub">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer" aria-label="LinkedIn">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Twitter">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                </div>
+                <a href="#top" class="text-gray-400 hover:text-white transition-colors duration-200 font-medium cursor-pointer">
+                    Back to top ↑
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Form submission handler
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+
+            // Here you would typically send the data to a server
+            console.log('Form submitted:', data);
+
+            // Show success message
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation for elements
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            observer.observe(section);
+        });
+
+        // Set first section (hero) visible immediately
+        document.querySelector('section').style.opacity = '1';
+    </script>
+</body>
+</html>

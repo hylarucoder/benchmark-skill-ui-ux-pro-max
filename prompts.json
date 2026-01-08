@@ -1,0 +1,602 @@
+[
+  {
+    "id": "saas",
+    "prompt": "Build a landing page for my SaaS (General) site",
+    "status": "completed",
+    "folder": "saas"
+  },
+  {
+    "id": "micro-saas",
+    "prompt": "Build a landing page for my Micro SaaS site",
+    "status": "completed",
+    "folder": "micro-saas"
+  },
+  {
+    "id": "ecommerce",
+    "prompt": "Build a landing page for my E-commerce site",
+    "status": "completed",
+    "folder": "ecommerce"
+  },
+  {
+    "id": "ecommerce-luxury",
+    "prompt": "Build a landing page for my E-commerce Luxury site",
+    "status": "completed",
+    "folder": "ecommerce-luxury"
+  },
+  {
+    "id": "service-landing",
+    "prompt": "Build a landing page for my Service Landing Page site",
+    "status": "completed",
+    "folder": "service-landing"
+  },
+  {
+    "id": "b2b-service",
+    "prompt": "Build a landing page for my B2B Service site",
+    "status": "completed",
+    "folder": "b2b-service"
+  },
+  {
+    "id": "financial-dashboard",
+    "prompt": "Build a landing page for my Financial Dashboard site",
+    "status": "completed",
+    "folder": "financial-dashboard"
+  },
+  {
+    "id": "analytics-dashboard",
+    "prompt": "Build a landing page for my Analytics Dashboard site",
+    "status": "completed",
+    "folder": "analytics-dashboard"
+  },
+  {
+    "id": "healthcare-app",
+    "prompt": "Build a landing page for my Healthcare App site",
+    "status": "completed",
+    "folder": "healthcare-app"
+  },
+  {
+    "id": "educational-app",
+    "prompt": "Build a landing page for my Educational App site",
+    "status": "completed",
+    "folder": "educational-app"
+  },
+  {
+    "id": "creative-agency",
+    "prompt": "Build a landing page for my Creative Agency site",
+    "status": "completed",
+    "folder": "creative-agency"
+  },
+  {
+    "id": "portfolio-personal",
+    "prompt": "Build a landing page for my Portfolio/Personal site",
+    "status": "completed",
+    "folder": "portfolio-personal"
+  },
+  {
+    "id": "gaming",
+    "prompt": "Build a landing page for my Gaming site",
+    "status": "completed",
+    "folder": "gaming"
+  },
+  {
+    "id": "government-public-service",
+    "prompt": "Build a landing page for my Government/Public Service site",
+    "status": "completed",
+    "folder": "government-public-service"
+  },
+  {
+    "id": "fintech-crypto",
+    "prompt": "Build a landing page for my Fintech/Crypto site",
+    "status": "completed",
+    "folder": "fintech-crypto"
+  },
+  {
+    "id": "social-media-app",
+    "prompt": "Build a landing page for my Social Media App site",
+    "status": "completed",
+    "folder": "social-media-app"
+  },
+  {
+    "id": "productivity-tool",
+    "prompt": "Build a landing page for my Productivity Tool site",
+    "status": "completed",
+    "folder": "productivity-tool"
+  },
+  {
+    "id": "design-system",
+    "prompt": "Build a landing page for my Design System/Component Library site",
+    "status": "completed",
+    "folder": "design-system"
+  },
+  {
+    "id": "ai-chatbot",
+    "prompt": "Build a landing page for my AI/Chatbot Platform site",
+    "status": "completed",
+    "folder": "ai-chatbot"
+  },
+  {
+    "id": "nft-web3",
+    "prompt": "Build a landing page for my NFT/Web3 Platform site",
+    "status": "completed",
+    "folder": "nft-web3"
+  },
+  {
+    "id": "creator-economy",
+    "prompt": "Build a landing page for my Creator Economy Platform site",
+    "status": "completed",
+    "folder": "creator-economy"
+  },
+  {
+    "id": "sustainability-esg",
+    "prompt": "Build a landing page for my Sustainability/ESG Platform site",
+    "status": "completed",
+    "folder": "sustainability-esg"
+  },
+  {
+    "id": "remote-work",
+    "prompt": "Build a landing page for my Remote Work/Collaboration Tool site",
+    "status": "completed",
+    "folder": "remote-work"
+  },
+  {
+    "id": "mental-health",
+    "prompt": "Build a landing page for my Mental Health App site",
+    "status": "completed",
+    "folder": "mental-health"
+  },
+  {
+    "id": "pet-tech",
+    "prompt": "Build a landing page for my Pet Tech App site",
+    "status": "completed",
+    "folder": "pet-tech"
+  },
+  {
+    "id": "smart-home",
+    "prompt": "Build a landing page for my Smart Home/IoT Dashboard site",
+    "status": "completed",
+    "folder": "smart-home"
+  },
+  {
+    "id": "ev-charging",
+    "prompt": "Build a landing page for my EV/Charging Ecosystem site",
+    "status": "completed",
+    "folder": "ev-charging"
+  },
+  {
+    "id": "subscription-box",
+    "prompt": "Build a landing page for my Subscription Box Service site",
+    "status": "completed",
+    "folder": "subscription-box"
+  },
+  {
+    "id": "podcast",
+    "prompt": "Build a landing page for my Podcast Platform site",
+    "status": "completed",
+    "folder": "podcast"
+  },
+  {
+    "id": "dating-app",
+    "prompt": "Build a landing page for my Dating App site",
+    "status": "completed",
+    "folder": "dating-app"
+  },
+  {
+    "id": "micro-credentials",
+    "prompt": "Build a landing page for my Micro-Credentials/Badges Platform site",
+    "status": "completed",
+    "folder": "micro-credentials"
+  },
+  {
+    "id": "knowledge-base",
+    "prompt": "Build a landing page for my Knowledge Base/Documentation site",
+    "status": "completed",
+    "folder": "knowledge-base"
+  },
+  {
+    "id": "hyperlocal",
+    "prompt": "Build a landing page for my Hyperlocal Services site",
+    "status": "completed",
+    "folder": "hyperlocal"
+  },
+  {
+    "id": "beauty-spa",
+    "prompt": "Build a landing page for my Beauty/Spa/Wellness Service site",
+    "status": "completed",
+    "folder": "beauty-spa"
+  },
+  {
+    "id": "luxury-premium",
+    "prompt": "Build a landing page for my Luxury/Premium Brand site",
+    "status": "completed",
+    "folder": "luxury-premium"
+  },
+  {
+    "id": "restaurant-food",
+    "prompt": "Build a landing page for my Restaurant/Food Service site",
+    "status": "completed",
+    "folder": "restaurant-food"
+  },
+  {
+    "id": "fitness-gym",
+    "prompt": "Build a landing page for my Fitness/Gym App site",
+    "status": "completed",
+    "folder": "fitness-gym"
+  },
+  {
+    "id": "real-estate",
+    "prompt": "Build a landing page for my Real Estate/Property site",
+    "status": "completed",
+    "folder": "real-estate"
+  },
+  {
+    "id": "travel-tourism",
+    "prompt": "Build a landing page for my Travel/Tourism Agency site",
+    "status": "completed",
+    "folder": "travel-tourism"
+  },
+  {
+    "id": "hotel-hospitality",
+    "prompt": "Build a landing page for my Hotel/Hospitality site",
+    "status": "completed",
+    "folder": "hotel-hospitality"
+  },
+  {
+    "id": "wedding-event",
+    "prompt": "Build a landing page for my Wedding/Event Planning site",
+    "status": "completed",
+    "folder": "wedding-event"
+  },
+  {
+    "id": "legal-services",
+    "prompt": "Build a landing page for my Legal Services site",
+    "status": "completed",
+    "folder": "legal-services"
+  },
+  {
+    "id": "insurance",
+    "prompt": "Build a landing page for my Insurance Platform site",
+    "status": "completed",
+    "folder": "insurance"
+  },
+  {
+    "id": "banking-traditional",
+    "prompt": "Build a landing page for my Banking/Traditional Finance site",
+    "status": "completed",
+    "folder": "banking-traditional"
+  },
+  {
+    "id": "online-course",
+    "prompt": "Build a landing page for my Online Course/E-learning site",
+    "status": "completed",
+    "folder": "online-course"
+  },
+  {
+    "id": "non-profit",
+    "prompt": "Build a landing page for my Non-profit/Charity site",
+    "status": "completed",
+    "folder": "non-profit"
+  },
+  {
+    "id": "music-streaming",
+    "prompt": "Build a landing page for my Music Streaming site",
+    "status": "completed",
+    "folder": "music-streaming"
+  },
+  {
+    "id": "video-streaming",
+    "prompt": "Build a landing page for my Video Streaming/OTT site",
+    "status": "completed",
+    "folder": "video-streaming"
+  },
+  {
+    "id": "job-board",
+    "prompt": "Build a landing page for my Job Board/Recruitment site",
+    "status": "completed",
+    "folder": "job-board"
+  },
+  {
+    "id": "marketplace",
+    "prompt": "Build a landing page for my Marketplace (P2P) site",
+    "status": "completed",
+    "folder": "marketplace"
+  },
+  {
+    "id": "logistics-delivery",
+    "prompt": "Build a landing page for my Logistics/Delivery site",
+    "status": "completed",
+    "folder": "logistics-delivery"
+  },
+  {
+    "id": "agriculture",
+    "prompt": "Build a landing page for my Agriculture/Farm Tech site",
+    "status": "completed",
+    "folder": "agriculture"
+  },
+  {
+    "id": "construction",
+    "prompt": "Build a landing page for my Construction/Architecture site",
+    "status": "completed",
+    "folder": "construction"
+  },
+  {
+    "id": "automotive",
+    "prompt": "Build a landing page for my Automotive/Car Dealership site",
+    "status": "completed",
+    "folder": "automotive"
+  },
+  {
+    "id": "photography",
+    "prompt": "Build a landing page for my Photography Studio site",
+    "status": "completed",
+    "folder": "photography"
+  },
+  {
+    "id": "coworking",
+    "prompt": "Build a landing page for my Coworking Space site",
+    "status": "completed",
+    "folder": "coworking"
+  },
+  {
+    "id": "cleaning",
+    "prompt": "Build a landing page for my Cleaning Service site",
+    "status": "completed",
+    "folder": "cleaning"
+  },
+  {
+    "id": "home-services",
+    "prompt": "Build a landing page for my Home Services (Plumber/Electrician) site",
+    "status": "completed",
+    "folder": "home-services"
+  },
+  {
+    "id": "childcare",
+    "prompt": "Build a landing page for my Childcare/Daycare site",
+    "status": "completed",
+    "folder": "childcare"
+  },
+  {
+    "id": "senior-care",
+    "prompt": "Build a landing page for my Senior Care/Elderly site",
+    "status": "completed",
+    "folder": "senior-care"
+  },
+  {
+    "id": "medical-clinic",
+    "prompt": "Build a landing page for my Medical Clinic site",
+    "status": "completed",
+    "folder": "medical-clinic"
+  },
+  {
+    "id": "pharmacy",
+    "prompt": "Build a landing page for my Pharmacy/Drug Store site",
+    "status": "completed",
+    "folder": "pharmacy"
+  },
+  {
+    "id": "dental",
+    "prompt": "Build a landing page for my Dental Practice site",
+    "status": "completed",
+    "folder": "dental"
+  },
+  {
+    "id": "veterinary",
+    "prompt": "Build a landing page for my Veterinary Clinic site",
+    "status": "completed",
+    "folder": "veterinary"
+  },
+  {
+    "id": "florist",
+    "prompt": "Build a landing page for my Florist/Plant Shop site",
+    "status": "completed",
+    "folder": "florist"
+  },
+  {
+    "id": "bakery-cafe",
+    "prompt": "Build a landing page for my Bakery/Cafe site",
+    "status": "completed",
+    "folder": "bakery-cafe"
+  },
+  {
+    "id": "coffee-shop",
+    "prompt": "Build a landing page for my Coffee Shop site",
+    "status": "completed",
+    "folder": "coffee-shop"
+  },
+  {
+    "id": "brewery-winery",
+    "prompt": "Build a landing page for my Brewery/Winery site",
+    "status": "completed",
+    "folder": "brewery-winery"
+  },
+  {
+    "id": "airline",
+    "prompt": "Build a landing page for my Airline site",
+    "status": "completed",
+    "folder": "airline"
+  },
+  {
+    "id": "news-media",
+    "prompt": "Build a landing page for my News/Media Platform site",
+    "status": "completed",
+    "folder": "news-media"
+  },
+  {
+    "id": "magazine-blog",
+    "prompt": "Build a landing page for my Magazine/Blog site",
+    "status": "completed",
+    "folder": "magazine-blog"
+  },
+  {
+    "id": "freelancer",
+    "prompt": "Build a landing page for my Freelancer Platform site",
+    "status": "completed",
+    "folder": "freelancer"
+  },
+  {
+    "id": "consulting",
+    "prompt": "Build a landing page for my Consulting Firm site",
+    "status": "completed",
+    "folder": "consulting"
+  },
+  {
+    "id": "marketing-agency",
+    "prompt": "Build a landing page for my Marketing Agency site",
+    "status": "completed",
+    "folder": "marketing-agency"
+  },
+  {
+    "id": "event-management",
+    "prompt": "Build a landing page for my Event Management site",
+    "status": "completed",
+    "folder": "event-management"
+  },
+  {
+    "id": "conference",
+    "prompt": "Build a landing page for my Conference/Webinar Platform site",
+    "status": "completed",
+    "folder": "conference"
+  },
+  {
+    "id": "membership",
+    "prompt": "Build a landing page for my Membership/Community site",
+    "status": "completed",
+    "folder": "membership"
+  },
+  {
+    "id": "newsletter",
+    "prompt": "Build a landing page for my Newsletter Platform site",
+    "status": "completed",
+    "folder": "newsletter"
+  },
+  {
+    "id": "digital-products",
+    "prompt": "Build a landing page for my Digital Products/Downloads site",
+    "status": "completed",
+    "folder": "digital-products"
+  },
+  {
+    "id": "church",
+    "prompt": "Build a landing page for my Church/Religious Organization site",
+    "status": "completed",
+    "folder": "church"
+  },
+  {
+    "id": "sports",
+    "prompt": "Build a landing page for my Sports Team/Club site",
+    "status": "completed",
+    "folder": "sports"
+  },
+  {
+    "id": "museum",
+    "prompt": "Build a landing page for my Museum/Gallery site",
+    "status": "completed",
+    "folder": "museum"
+  },
+  {
+    "id": "theater",
+    "prompt": "Build a landing page for my Theater/Cinema site",
+    "status": "completed",
+    "folder": "theater"
+  },
+  {
+    "id": "language-learning",
+    "prompt": "Build a landing page for my Language Learning App site",
+    "status": "completed",
+    "folder": "language-learning"
+  },
+  {
+    "id": "coding-bootcamp",
+    "prompt": "Build a landing page for my Coding Bootcamp site",
+    "status": "completed",
+    "folder": "coding-bootcamp"
+  },
+  {
+    "id": "cybersecurity",
+    "prompt": "Build a landing page for my Cybersecurity Platform site",
+    "status": "completed",
+    "folder": "cybersecurity"
+  },
+  {
+    "id": "developer-tool",
+    "prompt": "Build a landing page for my Developer Tool / IDE site",
+    "status": "completed",
+    "folder": "developer-tool"
+  },
+  {
+    "id": "biotech",
+    "prompt": "Build a landing page for my Biotech / Life Sciences site",
+    "status": "completed",
+    "folder": "biotech"
+  },
+  {
+    "id": "space-tech",
+    "prompt": "Build a landing page for my Space Tech / Aerospace site",
+    "status": "completed",
+    "folder": "space-tech"
+  },
+  {
+    "id": "architecture-interior",
+    "prompt": "Build a landing page for my Architecture / Interior site",
+    "status": "completed",
+    "folder": "architecture-interior"
+  },
+  {
+    "id": "quantum-computing",
+    "prompt": "Build a landing page for my Quantum Computing Interface site",
+    "status": "completed",
+    "folder": "quantum-computing"
+  },
+  {
+    "id": "biohacking",
+    "prompt": "Build a landing page for my Biohacking / Longevity App site",
+    "status": "completed",
+    "folder": "biohacking"
+  },
+  {
+    "id": "drone-fleet",
+    "prompt": "Build a landing page for my Autonomous Drone Fleet Manager site",
+    "status": "completed",
+    "folder": "drone-fleet"
+  },
+  {
+    "id": "generative-art",
+    "prompt": "Build a landing page for my Generative Art Platform site",
+    "status": "completed",
+    "folder": "generative-art"
+  },
+  {
+    "id": "spatial-computing",
+    "prompt": "Build a landing page for my Spatial Computing OS / App site",
+    "status": "completed",
+    "folder": "spatial-computing"
+  },
+  {
+    "id": "sustainable-energy",
+    "prompt": "Build a landing page for my Sustainable Energy / Climate Tech site",
+    "status": "completed",
+    "folder": "sustainable-energy"
+  },
+  {
+    "id": "vr-ar-platform",
+    "prompt": "Build a landing page for my VR/AR Platform site",
+    "status": "completed",
+    "folder": "vr-ar-platform"
+  },
+  {
+    "id": "robotics-automation",
+    "prompt": "Build a landing page for my Robotics / Automation Solutions site",
+    "status": "completed",
+    "folder": "robotics-automation"
+  },
+  {
+    "id": "edutainment",
+    "prompt": "Build a landing page for my Edutainment / Gamified Learning site",
+    "status": "completed",
+    "folder": "edutainment"
+  },
+  {
+    "id": "blockchain-defi",
+    "prompt": "Build a landing page for my Blockchain / DeFi Protocol site",
+    "status": "completed",
+    "folder": "blockchain-defi"
+  }
+]

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftShip Logistics - Global Delivery Solutions</title>
+    <meta name="description" content="Reliable global logistics and delivery services. Track shipments in real-time, express delivery, warehousing solutions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Poppins', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#3B82F6',
+                            dark: '#2563EB',
+                            light: '#60A5FA'
+                        },
+                        cta: {
+                            DEFAULT: '#F97316',
+                            hover: '#EA580C',
+                        },
+                        success: '#22C55E',
+                        background: '#F8FAFC',
+                        text: {
+                            DEFAULT: '#1E293B',
+                            muted: '#64748B',
+                        },
+                        border: '#E2E8F0'
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px rgba(0, 0, 0, 0.08)',
+                        'medium': '0 8px 30px rgba(0, 0, 0, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-hero {
+            background: linear-gradient(135deg, #667eea 0%, #3B82F6 50%, #2563EB 100%);
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="font-body text-text bg-background antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 bg-white/90 backdrop-blur-md rounded-2xl shadow-soft border border-border/50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <span class="font-heading font-bold text-xl text-text">SwiftShip</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#services" class="text-text hover:text-primary transition-colors duration-200 font-medium">Services</a>
+                    <a href="#how-it-works" class="text-text hover:text-primary transition-colors duration-200 font-medium">How It Works</a>
+                    <a href="#testimonials" class="text-text hover:text-primary transition-colors duration-200 font-medium">Testimonials</a>
+                    <a href="#contact" class="text-text hover:text-primary transition-colors duration-200 font-medium">Contact</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="flex items-center gap-4">
+                    <a href="#track" class="hidden sm:block text-text hover:text-primary transition-colors duration-200 font-medium">Track Shipment</a>
+                    <a href="#contact" class="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl cursor-pointer">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-hero min-h-screen flex items-center pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-white">
+                    <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                        <span class="w-2 h-2 bg-success rounded-full animate-pulse"></span>
+                        <span class="text-sm font-medium">Trusted by 50,000+ businesses worldwide</span>
+                    </div>
+                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        Global Logistics
+                        <span class="block">Made Simple</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-blue-100 mb-8 leading-relaxed max-w-xl">
+                        Fast, reliable, and transparent delivery solutions. Ship anywhere in the world with real-time tracking and competitive rates.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <a href="#contact" class="bg-white text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all duration-200 shadow-xl cursor-pointer text-center">
+                            Start Shipping Today
+                        </a>
+                        <a href="#how-it-works" class="border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all duration-200 cursor-pointer text-center flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                            </svg>
+                            Watch Demo
+                        </a>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="flex items-center gap-8 text-white/80">
+                        <div>
+                            <div class="text-3xl font-bold">99.8%</div>
+                            <div class="text-sm">On-Time Delivery</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/30"></div>
+                        <div>
+                            <div class="text-3xl font-bold">150+</div>
+                            <div class="text-sm">Countries Covered</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/30"></div>
+                        <div>
+                            <div class="text-3xl font-bold">24/7</div>
+                            <div class="text-sm">Support Available</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content - Illustration -->
+                <div class="hidden lg:block relative">
+                    <div class="relative animate-float">
+                        <!-- Main Card -->
+                        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md ml-auto">
+                            <!-- Tracking Interface Mock -->
+                            <div class="mb-6">
+                                <div class="text-sm font-semibold text-text-muted mb-2">Track Your Shipment</div>
+                                <div class="flex gap-2">
+                                    <input type="text" placeholder="Enter tracking number" class="flex-1 px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" aria-label="Tracking number">
+                                    <button class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-200 cursor-pointer">
+                                        Track
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Delivery Status -->
+                            <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-10 h-10 bg-success rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-text">In Transit</div>
+                                        <div class="text-sm text-text-muted">Estimated: Tomorrow, 2:30 PM</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-3 h-3 bg-success rounded-full"></div>
+                                        <div class="flex-1 text-sm">
+                                            <div class="font-medium">Package picked up</div>
+                                            <div class="text-text-muted">San Francisco, CA</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-3 h-3 bg-success rounded-full"></div>
+                                        <div class="flex-1 text-sm">
+                                            <div class="font-medium">Arrived at facility</div>
+                                            <div class="text-text-muted">Los Angeles, CA</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                                        <div class="flex-1 text-sm">
+                                            <div class="font-medium">In transit</div>
+                                            <div class="text-text-muted">On the way to New York</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Elements -->
+                        <div class="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-cta/10 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-text">2-3 Days</div>
+                                    <div class="text-sm text-text-muted">Express Delivery</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-text">Insured</div>
+                                    <div class="text-sm text-text-muted">Full Coverage</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">Our Services</span>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text mb-4">
+                    Complete Logistics Solutions
+                </h2>
+                <p class="text-lg text-text-muted max-w-2xl mx-auto">
+                    From small parcels to large cargo, we provide comprehensive shipping services tailored to your needs.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="bg-background rounded-2xl p-8 card-hover cursor-pointer border border-border">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-text mb-3">Real-Time Tracking</h3>
+                    <p class="text-text-muted leading-relaxed">
+                        Track your shipments 24/7 with GPS-powered location updates and instant notifications.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-background rounded-2xl p-8 card-hover cursor-pointer border border-border">
+                    <div class="w-14 h-14 bg-cta/10 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-text mb-3">Express Delivery</h3>
+                    <p class="text-text-muted leading-relaxed">
+                        Same-day and next-day delivery options for urgent shipments with guaranteed arrival times.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-background rounded-2xl p-8 card-hover cursor-pointer border border-border">
+                    <div class="w-14 h-14 bg-success/10 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-text mb-3">Warehousing</h3>
+                    <p class="text-text-muted leading-relaxed">
+                        Secure storage facilities with climate control and advanced inventory management systems.
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-background rounded-2xl p-8 card-hover cursor-pointer border border-border">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-text mb-3">Global Shipping</h3>
+                    <p class="text-text-muted leading-relaxed">
+                        International freight services with customs clearance and documentation handling.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-20 px-4 gradient-hero">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-white text-center">
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                    <div class="text-5xl font-bold mb-2">10M+</div>
+                    <div class="text-blue-100 text-lg">Deliveries Completed</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                    <div class="text-5xl font-bold mb-2">150+</div>
+                    <div class="text-blue-100 text-lg">Countries Served</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                    <div class="text-5xl font-bold mb-2">50K+</div>
+                    <div class="text-blue-100 text-lg">Happy Customers</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                    <div class="text-5xl font-bold mb-2">99.8%</div>
+                    <div class="text-blue-100 text-lg">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 px-4 bg-background">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">How It Works</span>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text mb-4">
+                    Simple 4-Step Process
+                </h2>
+                <p class="text-lg text-text-muted max-w-2xl mx-auto">
+                    Shipping with us is easy. Get your packages delivered in just a few simple steps.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="relative">
+                    <div class="bg-white rounded-2xl p-8 shadow-soft border border-border h-full">
+                        <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center text-xl font-bold mb-6">1</div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">Create Account</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Sign up in seconds and get instant access to our shipping platform with no hidden fees.
+                        </p>
+                    </div>
+                    <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-border"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative">
+                    <div class="bg-white rounded-2xl p-8 shadow-soft border border-border h-full">
+                        <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center text-xl font-bold mb-6">2</div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">Enter Details</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Provide pickup and delivery addresses along with package dimensions and weight.
+                        </p>
+                    </div>
+                    <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-border"></div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative">
+                    <div class="bg-white rounded-2xl p-8 shadow-soft border border-border h-full">
+                        <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center text-xl font-bold mb-6">3</div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">Choose Service</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Select from our range of delivery options based on your timeline and budget.
+                        </p>
+                    </div>
+                    <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-border"></div>
+                </div>
+
+                <!-- Step 4 -->
+                <div>
+                    <div class="bg-white rounded-2xl p-8 shadow-soft border border-border h-full">
+                        <div class="w-12 h-12 bg-cta text-white rounded-xl flex items-center justify-center text-xl font-bold mb-6">4</div>
+                        <h3 class="font-heading text-xl font-bold text-text mb-3">Track & Receive</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Monitor your shipment in real-time and receive notifications until delivery.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">Testimonials</span>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text mb-4">
+                    What Our Customers Say
+                </h2>
+                <p class="text-lg text-text-muted max-w-2xl mx-auto">
+                    Don't just take our word for it. Here's what businesses say about our services.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-background rounded-2xl p-8 border border-border">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-text-muted mb-6 leading-relaxed">
+                        "SwiftShip has transformed our e-commerce operations. Delivery times have improved by 40% and our customers love the real-time tracking feature."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                            <span class="text-primary font-bold">SM</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-text">Sarah Mitchell</div>
+                            <div class="text-sm text-text-muted">CEO, TechStore Inc.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-background rounded-2xl p-8 border border-border">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-text-muted mb-6 leading-relaxed">
+                        "The best logistics partner we've worked with. International shipping is seamless and their customer support team is always responsive."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-cta/10 rounded-full flex items-center justify-center">
+                            <span class="text-cta font-bold">JC</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-text">James Chen</div>
+                            <div class="text-sm text-text-muted">Operations Director, Global Trade Co.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-background rounded-2xl p-8 border border-border">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-text-muted mb-6 leading-relaxed">
+                        "Reliable, fast, and affordable. We've been using SwiftShip for 3 years and they've never let us down. Highly recommended!"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center">
+                            <span class="text-success font-bold">EP</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-text">Emily Parker</div>
+                            <div class="text-sm text-text-muted">Founder, Fresh Foods Delivery</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-20 px-4 bg-background">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-gradient-to-br from-primary to-primary-dark rounded-3xl p-8 sm:p-12 text-white text-center shadow-2xl">
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                    Ready to Ship?
+                </h2>
+                <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+                    Join thousands of businesses that trust SwiftShip for their logistics needs. Get started today and enjoy 20% off your first shipment.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#" class="bg-white text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all duration-200 shadow-xl cursor-pointer">
+                        Create Free Account
+                    </a>
+                    <a href="#" class="border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all duration-200 cursor-pointer">
+                        Contact Sales
+                    </a>
+                </div>
+                <p class="text-sm text-blue-100 mt-6">No credit card required • Free cancellation anytime</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-border py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        <span class="font-heading font-bold text-xl text-text">SwiftShip</span>
+                    </div>
+                    <p class="text-text-muted mb-4">
+                        Your trusted partner for global logistics and delivery solutions.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-background rounded-lg flex items-center justify-center text-text-muted hover:text-primary hover:bg-primary/10 transition-all duration-200" aria-label="Twitter">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-background rounded-lg flex items-center justify-center text-text-muted hover:text-primary hover:bg-primary/10 transition-all duration-200" aria-label="LinkedIn">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-background rounded-lg flex items-center justify-center text-text-muted hover:text-primary hover:bg-primary/10 transition-all duration-200" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-heading font-semibold text-text mb-4">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-text-muted hover:text-primary transition-colors duration-200">Services</a></li>
+                        <li><a href="#how-it-works" class="text-text-muted hover:text-primary transition-colors duration-200">How It Works</a></li>
+                        <li><a href="#testimonials" class="text-text-muted hover:text-primary transition-colors duration-200">Testimonials</a></li>
+                        <li><a href="#" class="text-text-muted hover:text-primary transition-colors duration-200">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-heading font-semibold text-text mb-4">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-text-muted hover:text-primary transition-colors duration-200">Help Center</a></li>
+                        <li><a href="#" class="text-text-muted hover:text-primary transition-colors duration-200">Track Shipment</a></li>
+                        <li><a href="#" class="text-text-muted hover:text-primary transition-colors duration-200">Contact Us</a></li>
+                        <li><a href="#" class="text-text-muted hover:text-primary transition-colors duration-200">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-heading font-semibold text-text mb-4">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-text-muted hover:text-primary transition-colors duration-200">Privacy Policy</a></li>
+                        <li><a href="#" class="text-text-muted hover:text-primary transition-colors duration-200">Terms of Service</a></li>
+                        <li><a href="#" class="text-text-muted hover:text-primary transition-colors duration-200">Cookie Policy</a></li>
+                        <li><a href="#" class="text-text-muted hover:text-primary transition-colors duration-200">Shipping Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-border pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-text-muted text-sm">
+                    © 2024 SwiftShip Logistics. All rights reserved.
+                </p>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-success rounded-full animate-pulse"></span>
+                    <span class="text-text-muted text-sm">All Systems Operational</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-medium');
+            } else {
+                nav.classList.remove('shadow-medium');
+            }
+        });
+    </script>
+</body>
+</html>

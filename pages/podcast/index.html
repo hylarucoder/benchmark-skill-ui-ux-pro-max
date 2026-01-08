@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PodWave - Your Podcast Platform</title>
+    <meta name="description" content="Discover, stream, and share your favorite podcasts with PodWave">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#8B5CF6',
+                        secondary: '#06B6D4',
+                        cta: '#F97316',
+                        dark: '#121212',
+                        'dark-secondary': '#1E1E1E',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1E1E1E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8B5CF6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7C3AED;
+        }
+
+        /* Aurora gradient background */
+        .aurora-bg {
+            background: linear-gradient(-45deg, #121212, #1E1E1E, #2D1B4E, #0C4A6E);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Audio wave animation */
+        .waveform-bar {
+            animation: waveform 1s ease-in-out infinite;
+        }
+        @keyframes waveform {
+            0%, 100% { height: 8px; }
+            50% { height: 32px; }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-body text-white bg-dark antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 glass rounded-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <span class="font-heading font-bold text-xl">PodWave</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Features</a>
+                    <a href="#discover" class="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Discover</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Pricing</a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Creators</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex items-center gap-4">
+                    <a href="#" class="hidden sm:block text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer">Sign In</a>
+                    <button class="bg-primary hover:bg-violet-600 text-white px-5 py-2 rounded-full font-medium transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-violet-500/30">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="aurora-bg min-h-screen flex items-center justify-center relative overflow-hidden pt-24">
+        <!-- Decorative elements -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-gray-300">Over 1M+ podcasts available</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                    Discover Stories That
+                    <span class="bg-gradient-to-r from-primary via-secondary to-cta bg-clip-text text-transparent">Move You</span>
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto mb-10">
+                    Stream millions of podcasts, create your own, and join a community of passionate storytellers. Your next favorite show is waiting.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                    <button class="w-full sm:w-auto bg-gradient-to-r from-primary to-violet-600 hover:from-violet-600 hover:to-primary text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 cursor-pointer hover:shadow-xl hover:shadow-violet-500/30 hover:scale-105">
+                        Start Listening Free
+                    </button>
+                    <button class="w-full sm:w-auto glass hover:bg-white/10 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 cursor-pointer flex items-center justify-center gap-2">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        Watch Demo
+                    </button>
+                </div>
+
+                <!-- Audio Waveform Visual -->
+                <div class="flex items-center justify-center gap-1 h-16">
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.1s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.2s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.3s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.4s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.5s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.6s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.7s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.8s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.9s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 1s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.9s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.8s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.7s;"></div>
+                    <div class="w-1 bg-gradient-to-t from-primary to-secondary rounded-full waveform-bar" style="animation-delay: 0.6s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-dark-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="font-heading text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">1M+</div>
+                    <div class="text-gray-400">Podcasts</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-heading text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">50M+</div>
+                    <div class="text-gray-400">Episodes</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-heading text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">10M+</div>
+                    <div class="text-gray-400">Listeners</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-heading text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">150+</div>
+                    <div class="text-gray-400">Countries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold mb-4">
+                    Everything You Need to
+                    <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Listen & Create</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Powerful features for podcast lovers and creators alike
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-violet-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold mb-3">Smart Discovery</h3>
+                    <p class="text-gray-400">AI-powered recommendations that learn your tastes and suggest podcasts you'll love.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-secondary to-cyan-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold mb-3">Offline Listening</h3>
+                    <p class="text-gray-400">Download episodes and enjoy anywhere, anytime. No internet? No problem.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-cta to-orange-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold mb-3">Smart Playback</h3>
+                    <p class="text-gray-400">Variable speed, silence skipping, and smart resume make listening effortless.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary to-violet-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold mb-3">Studio Tools</h3>
+                    <p class="text-gray-400">Record, edit, and publish with our intuitive creator studio. No expertise needed.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-secondary to-cyan-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold mb-3">Community</h3>
+                    <p class="text-gray-400">Connect with creators and listeners. Join discussions, share clips, and build your audience.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-cta to-orange-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold mb-3">Analytics</h3>
+                    <p class="text-gray-400">Detailed insights into your audience. Track downloads, demographics, and engagement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discover Section -->
+    <section id="discover" class="py-24 bg-dark-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold mb-4">
+                    Discover
+                    <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Trending Shows</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Handpicked podcasts trending across the globe
+                </p>
+            </div>
+
+            <!-- Podcast Cards -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-gradient-to-br from-primary/20 to-violet-600/20">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute top-3 right-3 bg-primary px-3 py-1 rounded-full text-xs font-semibold">NEW</div>
+                    </div>
+                    <h3 class="font-heading font-semibold text-lg mb-1 group-hover:text-primary transition-colors">Tech Today</h3>
+                    <p class="text-sm text-gray-400">Technology & Innovation</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-gradient-to-br from-secondary/20 to-cyan-600/20">
+                        <div class="absolute inset-0 bg-gradient-to-br from-secondary to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute top-3 right-3 bg-secondary px-3 py-1 rounded-full text-xs font-semibold">HOT</div>
+                    </div>
+                    <h3 class="font-heading font-semibold text-lg mb-1 group-hover:text-secondary transition-colors">Mind Matters</h3>
+                    <p class="text-sm text-gray-400">Science & Psychology</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-gradient-to-br from-cta/20 to-orange-600/20">
+                        <div class="absolute inset-0 bg-gradient-to-br from-cta to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-heading font-semibold text-lg mb-1 group-hover:text-cta transition-colors">Startup Stories</h3>
+                    <p class="text-sm text-gray-400">Business & Entrepreneurship</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-gradient-to-br from-primary/20 to-secondary/20">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-heading font-semibold text-lg mb-1 group-hover:text-primary transition-colors">Creative Minds</h3>
+                    <p class="text-sm text-gray-400">Arts & Culture</p>
+                </div>
+            </div>
+
+            <!-- Browse All Button -->
+            <div class="text-center mt-12">
+                <button class="glass hover:bg-white/10 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 cursor-pointer">
+                    Browse All Categories
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-4xl sm:text-5xl font-bold mb-4">
+                    Choose Your
+                    <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Perfect Plan</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Start free, upgrade when you're ready
+                </p>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Free Plan -->
+                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition-all duration-300">
+                    <div class="text-center mb-8">
+                        <h3 class="font-heading text-2xl font-semibold mb-2">Free</h3>
+                        <div class="flex items-baseline justify-center gap-1">
+                            <span class="text-5xl font-bold">$0</span>
+                            <span class="text-gray-400">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Access to 1M+ podcasts</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Basic recommendations</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Ad-supported listening</span>
+                        </li>
+                    </ul>
+                    <button class="w-full glass hover:bg-white/10 text-white py-3 rounded-full font-semibold transition-all duration-200 cursor-pointer">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Premium Plan (Popular) -->
+                <div class="relative bg-gradient-to-br from-primary/20 to-violet-600/20 rounded-2xl p-8 border-2 border-primary">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        Most Popular
+                    </div>
+                    <div class="text-center mb-8">
+                        <h3 class="font-heading text-2xl font-semibold mb-2">Premium</h3>
+                        <div class="flex items-baseline justify-center gap-1">
+                            <span class="text-5xl font-bold">$9.99</span>
+                            <span class="text-gray-400">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Everything in Free</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Ad-free listening</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Offline downloads</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">AI recommendations</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Exclusive content</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-gradient-to-r from-primary to-violet-600 hover:from-violet-600 hover:to-primary text-white py-3 rounded-full font-semibold transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-violet-500/30">
+                        Start Free Trial
+                    </button>
+                </div>
+
+                <!-- Creator Plan -->
+                <div class="glass rounded-2xl p-8 hover:bg-white/5 transition-all duration-300">
+                    <div class="text-center mb-8">
+                        <h3 class="font-heading text-2xl font-semibold mb-2">Creator</h3>
+                        <div class="flex items-baseline justify-center gap-1">
+                            <span class="text-5xl font-bold">$29.99</span>
+                            <span class="text-gray-400">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Everything in Premium</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Unlimited podcast hosting</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Advanced analytics</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="text-gray-300">Monetization tools</span>
+                        </li>
+                    </ul>
+                    <button class="w-full glass hover:bg-white/10 text-white py-3 rounded-full font-semibold transition-all duration-200 cursor-pointer">
+                        Start Creating
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-dark-secondary relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+                Ready to Start Your
+                <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Podcast Journey?</span>
+            </h2>
+            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                Join millions of listeners and creators. Your story deserves to be heard.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button class="w-full sm:w-auto bg-gradient-to-r from-primary to-violet-600 hover:from-violet-600 hover:to-primary text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 cursor-pointer hover:shadow-xl hover:shadow-violet-500/30 hover:scale-105">
+                    Get Started Free
+                </button>
+                <button class="w-full sm:w-auto glass hover:bg-white/10 text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-200 cursor-pointer">
+                    Contact Sales
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-dark border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <!-- Logo & Description -->
+                <div class="col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="font-heading font-bold text-xl">PodWave</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Your podcast platform for discovery and creation.
+                    </p>
+                </div>
+
+                <!-- Product -->
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Features</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Creators</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Apps</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">About</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Press</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Status</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Community</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Privacy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Terms</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Cookies</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors cursor-pointer">Licenses</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-gray-400 text-sm">
+                    © 2025 PodWave. All rights reserved.
+                </p>
+                <div class="flex items-center gap-6">
+                    <!-- Social Links -->
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth scroll script -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-dark/80');
+            } else {
+                nav.classList.remove('bg-dark/80');
+            }
+        });
+    </script>
+</body>
+</html>

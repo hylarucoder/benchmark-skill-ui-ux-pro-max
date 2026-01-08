@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODA Gallery | Modern Art Museum</title>
+    <meta name="description" content="Experience extraordinary art exhibitions at MODA Gallery. Discover contemporary masterpieces and timeless classics in our curated collections.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1a1a1a',
+                        secondary: '#2d2d2d',
+                        accent: '#c9a962',
+                        gold: '#d4af37',
+                        'dark-bg': '#0a0a0a',
+                        'dark-card': '#141414',
+                        'dark-border': '#262626',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Custom styles for elegant dark theme */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #c9a962 #0a0a0a;
+        }
+
+        *::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #c9a962;
+            border-radius: 4px;
+        }
+
+        .glass-card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(201, 169, 98, 0.1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-gray-100 font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass-card rounded-2xl px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <a href="#" class="flex items-center space-x-2 group">
+                        <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+                            <span class="font-serif font-bold text-dark-bg text-xl">M</span>
+                        </div>
+                        <span class="font-serif text-2xl font-semibold text-white group-hover:text-accent transition-colors duration-300">MODA</span>
+                    </a>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="#exhibitions" class="text-gray-300 hover:text-accent transition-colors duration-300">Exhibitions</a>
+                        <a href="#gallery" class="text-gray-300 hover:text-accent transition-colors duration-300">Gallery</a>
+                        <a href="#visit" class="text-gray-300 hover:text-accent transition-colors duration-300">Visit</a>
+                        <a href="#contact" class="text-gray-300 hover:text-accent transition-colors duration-300">Contact</a>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="hidden md:block">
+                        <a href="#visit" class="bg-accent text-dark-bg px-6 py-2.5 rounded-lg font-semibold hover:bg-gold transition-colors duration-300 cursor-pointer">
+                            Plan Your Visit
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-white p-2 hover:bg-dark-border rounded-lg transition-colors duration-300 cursor-pointer" aria-label="Toggle menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-dark-border">
+                    <div class="flex flex-col space-y-3">
+                        <a href="#exhibitions" class="text-gray-300 hover:text-accent transition-colors duration-300 py-2">Exhibitions</a>
+                        <a href="#gallery" class="text-gray-300 hover:text-accent transition-colors duration-300 py-2">Gallery</a>
+                        <a href="#visit" class="text-gray-300 hover:text-accent transition-colors duration-300 py-2">Visit</a>
+                        <a href="#contact" class="text-gray-300 hover:text-accent transition-colors duration-300 py-2">Contact</a>
+                        <a href="#visit" class="bg-accent text-dark-bg px-6 py-2.5 rounded-lg font-semibold text-center hover:bg-gold transition-colors duration-300">Plan Your Visit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img
+                src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=1920&q=80"
+                alt="Modern art gallery interior with abstract paintings"
+                class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-dark-bg/70 via-dark-bg/50 to-dark-bg"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+            <div class="animate-fade-in">
+                <p class="text-accent font-medium tracking-widest uppercase mb-4">Now Showing</p>
+                <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+                    Abstract Realities
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto font-light">
+                    A Journey Through Contemporary Expression
+                </p>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Experience the boundary-pushing works of 32 international artists exploring the intersection of reality and imagination
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#exhibitions" class="bg-accent text-dark-bg px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gold transition-colors duration-300 cursor-pointer w-full sm:w-auto">
+                        Explore Exhibition
+                    </a>
+                    <a href="#visit" class="border-2 border-accent text-accent px-8 py-4 rounded-lg font-semibold text-lg hover:bg-accent hover:text-dark-bg transition-colors duration-300 cursor-pointer w-full sm:w-auto">
+                        Book Tickets
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Featured Exhibition -->
+    <section id="exhibitions" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 animate-slide-up">
+                <p class="text-accent font-medium tracking-widest uppercase mb-4">Current Exhibition</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Abstract Realities</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    March 15 - June 30, 2025
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Exhibition Card 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer hover:border-accent/30 transition-all duration-300">
+                    <div class="relative h-72 overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80"
+                            alt="Abstract painting with vibrant colors"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-bg/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-2xl font-semibold text-white mb-2">Color Theory</h3>
+                        <p class="text-gray-400 mb-4">Exploring the emotional impact of color in modern expressionism</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-accent text-sm font-medium">Main Gallery</span>
+                            <svg class="w-5 h-5 text-accent group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exhibition Card 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer hover:border-accent/30 transition-all duration-300">
+                    <div class="relative h-72 overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800&q=80"
+                            alt="Contemporary sculpture installation"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-bg/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-2xl font-semibold text-white mb-2">Form & Space</h3>
+                        <p class="text-gray-400 mb-4">Sculptural installations challenging our perception of dimension</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-accent text-sm font-medium">West Wing</span>
+                            <svg class="w-5 h-5 text-accent group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exhibition Card 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer hover:border-accent/30 transition-all duration-300">
+                    <div class="relative h-72 overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=800&q=80"
+                            alt="Digital art projection"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-bg/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-2xl font-semibold text-white mb-2">Digital Dreams</h3>
+                        <p class="text-gray-400 mb-4">Immersive digital experiences at the frontier of technology</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-accent text-sm font-medium">Media Lab</span>
+                            <svg class="w-5 h-5 text-accent group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section id="gallery" class="py-24 px-6 bg-dark-card">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-accent font-medium tracking-widest uppercase mb-4">The Collection</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Featured Works</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    Discover masterpieces from our permanent collection
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer group col-span-2 row-span-2">
+                    <img
+                        src="https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=800&q=80"
+                        alt="Large abstract expressionist painting"
+                        class="w-full h-full object-cover transition-transform duration-500"
+                    />
+                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-dark-bg/40 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <p class="text-accent text-sm font-medium mb-1">Abstract Expressionism</p>
+                            <h3 class="font-serif text-2xl font-semibold text-white">Eclipse No. 7</h3>
+                            <p class="text-gray-300 text-sm mt-1">Elena Voronova, 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer group">
+                    <img
+                        src="https://images.unsplash.com/photo-1549289524-06cf8837ace5?w=400&q=80"
+                        alt="Minimalist geometric composition"
+                        class="w-full h-48 object-cover transition-transform duration-500"
+                    />
+                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-dark-bg/40 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                        <div>
+                            <h3 class="font-serif text-lg font-semibold text-white">Geometric Study</h3>
+                            <p class="text-gray-300 text-xs mt-1">Marcus Chen, 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer group">
+                    <img
+                        src="https://images.unsplash.com/photo-1545989253-02cc26577f88?w=400&q=80"
+                        alt="Contemporary portrait painting"
+                        class="w-full h-48 object-cover transition-transform duration-500"
+                    />
+                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-dark-bg/40 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                        <div>
+                            <h3 class="font-serif text-lg font-semibold text-white">Reflection</h3>
+                            <p class="text-gray-300 text-xs mt-1">Sofia Andersson, 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer group">
+                    <img
+                        src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=400&q=80"
+                        alt="Modern sculpture piece"
+                        class="w-full h-48 object-cover transition-transform duration-500"
+                    />
+                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-dark-bg/40 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                        <div>
+                            <h3 class="font-serif text-lg font-semibold text-white">Bronze Flow</h3>
+                            <p class="text-gray-300 text-xs mt-1">James Morrison, 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item relative overflow-hidden rounded-xl cursor-pointer group">
+                    <img
+                        src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=400&q=80"
+                        alt="Abstract oil painting"
+                        class="w-full h-48 object-cover transition-transform duration-500"
+                    />
+                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-dark-bg/40 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                        <div>
+                            <h3 class="font-serif text-lg font-semibold text-white">Midnight Wave</h3>
+                            <p class="text-gray-300 text-xs mt-1">Yuki Tanaka, 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gap-2 text-accent hover:text-gold transition-colors duration-300 font-medium cursor-pointer">
+                    View Full Collection
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Information -->
+    <section id="visit" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-accent font-medium tracking-widest uppercase mb-4">Plan Your Visit</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Visit Us</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    Immerse yourself in art at our centrally located gallery
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Opening Hours -->
+                <div class="glass-card rounded-2xl p-8 hover:border-accent/30 transition-all duration-300">
+                    <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-4">Opening Hours</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <div class="flex justify-between">
+                            <span>Monday - Wednesday</span>
+                            <span class="text-white font-medium">10:00 - 18:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Thursday - Friday</span>
+                            <span class="text-white font-medium">10:00 - 21:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Saturday - Sunday</span>
+                            <span class="text-white font-medium">9:00 - 20:00</span>
+                        </div>
+                        <div class="pt-3 border-t border-dark-border">
+                            <span class="text-accent">Closed on Tuesdays</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admission -->
+                <div class="glass-card rounded-2xl p-8 hover:border-accent/30 transition-all duration-300">
+                    <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-4">Admission</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <div class="flex justify-between items-center">
+                            <span>Adults</span>
+                            <span class="text-white font-medium text-xl">$25</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Students & Seniors</span>
+                            <span class="text-white font-medium text-xl">$18</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Children (6-16)</span>
+                            <span class="text-white font-medium text-xl">$12</span>
+                        </div>
+                        <div class="pt-3 border-t border-dark-border">
+                            <span class="text-accent">Free for children under 6</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-6 bg-accent text-dark-bg py-3 rounded-lg font-semibold hover:bg-gold transition-colors duration-300 cursor-pointer">
+                        Book Tickets
+                    </button>
+                </div>
+
+                <!-- Location -->
+                <div class="glass-card rounded-2xl p-8 hover:border-accent/30 transition-all duration-300">
+                    <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-4">Location</h3>
+                    <div class="text-gray-300 space-y-2">
+                        <p class="text-white">MODA Gallery</p>
+                        <p>742 Art District Boulevard</p>
+                        <p>New York, NY 10001</p>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-dark-border space-y-3">
+                        <div class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span>+1 (212) 555-0123</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-300">
+                            <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>info@modagallery.art</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-6 border-2 border-accent text-accent py-3 rounded-lg font-semibold hover:bg-accent hover:text-dark-bg transition-colors duration-300 cursor-pointer">
+                        Get Directions
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-24 px-6 bg-dark-card">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="glass-card rounded-3xl p-12">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Stay Connected</h2>
+                <p class="text-gray-400 mb-8 text-lg">
+                    Subscribe to our newsletter for exclusive previews, artist interviews, and special event invitations
+                </p>
+                <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                    <input
+                        type="email"
+                        placeholder="Enter your email address"
+                        required
+                        class="flex-1 px-6 py-4 rounded-lg bg-dark-bg border border-dark-border text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors duration-300"
+                        aria-label="Email address for newsletter"
+                    />
+                    <button
+                        type="submit"
+                        class="bg-accent text-dark-bg px-8 py-4 rounded-lg font-semibold hover:bg-gold transition-colors duration-300 cursor-pointer whitespace-nowrap"
+                    >
+                        Subscribe
+                    </button>
+                </form>
+                <p class="text-gray-500 text-sm mt-4">
+                    By subscribing, you agree to our Privacy Policy. Unsubscribe anytime.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <p class="text-accent font-medium tracking-widest uppercase mb-4">Get in Touch</p>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Contact Us</h2>
+                    <p class="text-gray-400 mb-8 text-lg">
+                        Have questions about exhibitions, group bookings, or press inquiries? We'd love to hear from you.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-semibold mb-1">Email</h3>
+                                <p class="text-gray-400">info@modagallery.art</p>
+                                <p class="text-gray-400">press@modagallery.art</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-semibold mb-1">Phone</h3>
+                                <p class="text-gray-400">+1 (212) 555-0123</p>
+                                <p class="text-gray-500 text-sm">Mon-Fri, 9:00-17:00</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-semibold mb-1">Social</h3>
+                                <div class="flex gap-4">
+                                    <a href="#" class="text-gray-400 hover:text-accent transition-colors duration-300 cursor-pointer">Instagram</a>
+                                    <a href="#" class="text-gray-400 hover:text-accent transition-colors duration-300 cursor-pointer">Twitter</a>
+                                    <a href="#" class="text-gray-400 hover:text-accent transition-colors duration-300 cursor-pointer">Facebook</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="glass-card rounded-2xl p-8">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-white font-medium mb-2">Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                required
+                                class="w-full px-4 py-3 rounded-lg bg-dark-bg border border-dark-border text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors duration-300"
+                                placeholder="Your full name"
+                            />
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-white font-medium mb-2">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                class="w-full px-4 py-3 rounded-lg bg-dark-bg border border-dark-border text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors duration-300"
+                                placeholder="your@email.com"
+                            />
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-white font-medium mb-2">Subject</label>
+                            <select
+                                id="subject"
+                                name="subject"
+                                class="w-full px-4 py-3 rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-accent transition-colors duration-300"
+                            >
+                                <option value="general">General Inquiry</option>
+                                <option value="booking">Group Booking</option>
+                                <option value="press">Press Inquiry</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-white font-medium mb-2">Message</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="5"
+                                required
+                                class="w-full px-4 py-3 rounded-lg bg-dark-bg border border-dark-border text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors duration-300 resize-none"
+                                placeholder="How can we help you?"
+                            ></textarea>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full bg-accent text-dark-bg py-4 rounded-lg font-semibold hover:bg-gold transition-colors duration-300 cursor-pointer"
+                        >
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-dark-border">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+                            <span class="font-serif font-bold text-dark-bg text-xl">M</span>
+                        </div>
+                        <span class="font-serif text-2xl font-semibold text-white">MODA Gallery</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Discover extraordinary art at MODA Gallery. We curate exhibitions that challenge, inspire, and transform.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#exhibitions" class="hover:text-accent transition-colors duration-300 cursor-pointer">Exhibitions</a></li>
+                        <li><a href="#gallery" class="hover:text-accent transition-colors duration-300 cursor-pointer">Collection</a></li>
+                        <li><a href="#visit" class="hover:text-accent transition-colors duration-300 cursor-pointer">Plan Your Visit</a></li>
+                        <li><a href="#contact" class="hover:text-accent transition-colors duration-300 cursor-pointer">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Information</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-accent transition-colors duration-300 cursor-pointer">About Us</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors duration-300 cursor-pointer">Careers</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors duration-300 cursor-pointer">Press</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors duration-300 cursor-pointer">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-dark-border flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">
+                    &copy; 2025 MODA Gallery. All rights reserved.
+                </p>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-accent transition-colors duration-300 cursor-pointer">Privacy Policy</a>
+                    <a href="#" class="hover:text-accent transition-colors duration-300 cursor-pointer">Terms of Service</a>
+                    <a href="#" class="hover:text-accent transition-colors duration-300 cursor-pointer">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.getElementById('newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('input[type="email"]').value;
+            alert(`Thank you for subscribing with ${email}! You'll receive our latest updates soon.`);
+            newsletterForm.reset();
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            alert(`Thank you, ${name}! Your message has been sent. We'll get back to you soon.`);
+            contactForm.reset();
+        });
+
+        // Navbar background on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('top-2');
+                nav.classList.remove('top-4');
+            } else {
+                nav.classList.add('top-4');
+                nav.classList.remove('top-2');
+            }
+        });
+    </script>
+</body>
+</html>

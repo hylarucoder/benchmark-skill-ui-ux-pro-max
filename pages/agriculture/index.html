@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech Pro - Smart Farming Solutions</title>
+    <meta name="description" content="Transform your farm with cutting-edge agricultural technology. IoT sensors, precision farming, and data-driven insights for sustainable agriculture.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Poppins', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#4A7C23',
+                        secondary: '#6B8E23',
+                        accent: '#3B82F6',
+                        cta: '#F97316',
+                        background: '#F8FAFC',
+                        surface: '#FFFFFF',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="font-body bg-background text-slate-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <span class="font-heading font-bold text-xl text-primary">AgriTech Pro</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-slate-600 hover:text-primary transition-colors duration-200 font-medium">Features</a>
+                    <a href="#services" class="text-slate-600 hover:text-primary transition-colors duration-200 font-medium">Services</a>
+                    <a href="#about" class="text-slate-600 hover:text-primary transition-colors duration-200 font-medium">About</a>
+                    <a href="#contact" class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-semibold transition-colors duration-200 cursor-pointer">Get Started</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 cursor-pointer" aria-label="Toggle menu">
+                    <svg class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234A7C23' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;);"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Hero Content -->
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/>
+                        </svg>
+                        Smart Farming Revolution
+                    </div>
+
+                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
+                        Transform Your Farm with
+                        <span class="text-primary">Smart Technology</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0">
+                        Harness the power of IoT sensors, precision agriculture, and data-driven insights to increase yields, reduce costs, and farm sustainably.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 cursor-pointer text-center shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40">
+                            Start Free Trial
+                        </a>
+                        <a href="#features" class="bg-white hover:bg-gray-50 text-slate-700 px-8 py-4 rounded-xl font-semibold transition-all duration-200 cursor-pointer text-center border-2 border-gray-200 hover:border-primary">
+                            Explore Features
+                        </a>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="mt-12 flex items-center justify-center lg:justify-start space-x-8">
+                        <div class="text-center">
+                            <div class="font-heading text-3xl font-bold text-primary">500+</div>
+                            <div class="text-sm text-slate-500">Farms Served</div>
+                        </div>
+                        <div class="w-px h-12 bg-gray-200"></div>
+                        <div class="text-center">
+                            <div class="font-heading text-3xl font-bold text-primary">40%</div>
+                            <div class="text-sm text-slate-500">Yield Increase</div>
+                        </div>
+                        <div class="w-px h-12 bg-gray-200"></div>
+                        <div class="text-center">
+                            <div class="font-heading text-3xl font-bold text-primary">99.9%</div>
+                            <div class="text-sm text-slate-500">Uptime</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="relative">
+                    <div class="relative bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl p-8 lg:p-12">
+                        <svg class="w-full h-auto text-primary" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <!-- Farm Field with Tech Overlay -->
+                            <rect x="50" y="180" width="300" height="80" rx="8" fill="#4A7C23" opacity="0.2"/>
+                            <rect x="50" y="180" width="300" height="80" rx="8" stroke="#4A7C23" stroke-width="2"/>
+
+                            <!-- Crops Grid -->
+                            <g fill="#4A7C23">
+                                <circle cx="80" cy="200" r="8"/>
+                                <circle cx="120" cy="200" r="8"/>
+                                <circle cx="160" cy="200" r="8"/>
+                                <circle cx="200" cy="200" r="8"/>
+                                <circle cx="240" cy="200" r="8"/>
+                                <circle cx="280" cy="200" r="8"/>
+                                <circle cx="320" cy="200" r="8"/>
+
+                                <circle cx="80" cy="230" r="8"/>
+                                <circle cx="120" cy="230" r="8"/>
+                                <circle cx="160" cy="230" r="8"/>
+                                <circle cx="200" cy="230" r="8"/>
+                                <circle cx="240" cy="230" r="8"/>
+                                <circle cx="280" cy="230" r="8"/>
+                                <circle cx="320" cy="230" r="8"/>
+                            </g>
+
+                            <!-- Sensor Nodes -->
+                            <g>
+                                <rect x="75" y="140" width="10" height="30" rx="2" fill="#3B82F6"/>
+                                <circle cx="80" cy="135" r="6" fill="#F97316"/>
+
+                                <rect x="195" y="140" width="10" height="30" rx="2" fill="#3B82F6"/>
+                                <circle cx="200" cy="135" r="6" fill="#F97316"/>
+
+                                <rect x="315" y="140" width="10" height="30" rx="2" fill="#3B82F6"/>
+                                <circle cx="320" cy="135" r="6" fill="#F97316"/>
+                            </g>
+
+                            <!-- Data Lines -->
+                            <g stroke="#3B82F6" stroke-width="2" stroke-dasharray="4 4" opacity="0.6">
+                                <line x1="80" y1="135" x2="200" y2="80"/>
+                                <line x1="200" y1="135" x2="200" y2="80"/>
+                                <line x1="320" y1="135" x2="200" y2="80"/>
+                            </g>
+
+                            <!-- Central Hub -->
+                            <rect x="170" y="50" width="60" height="40" rx="8" fill="#3B82F6"/>
+                            <circle cx="200" cy="70" r="12" fill="#FFFFFF"/>
+                            <path d="M196 70 L200 66 L204 70 M200 66 L200 74" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- WiFi Signals -->
+                            <g stroke="#4A7C23" stroke-width="2" fill="none" opacity="0.5">
+                                <path d="M185 55 Q200 45 215 55"/>
+                                <path d="M190 50 Q200 42 210 50"/>
+                                <path d="M195 45 Q200 40 205 45"/>
+                            </g>
+
+                            <!-- Sun -->
+                            <circle cx="350" cy="50" r="20" fill="#F97316" opacity="0.8"/>
+                            <g stroke="#F97316" stroke-width="2" opacity="0.6">
+                                <line x1="350" y1="20" x2="350" y2="30"/>
+                                <line x1="350" y1="70" x2="350" y2="80"/>
+                                <line x1="320" y1="50" x2="330" y2="50"/>
+                                <line x1="370" y1="50" x2="380" y2="50"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-heading font-semibold text-slate-900">Real-time Monitoring</div>
+                                <div class="text-sm text-slate-500">Active & Connected</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    Powerful Features
+                </div>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+                    Everything You Need to Farm Smarter
+                </h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                    Our comprehensive suite of tools helps you monitor, analyze, and optimize every aspect of your farm.
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="group bg-gray-50 hover:bg-primary/5 rounded-2xl p-8 transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-primary/20">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-200">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">Real-Time Analytics</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Monitor soil moisture, temperature, humidity, and nutrient levels in real-time with our advanced IoT sensor network.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="group bg-gray-50 hover:bg-primary/5 rounded-2xl p-8 transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-primary/20">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-200">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">Precision Mapping</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Create detailed field maps with GPS-guided precision planting, spraying, and harvesting to maximize efficiency.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="group bg-gray-50 hover:bg-primary/5 rounded-2xl p-8 transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-primary/20">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-200">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">Smart Irrigation</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Automated irrigation systems that optimize water usage based on weather forecasts and soil conditions.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="group bg-gray-50 hover:bg-primary/5 rounded-2xl p-8 transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-primary/20">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-200">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">Weather Integration</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Get hyperlocal weather forecasts and alerts to protect your crops and plan operations accordingly.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="group bg-gray-50 hover:bg-primary/5 rounded-2xl p-8 transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-primary/20">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-200">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">Crop Management</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Track planting schedules, growth stages, and harvest timing with intelligent crop lifecycle management.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="group bg-gray-50 hover:bg-primary/5 rounded-2xl p-8 transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-primary/20">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-200">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">Pest Detection</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        AI-powered pest and disease detection with early warning systems to protect your yield and reduce chemical use.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 lg:py-28 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    Our Services
+                </div>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+                    End-to-End Farm Solutions
+                </h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                    From consultation to implementation and ongoing support, we're with you every step of the way.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-semibold text-slate-900 mb-3">IoT Sensor Installation</h3>
+                            <p class="text-slate-600 mb-4">
+                                Professional installation of wireless sensor networks throughout your farm. Our team ensures optimal placement for accurate data collection.
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Soil sensors (moisture, pH, nutrients)
+                                </li>
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Weather stations
+                                </li>
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Drone integration
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-accent to-blue-600 rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-semibold text-slate-900 mb-3">Data Analytics Platform</h3>
+                            <p class="text-slate-600 mb-4">
+                                Cloud-based dashboard with advanced analytics, machine learning insights, and predictive modeling for informed decision-making.
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-accent mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Real-time monitoring dashboard
+                                </li>
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-accent mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Predictive yield analytics
+                                </li>
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-accent mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Mobile app access
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-cta to-orange-600 rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-semibold text-slate-900 mb-3">Training & Support</h3>
+                            <p class="text-slate-600 mb-4">
+                                Comprehensive training programs for your team and 24/7 technical support to ensure you get the most out of our technology.
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-cta mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    On-site training sessions
+                                </li>
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-cta mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Video tutorials & documentation
+                                </li>
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-cta mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Dedicated account manager
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-secondary to-green-600 rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-semibold text-slate-900 mb-3">Sustainability Consulting</h3>
+                            <p class="text-slate-600 mb-4">
+                                Expert guidance on sustainable farming practices, resource optimization, and environmental impact reduction.
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-secondary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Water conservation strategies
+                                </li>
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-secondary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Soil health management
+                                </li>
+                                <li class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-5 h-5 text-secondary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Carbon footprint tracking
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Content -->
+                <div>
+                    <div class="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                        About Us
+                    </div>
+                    <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+                        Pioneering the Future of Agriculture
+                    </h2>
+                    <p class="text-lg text-slate-600 mb-6">
+                        Founded by farmers and engineers, AgriTech Pro combines decades of agricultural expertise with cutting-edge technology to help farms of all sizes thrive in the digital age.
+                    </p>
+                    <p class="text-slate-600 mb-8">
+                        We believe that sustainable, efficient farming is the key to feeding the world's growing population while protecting our planet. Our mission is to make advanced farming technology accessible and easy to use for everyone.
+                    </p>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6">
+                        <div>
+                            <div class="font-heading text-3xl font-bold text-primary mb-1">10+</div>
+                            <div class="text-sm text-slate-500">Years Experience</div>
+                        </div>
+                        <div>
+                            <div class="font-heading text-3xl font-bold text-primary mb-1">50K+</div>
+                            <div class="text-sm text-slate-500">Hectares Monitored</div>
+                        </div>
+                        <div>
+                            <div class="font-heading text-3xl font-bold text-primary mb-1">15</div>
+                            <div class="text-sm text-slate-500">Countries Served</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl p-8">
+                        <svg class="w-full h-auto" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <!-- Team Collaboration Scene -->
+                            <!-- Background -->
+                            <rect x="50" y="80" width="300" height="200" rx="12" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+
+                            <!-- Dashboard Screen -->
+                            <rect x="80" y="110" width="240" height="140" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+
+                            <!-- Charts -->
+                            <rect x="100" y="130" width="80" height="60" rx="4" fill="#4A7C23" opacity="0.2"/>
+                            <path d="M100 170 L110 160 L120 165 L130 150 L140 155 L150 145 L160 150 L170 140 L180 145" stroke="#4A7C23" stroke-width="2" fill="none"/>
+
+                            <rect x="200" y="130" width="80" height="60" rx="4" fill="#3B82F6" opacity="0.2"/>
+                            <circle cx="240" cy="160" r="20" stroke="#3B82F6" stroke-width="2" fill="none"/>
+                            <path d="M240 160 L240 148" stroke="#3B82F6" stroke-width="2"/>
+                            <path d="M240 160 L250 168" stroke="#3B82F6" stroke-width="2"/>
+
+                            <!-- Data Cards -->
+                            <rect x="100" y="200" width="60" height="40" rx="4" fill="#F97316" opacity="0.1"/>
+                            <rect x="170" y="200" width="60" height="40" rx="4" fill="#10B981" opacity="0.1"/>
+                            <rect x="240" y="200" width="60" height="40" rx="4" fill="#6366F1" opacity="0.1"/>
+
+                            <!-- Person 1 - Farmer -->
+                            <circle cx="120" cy="60" r="20" fill="#4A7C23"/>
+                            <circle cx="115" cy="55" r="3" fill="white"/>
+                            <circle cx="125" cy="55" r="3" fill="white"/>
+                            <path d="M115 62 Q120 67 125 62" stroke="white" stroke-width="2" fill="none"/>
+                            <rect x="105" y="80" width="30" height="40" rx="4" fill="#4A7C23"/>
+
+                            <!-- Person 2 - Tech -->
+                            <circle cx="200" cy="60" r="20" fill="#3B82F6"/>
+                            <circle cx="195" cy="55" r="3" fill="white"/>
+                            <circle cx="205" cy="55" r="3" fill="white"/>
+                            <path d="M195 62 Q200 67 205 62" stroke="white" stroke-width="2" fill="none"/>
+                            <rect x="185" y="80" width="30" height="40" rx="4" fill="#3B82F6"/>
+
+                            <!-- Person 3 - Analyst -->
+                            <circle cx="280" cy="60" r="20" fill="#F97316"/>
+                            <circle cx="275" cy="55" r="3" fill="white"/>
+                            <circle cx="285" cy="55" r="3" fill="white"/>
+                            <path d="M275 62 Q280 67 285 62" stroke="white" stroke-width="2" fill="none"/>
+                            <rect x="265" y="80" width="30" height="40" rx="4" fill="#F97316"/>
+
+                            <!-- Connection Lines -->
+                            <path d="M120 80 L200 80 L280 80" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+                            <circle cx="200" cy="80" r="4" fill="#10B981"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 lg:py-28 bg-gradient-to-br from-primary to-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="text-white">
+                    <div class="inline-flex items-center bg-white/20 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                        Get In Touch
+                    </div>
+                    <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                        Ready to Transform Your Farm?
+                    </h2>
+                    <p class="text-lg text-white/90 mb-8">
+                        Let's discuss how AgriTech Pro can help you increase yields, reduce costs, and farm more sustainably.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Email Us</div>
+                                <div class="text-white/80">hello@agritechpro.com</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Call Us</div>
+                                <div class="text-white/80">+1 (555) 123-4567</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Visit Us</div>
+                                <div class="text-white/80">123 Farm Tech Lane<br>San Francisco, CA 94105</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white rounded-2xl p-8 shadow-2xl">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200"
+                                placeholder="John Smith">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200"
+                                placeholder="john@example.com">
+                        </div>
+
+                        <div>
+                            <label for="farm-size" class="block text-sm font-semibold text-slate-700 mb-2">Farm Size</label>
+                            <select id="farm-size" name="farm-size" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200">
+                                <option value="">Select farm size</option>
+                                <option value="small">Small (1-50 hectares)</option>
+                                <option value="medium">Medium (50-500 hectares)</option>
+                                <option value="large">Large (500+ hectares)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-semibold text-slate-700 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200 resize-none"
+                                placeholder="Tell us about your farming needs..."></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 cursor-pointer shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="font-heading font-bold text-xl">AgriTech Pro</span>
+                    </div>
+                    <p class="text-slate-400 mb-4 max-w-md">
+                        Empowering farmers with smart technology for sustainable, efficient, and profitable agriculture.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="Twitter">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="LinkedIn">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-primary rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-heading font-semibold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Features</a></li>
+                        <li><a href="#services" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Services</a></li>
+                        <li><a href="#about" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">About Us</a></li>
+                        <li><a href="#contact" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-heading font-semibold text-lg mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Privacy Policy</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Terms of Service</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 text-center text-slate-400 text-sm">
+                <p>&copy; 2025 AgriTech Pro. All rights reserved. Built with sustainable technology.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

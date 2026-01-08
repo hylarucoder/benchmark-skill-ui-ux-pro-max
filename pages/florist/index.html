@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom & Leaf | Premium Florist & Plant Shop</title>
+    <meta name="description" content="Discover beautiful handcrafted floral arrangements and healthy plants for your home and special occasions">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Lora', 'serif'],
+                        sans: ['Raleway', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2E8B57',
+                        secondary: '#8B4513',
+                        accent: '#87CEEB',
+                        cream: '#F5F5DC',
+                        'text-dark': '#1A3320',
+                        'text-light': '#475569',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .organic-shape {
+            border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+        }
+        .organic-shape-2 {
+            border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+        }
+        .leaf-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c-5 10-15 15-25 15 5 20 15 35 25 35s20-15 25-35c-10 0-20-5-25-15z' fill='%232E8B57' fill-opacity='0.05'/%3E%3C/svg%3E");
+        }
+        .hover-lift {
+            transition: transform 300ms ease-out, box-shadow 300ms ease-out;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(46, 139, 87, 0.15);
+        }
+        .fade-in {
+            animation: fadeIn 600ms ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans text-text-light bg-cream">
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#" class="font-serif text-2xl font-bold text-primary flex items-center gap-2">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C13.5 2 15 3 15 5C15 7 13 8 12 9C11 8 9 7 9 5C9 3 10.5 2 12 2ZM12 10C14 10 17 11 18 13L18 22L16 22L16 16L14 16L14 22L10 22L10 16L8 16L8 22L6 22L6 13C7 11 10 10 12 10Z"/>
+                    </svg>
+                    Bloom & Leaf
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#products" class="text-text-light hover:text-primary transition-colors duration-200">Products</a>
+                    <a href="#about" class="text-text-light hover:text-primary transition-colors duration-200">About</a>
+                    <a href="#services" class="text-text-light hover:text-primary transition-colors duration-200">Services</a>
+                    <a href="#contact" class="text-text-light hover:text-primary transition-colors duration-200">Contact</a>
+                    <a href="#contact" class="bg-primary text-white px-6 py-2.5 rounded-full hover:bg-opacity-90 transition-colors duration-200 cursor-pointer">Shop Now</a>
+                </div>
+                <button class="md:hidden p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#products" class="block py-2 text-text-light hover:text-primary">Products</a>
+            <a href="#about" class="block py-2 text-text-light hover:text-primary">About</a>
+            <a href="#services" class="block py-2 text-text-light hover:text-primary">Services</a>
+            <a href="#contact" class="block py-2 text-text-light hover:text-primary">Contact</a>
+            <a href="#contact" class="block mt-3 bg-primary text-white px-6 py-2.5 rounded-full text-center">Shop Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16 leaf-pattern">
+        <div class="absolute top-20 right-0 w-96 h-96 bg-primary/10 organic-shape blur-3xl"></div>
+        <div class="absolute bottom-20 left-0 w-80 h-80 bg-accent/10 organic-shape-2 blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <span class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">✨ Fresh Daily Arrivals</span>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-text-dark leading-tight mb-6">
+                        Bring Nature's<br>
+                        <span class="text-primary">Beauty Home</span>
+                    </h1>
+                    <p class="text-lg text-text-light mb-8 leading-relaxed">
+                        Discover handcrafted floral arrangements and premium plants that transform your space.
+                        Perfect for gifts, events, or brightening your everyday life.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#products" class="bg-primary text-white px-8 py-4 rounded-full hover:bg-opacity-90 transition-all duration-200 cursor-pointer font-medium shadow-lg hover:shadow-xl">
+                            Explore Collection
+                        </a>
+                        <a href="#services" class="bg-white text-primary px-8 py-4 rounded-full border-2 border-primary hover:bg-primary hover:text-white transition-all duration-200 cursor-pointer font-medium">
+                            Our Services
+                        </a>
+                    </div>
+                    <div class="mt-12 flex items-center gap-8">
+                        <div>
+                            <div class="text-3xl font-bold text-primary">500+</div>
+                            <div class="text-sm text-text-light">Plant Varieties</div>
+                        </div>
+                        <div class="w-px h-12 bg-primary/20"></div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary">10K+</div>
+                            <div class="text-sm text-text-light">Happy Customers</div>
+                        </div>
+                        <div class="w-px h-12 bg-primary/20"></div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary">5★</div>
+                            <div class="text-sm text-text-light">Rating</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative fade-in" style="animation-delay: 200ms;">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600&h=700&fit=crop"
+                             alt="Beautiful flower arrangement"
+                             class="w-full h-[500px] object-cover rounded-3xl shadow-2xl">
+                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C13.5 2 15 3 15 5C15 7 13 8 12 9C11 8 9 7 9 5C9 3 10.5 2 12 2Z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-text-dark">100% Fresh</div>
+                                    <div class="text-sm text-text-light">Guaranteed quality</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute -top-4 -right-4 bg-accent p-4 rounded-2xl shadow-xl">
+                            <div class="text-white font-bold text-lg">Free Delivery</div>
+                            <div class="text-white/90 text-sm">Orders $50+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">Our Collection</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-text-dark mb-4">Featured Products</h2>
+                <p class="text-text-light max-w-2xl mx-auto">Handpicked selections of our finest floral arrangements and healthiest plants</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product Card 1 -->
+                <div class="group cursor-pointer hover-lift bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=400&h=400&fit=crop"
+                             alt="Rose Bouquet"
+                             class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-primary shadow-md">
+                            $49.99
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-sm text-primary font-medium mb-2">Bestseller</div>
+                        <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">Classic Rose Bouquet</h3>
+                        <p class="text-text-light text-sm mb-4">12 premium red roses with baby's breath</p>
+                        <button class="w-full bg-primary text-white py-3 rounded-full hover:bg-opacity-90 transition-colors duration-200 cursor-pointer">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="group cursor-pointer hover-lift bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1459156212016-c812468e2115?w=400&h=400&fit=crop"
+                             alt="Monstera Plant"
+                             class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-primary shadow-md">
+                            $35.99
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-sm text-accent font-medium mb-2">Easy Care</div>
+                        <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">Monstera Deliciosa</h3>
+                        <p class="text-text-light text-sm mb-4">Lush tropical plant, 12" pot</p>
+                        <button class="w-full bg-primary text-white py-3 rounded-full hover:bg-opacity-90 transition-colors duration-200 cursor-pointer">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="group cursor-pointer hover-lift bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=400&h=400&fit=crop"
+                             alt="Mixed Flowers"
+                             class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-primary shadow-md">
+                            $39.99
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-sm text-primary font-medium mb-2">Popular</div>
+                        <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">Garden Mix Basket</h3>
+                        <p class="text-text-light text-sm mb-4">Seasonal flowers in a charming basket</p>
+                        <button class="w-full bg-primary text-white py-3 rounded-full hover:bg-opacity-90 transition-colors duration-200 cursor-pointer">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="group cursor-pointer hover-lift bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400&h=400&fit=crop"
+                             alt="Succulent Collection"
+                             class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-primary shadow-md">
+                            $24.99
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-sm text-accent font-medium mb-2">Low Maintenance</div>
+                        <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">Succulent Garden</h3>
+                        <p class="text-text-light text-sm mb-4">5 beautiful succulents in wooden box</p>
+                        <button class="w-full bg-primary text-white py-3 rounded-full hover:bg-opacity-90 transition-colors duration-200 cursor-pointer">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-200 cursor-pointer">
+                    View All Products
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-cream leaf-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&h=500&fit=crop"
+                         alt="Our florist at work"
+                         class="w-full h-[400px] object-cover rounded-3xl shadow-xl">
+                    <div class="absolute -bottom-8 -right-8 bg-primary text-white p-8 rounded-2xl shadow-xl max-w-xs">
+                        <div class="text-4xl font-bold mb-2">15+</div>
+                        <div class="text-lg">Years of Excellence</div>
+                    </div>
+                </div>
+                <div>
+                    <span class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">About Us</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-text-dark mb-6">Crafting Beauty Since 2009</h2>
+                    <p class="text-text-light text-lg mb-6 leading-relaxed">
+                        At Bloom & Leaf, we believe that flowers and plants have the power to transform spaces and uplift spirits.
+                        Our family-owned business has been serving the community with passion and dedication for over 15 years.
+                    </p>
+                    <p class="text-text-light text-lg mb-8 leading-relaxed">
+                        Every arrangement is handcrafted with love, using only the freshest blooms from local and sustainable farms.
+                        We take pride in creating personalized experiences for each customer.
+                    </p>
+                    <div class="grid sm:grid-cols-3 gap-6">
+                        <div class="text-center p-4 bg-white rounded-2xl shadow-md">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C13.5 2 15 3 15 5C15 7 13 8 12 9C11 8 9 7 9 5C9 3 10.5 2 12 2Z"/>
+                                </svg>
+                            </div>
+                            <div class="font-semibold text-text-dark">Fresh Daily</div>
+                            <div class="text-sm text-text-light">From local farms</div>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-2xl shadow-md">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+                            <div class="font-semibold text-text-dark">Made with Love</div>
+                            <div class="text-sm text-text-light">Handcrafted</div>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-2xl shadow-md">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                            <div class="font-semibold text-text-dark">Eco-Friendly</div>
+                            <div class="text-sm text-text-light">Sustainable packaging</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">What We Offer</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-text-dark mb-4">Our Services</h2>
+                <p class="text-text-light max-w-2xl mx-auto">Beyond beautiful flowers, we offer comprehensive services to meet all your botanical needs</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="group cursor-pointer hover-lift bg-cream rounded-3xl p-8 border border-primary/10">
+                    <div class="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-opacity-90 transition-colors duration-200">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C13.5 2 15 3 15 5C15 7 13 8 12 9C11 8 9 7 9 5C9 3 10.5 2 12 2ZM12 10C14 10 17 11 18 13L18 22L16 22L16 16L14 16L14 22L10 22L10 16L8 16L8 22L6 22L6 13C7 11 10 10 12 10Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-text-dark mb-4">Event Decoration</h3>
+                    <p class="text-text-light mb-6">Transform your weddings, corporate events, and special occasions with stunning floral designs tailored to your vision.</p>
+                    <ul class="space-y-2 text-text-light">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Weddings & Engagements
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Corporate Events
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Custom Themes
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group cursor-pointer hover-lift bg-cream rounded-3xl p-8 border border-primary/10">
+                    <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 group-hover:bg-opacity-90 transition-colors duration-200">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-text-dark mb-4">Subscription Plans</h3>
+                    <p class="text-text-light mb-6">Never miss fresh flowers with our flexible subscription plans. Perfect for home or office, delivered weekly or monthly.</p>
+                    <ul class="space-y-2 text-text-light">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Weekly or Monthly
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Customizable Arrangements
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Save Up to 20%
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group cursor-pointer hover-lift bg-cream rounded-3xl p-8 border border-primary/10">
+                    <div class="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-opacity-90 transition-colors duration-200">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-text-dark mb-4">Workshops & Classes</h3>
+                    <p class="text-text-light mb-6">Learn the art of floral arrangement from our expert florists. Perfect for beginners or experienced enthusiasts.</p>
+                    <ul class="space-y-2 text-text-light">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Beginner to Advanced
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Private & Group Sessions
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            All Materials Included
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="text-white">
+                    <span class="inline-block bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium mb-6">Get In Touch</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">Let's Create Something Beautiful</h2>
+                    <p class="text-white/90 text-lg mb-8 leading-relaxed">
+                        Have a question or special request? We'd love to hear from you. Reach out and let's discuss how we can bring your floral vision to life.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-sm text-white/80">Email Us</div>
+                                <div class="font-medium">hello@bloomandleaf.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-sm text-white/80">Call Us</div>
+                                <div class="font-medium">(555) 123-4567</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-sm text-white/80">Visit Us</div>
+                                <div class="font-medium">123 Garden Street, Floral City</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 shadow-2xl">
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-text-dark mb-2">Your Name</label>
+                            <input type="text"
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
+                                   placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-dark mb-2">Email Address</label>
+                            <input type="email"
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200"
+                                   placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-dark mb-2">Service Interested In</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200">
+                                <option>Select a service</option>
+                                <option>Floral Arrangement</option>
+                                <option>Event Decoration</option>
+                                <option>Subscription Plan</option>
+                                <option>Workshop</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-dark mb-2">Your Message</label>
+                            <textarea rows="4"
+                                      class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none"
+                                      placeholder="Tell us about your requirements..."></textarea>
+                        </div>
+                        <button type="submit"
+                                class="w-full bg-primary text-white py-4 rounded-xl hover:bg-opacity-90 transition-all duration-200 font-medium cursor-pointer shadow-lg hover:shadow-xl">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-text-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2 md:col-span-1">
+                    <a href="#" class="font-serif text-2xl font-bold flex items-center gap-2 mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C13.5 2 15 3 15 5C15 7 13 8 12 9C11 8 9 7 9 5C9 3 10.5 2 12 2ZM12 10C14 10 17 11 18 13L18 22L16 22L16 16L14 16L14 22L10 22L10 16L8 16L8 22L6 22L6 13C7 11 10 10 12 10Z"/>
+                        </svg>
+                        Bloom & Leaf
+                    </a>
+                    <p class="text-white/70 text-sm leading-relaxed">
+                        Bringing nature's beauty to your doorstep since 2009.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-white/70 text-sm">
+                        <li><a href="#products" class="hover:text-primary transition-colors duration-200 cursor-pointer">Products</a></li>
+                        <li><a href="#about" class="hover:text-primary transition-colors duration-200 cursor-pointer">About Us</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors duration-200 cursor-pointer">Services</a></li>
+                        <li><a href="#contact" class="hover:text-primary transition-colors duration-200 cursor-pointer">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-white/70 text-sm">
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200 cursor-pointer">Event Decoration</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200 cursor-pointer">Subscriptions</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200 cursor-pointer">Workshops</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200 cursor-pointer">Custom Orders</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-200 cursor-pointer">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-200 cursor-pointer">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-200 cursor-pointer">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-12 pt-8 text-center text-white/50 text-sm">
+                <p>© 2024 Bloom & Leaf. All rights reserved. Made with 💚 for nature lovers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

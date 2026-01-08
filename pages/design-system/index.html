@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - Component Library</title>
+    <meta name="description" content="A comprehensive design system and component library for building modern, accessible, and beautiful user interfaces.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2563EB',
+                            50: '#EFF6FF',
+                            100: '#DBEAFE',
+                            200: '#BFDBFE',
+                            300: '#93C5FD',
+                            400: '#60A5FA',
+                            500: '#3B82F6',
+                            600: '#2563EB',
+                            700: '#1D4ED8',
+                            800: '#1E40AF',
+                            900: '#1E3A8A',
+                        },
+                        secondary: {
+                            DEFAULT: '#3B82F6',
+                        },
+                        accent: {
+                            DEFAULT: '#F97316',
+                            50: '#FFF7ED',
+                            100: '#FFEDD5',
+                            200: '#FED7AA',
+                            300: '#FDBA74',
+                            400: '#FB923C',
+                            500: '#F97316',
+                            600: '#EA580C',
+                            700: '#C2410C',
+                            800: '#9A3412',
+                            900: '#7C2D12',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2563EB;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1D4ED8;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #F97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero gradient */
+        .hero-gradient {
+            background: radial-gradient(ellipse at top, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(249, 115, 22, 0.05) 0%, transparent 50%);
+        }
+
+        /* Component card hover */
+        .component-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .component-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Feature icon animation */
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Smooth fade in animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animation-delay-200 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+
+        .animation-delay-400 {
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="font-body text-slate-800 bg-white antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 bg-white/90 backdrop-blur-md rounded-2xl shadow-sm border border-slate-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                        </svg>
+                    </div>
+                    <span class="font-heading font-bold text-xl text-slate-900">DesignSystem</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 font-medium">Features</a>
+                    <a href="#components" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 font-medium">Components</a>
+                    <a href="#docs" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 font-medium">Docs</a>
+                    <a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 font-medium">Blog</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex items-center space-x-3">
+                    <a href="#" class="hidden sm:block text-slate-600 hover:text-primary-600 transition-colors duration-200 font-medium">GitHub</a>
+                    <a href="#" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/30">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors duration-200" aria-label="Open menu">
+                    <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Badge -->
+                <div class="inline-flex items-center space-x-2 bg-primary-50 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in-up">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+                    </span>
+                    <span>v2.0 Now Available</span>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 animate-fade-in-up animation-delay-200">
+                    Build Beautiful UIs with
+                    <span class="gradient-text">Confidence</span>
+                </h1>
+
+                <!-- Description -->
+                <p class="text-lg sm:text-xl text-slate-600 mb-10 max-w-2xl mx-auto animate-fade-in-up animation-delay-400">
+                    A comprehensive design system and component library for building modern, accessible, and scalable user interfaces. Ships with 50+ production-ready components.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-400">
+                    <a href="#" class="w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-xl hover:shadow-primary-500/30 flex items-center justify-center space-x-2 group cursor-pointer">
+                        <span>Start Building</span>
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:border-slate-400 flex items-center justify-center space-x-2 cursor-pointer">
+                        <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span>Read the Docs</span>
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-slate-200 pt-10">
+                    <div>
+                        <div class="font-heading text-3xl sm:text-4xl font-bold text-primary-600">50+</div>
+                        <div class="text-slate-600 mt-1">Components</div>
+                    </div>
+                    <div>
+                        <div class="font-heading text-3xl sm:text-4xl font-bold text-primary-600">100%</div>
+                        <div class="text-slate-600 mt-1">Accessible</div>
+                    </div>
+                    <div>
+                        <div class="font-heading text-3xl sm:text-4xl font-bold text-primary-600">10K+</div>
+                        <div class="text-slate-600 mt-1">GitHub Stars</div>
+                    </div>
+                    <div>
+                        <div class="font-heading text-3xl sm:text-4xl font-bold text-primary-600">99%</div>
+                        <div class="text-slate-600 mt-1">TypeScript</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+                    Everything You Need
+                </h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                    A complete toolkit for building production-ready applications with best practices built-in.
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white p-8 rounded-2xl border border-slate-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div class="feature-icon w-14 h-14 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">
+                        50+ Components
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        From buttons to complex data tables, we have everything you need to build modern interfaces.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white p-8 rounded-2xl border border-slate-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div class="feature-icon w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">
+                        Fully Accessible
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        WCAG 2.1 AA compliant out of the box. Keyboard navigation, ARIA labels, and screen reader support included.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white p-8 rounded-2xl border border-slate-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div class="feature-icon w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">
+                        Themeable
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Customize every aspect with CSS variables or Tailwind config. Light and dark mode support built-in.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white p-8 rounded-2xl border border-slate-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div class="feature-icon w-14 h-14 bg-accent-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">
+                        TypeScript First
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Written in TypeScript with full type definitions. Better DX with autocomplete and type safety.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white p-8 rounded-2xl border border-slate-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div class="feature-icon w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">
+                        Responsive Design
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Mobile-first approach with breakpoints for every device. Your components look great everywhere.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white p-8 rounded-2xl border border-slate-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div class="feature-icon w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-semibold text-slate-900 mb-3">
+                        Performance Optimized
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Tree-shakeable, minimal bundle size, and lazy loading support. Speed is a first-class citizen.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Components Preview Section -->
+    <section id="components" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+                    Preview the Components
+                </h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                    See what you can build with our component library. Everything is customizable and production-ready.
+                </p>
+            </div>
+
+            <!-- Components Showcase -->
+            <div class="space-y-8">
+                <!-- Buttons Showcase -->
+                <div class="component-card bg-white rounded-2xl border border-slate-200 p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-heading text-xl font-semibold text-slate-900">Buttons</h3>
+                        <span class="text-sm text-slate-500">8 variants</span>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer">
+                            Primary Button
+                        </button>
+                        <button class="bg-accent-500 hover:bg-accent-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer">
+                            Secondary Button
+                        </button>
+                        <button class="bg-white border-2 border-slate-300 hover:border-slate-400 text-slate-700 px-6 py-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer">
+                            Outline Button
+                        </button>
+                        <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-6 py-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer">
+                            Ghost Button
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cards Showcase -->
+                <div class="component-card bg-white rounded-2xl border border-slate-200 p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-heading text-xl font-semibold text-slate-900">Cards</h3>
+                        <span class="text-sm text-slate-500">5 variants</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Card 1 -->
+                        <div class="bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl p-6 text-white cursor-pointer hover:shadow-xl transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-heading font-semibold text-lg mb-2">Analytics</h4>
+                            <p class="text-white/90 text-sm">Track your metrics with beautiful charts and visualizations.</p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-6 cursor-pointer hover:shadow-xl hover:border-primary-300 transition-all duration-300">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-heading font-semibold text-lg mb-2 text-slate-900">Task Complete</h4>
+                            <p class="text-slate-600 text-sm">Your task has been completed successfully.</p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 cursor-pointer hover:shadow-xl transition-shadow duration-300">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-accent-400 to-accent-600 rounded-full flex items-center justify-center text-white font-bold">
+                                    JD
+                                </div>
+                                <div>
+                                    <h4 class="font-heading font-semibold text-slate-900">John Doe</h4>
+                                    <p class="text-slate-500 text-sm">Product Designer</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm">This is an example of a user profile card with avatar.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Elements Showcase -->
+                <div class="component-card bg-white rounded-2xl border border-slate-200 p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-heading text-xl font-semibold text-slate-900">Form Elements</h3>
+                        <span class="text-sm text-slate-500">12 components</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+                            <input type="email" placeholder="you@example.com" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Select Option</label>
+                            <select class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 outline-none bg-white cursor-pointer">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Message</label>
+                            <textarea rows="3" placeholder="Type your message..." class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 outline-none resize-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts & Badges Showcase -->
+                <div class="component-card bg-white rounded-2xl border border-slate-200 p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-heading text-xl font-semibold text-slate-900">Alerts & Badges</h3>
+                        <span class="text-sm text-slate-500">6 variants</span>
+                    </div>
+                    <div class="space-y-4">
+                        <!-- Success Alert -->
+                        <div class="flex items-start space-x-3 bg-green-50 border border-green-200 rounded-lg p-4">
+                            <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div class="flex-1">
+                                <h4 class="font-medium text-green-900">Success</h4>
+                                <p class="text-green-700 text-sm mt-1">Your changes have been saved successfully.</p>
+                            </div>
+                        </div>
+
+                        <!-- Warning Alert -->
+                        <div class="flex items-start space-x-3 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                            <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                            <div class="flex-1">
+                                <h4 class="font-medium text-yellow-900">Warning</h4>
+                                <p class="text-yellow-700 text-sm mt-1">Please review your information before proceeding.</p>
+                            </div>
+                        </div>
+
+                        <!-- Badges -->
+                        <div class="flex items-center space-x-3 pt-4 border-t border-slate-200">
+                            <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">Primary</span>
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Success</span>
+                            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">Warning</span>
+                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-medium">Error</span>
+                            <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-medium">Default</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View All Button -->
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center space-x-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-xl cursor-pointer">
+                    <span>View All Components</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="docs" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 to-slate-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Content -->
+                <div>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-white mb-6">
+                        Comprehensive Documentation
+                    </h2>
+                    <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+                        Get started quickly with our detailed guides, API references, and examples. Everything you need to integrate the design system into your project.
+                    </p>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-slate-300">Step-by-step getting started guide</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-slate-300">Complete API reference for all components</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-slate-300">Real-world examples and use cases</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-slate-300">Theming and customization guides</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <span class="text-slate-300">Migration guides and best practices</span>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="inline-flex items-center space-x-2 bg-white hover:bg-slate-100 text-slate-900 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-xl cursor-pointer">
+                        <span>Explore Documentation</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Code Preview -->
+                <div class="bg-slate-950 rounded-2xl p-6 shadow-2xl border border-slate-700">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="text-slate-500 text-sm ml-4">installation</span>
+                    </div>
+                    <pre class="text-sm overflow-x-auto"><code class="text-slate-300"><span class="text-green-400"># Install via npm</span>
+<span class="text-blue-400">$</span> npm install @design-system/components
+
+<span class="text-green-400"># Or with yarn</span>
+<span class="text-blue-400">$</span> yarn add @design-system/components
+
+<span class="text-green-400"># Or with pnpm</span>
+<span class="text-blue-400">$</span> pnpm add @design-system/components</code></pre>
+
+                    <div class="mt-6 pt-6 border-t border-slate-800">
+                        <pre class="text-sm overflow-x-auto"><code class="text-slate-300"><span class="text-purple-400">import</span> { Button, Card } <span class="text-purple-400">from</span> <span class="text-green-400">'@design-system/components'</span>
+
+<span class="text-purple-400">export function</span> <span class="text-yellow-400">MyComponent</span>() {
+  <span class="text-purple-400">return</span> (
+    <span class="text-blue-400">&lt;Card&gt;</span>
+      <span class="text-blue-400">&lt;h1&gt;</span>Hello World<span class="text-blue-400">&lt;/h1&gt;</span>
+      <span class="text-blue-400">&lt;Button&gt;</span>Click me<span class="text-blue-400">&lt;/Button&gt;</span>
+    <span class="text-blue-400">&lt;/Card&gt;</span>
+  )
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-heading text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
+                Ready to Build Something Amazing?
+            </h2>
+            <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
+                Join thousands of developers who are already building beautiful interfaces with our design system. Start your project today.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#" class="w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-xl hover:shadow-primary-500/30 flex items-center justify-center space-x-2 cursor-pointer">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span>Star on GitHub</span>
+                </a>
+                <a href="#" class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-xl hover:shadow-accent-500/30 cursor-pointer">
+                    Get Started Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div class="md:col-span-1">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                            </svg>
+                        </div>
+                        <span class="font-heading font-bold text-xl text-slate-900">DesignSystem</span>
+                    </div>
+                    <p class="text-slate-600 text-sm">
+                        Building beautiful interfaces, one component at a time.
+                    </p>
+                </div>
+
+                <!-- Product -->
+                <div>
+                    <h4 class="font-heading font-semibold text-slate-900 mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Components</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Templates</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Icons</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Changelog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h4 class="font-heading font-semibold text-slate-900 mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Documentation</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Tutorials</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Blog</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Community -->
+                <div>
+                    <h4 class="font-heading font-semibold text-slate-900 mb-4">Community</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">GitHub</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Discord</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Twitter</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+                <p class="text-slate-600 text-sm">
+                    © 2024 DesignSystem. All rights reserved.
+                </p>
+                <div class="flex items-center space-x-6 text-sm">
+                    <a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Privacy Policy</a>
+                    <a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">Terms of Service</a>
+                    <a href="#" class="text-slate-600 hover:text-primary-600 transition-colors duration-200 cursor-pointer">License</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

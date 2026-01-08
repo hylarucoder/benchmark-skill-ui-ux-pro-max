@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thunder FC - Professional Sports Club</title>
+    <meta name="description" content="Join Thunder FC - Elite sports club with professional training, competitive teams, and a winning tradition">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3B82F6;
+            --secondary: #60A5FA;
+            --cta: #F97316;
+            --background: #F8FAFC;
+            --text: #1E293B;
+            --border: #E2E8F0;
+        }
+
+        * {
+            font-family: 'Barlow', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Barlow Condensed', sans-serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 50%, #1E293B 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease-out;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+            transition: all 0.2s ease-out;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card-hover:hover {
+                transform: none;
+            }
+
+            .btn-primary:hover {
+                transform: none;
+            }
+        }
+
+        .match-live {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .7;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .match-live {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-slate-900" style="font-family: 'Barlow Condensed', sans-serif;">THUNDER FC</span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#matches" class="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium">Matches</a>
+                    <a href="#team" class="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium">Team</a>
+                    <a href="#news" class="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium">News</a>
+                    <a href="#contact" class="text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium">Contact</a>
+                    <button class="btn-primary text-white px-6 py-2.5 rounded-lg font-semibold cursor-pointer">
+                        Join Club
+                    </button>
+                </div>
+
+                <button class="md:hidden p-2 text-slate-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-screen flex items-center pt-24 pb-16 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-orange-500 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center px-4 py-2 bg-blue-500/20 rounded-full mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 match-live"></span>
+                        <span class="text-blue-300 text-sm font-semibold">Season 2024 Now Open</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
+                        UNLEASH YOUR
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                            CHAMPION
+                        </span>
+                    </h1>
+
+                    <p class="text-xl text-slate-300 mb-8 leading-relaxed">
+                        Join Thunder FC, where passion meets performance. Elite training, competitive teams, and a winning tradition that shapes champions.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary text-white px-8 py-4 rounded-xl font-bold text-lg cursor-pointer">
+                            Start Your Journey
+                        </button>
+                        <button class="bg-white/10 backdrop-blur-sm border-2 border-white/20 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all duration-200 cursor-pointer">
+                            Watch Highlights
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6 mt-12">
+                        <div class="stat-card rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold text-white">150+</div>
+                            <div class="text-slate-400 text-sm">Active Players</div>
+                        </div>
+                        <div class="stat-card rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold text-white">12</div>
+                            <div class="text-slate-400 text-sm">Championships</div>
+                        </div>
+                        <div class="stat-card rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold text-white">25</div>
+                            <div class="text-slate-400 text-sm">Years Excellence</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative hidden lg:block">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-3xl blur-2xl opacity-20"></div>
+                        <div class="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-slate-700">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-slate-700/50 rounded-2xl p-6">
+                                    <svg class="w-12 h-12 text-blue-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                    </svg>
+                                    <h4 class="text-white font-bold mb-2">Elite Defense</h4>
+                                    <p class="text-slate-400 text-sm">Top-rated defensive strategy</p>
+                                </div>
+                                <div class="bg-slate-700/50 rounded-2xl p-6">
+                                    <svg class="w-12 h-12 text-orange-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/>
+                                    </svg>
+                                    <h4 class="text-white font-bold mb-2">Dynamic Attack</h4>
+                                    <p class="text-slate-400 text-sm">Aggressive offensive plays</p>
+                                </div>
+                                <div class="bg-slate-700/50 rounded-2xl p-6">
+                                    <svg class="w-12 h-12 text-green-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                    </svg>
+                                    <h4 class="text-white font-bold mb-2">Performance</h4>
+                                    <p class="text-slate-400 text-sm">Data-driven training</p>
+                                </div>
+                                <div class="bg-slate-700/50 rounded-2xl p-6">
+                                    <svg class="w-12 h-12 text-purple-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                    </svg>
+                                    <h4 class="text-white font-bold mb-2">Team Unity</h4>
+                                    <p class="text-slate-400 text-sm">Strong brotherhood culture</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Matches Section -->
+    <section id="matches" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">UPCOMING MATCHES</h2>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto">Catch the action live and support your team</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Match 1 - Live -->
+                <div class="card-hover bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl p-6 text-white cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-4 right-4 flex items-center space-x-2">
+                        <span class="w-2 h-2 bg-white rounded-full match-live"></span>
+                        <span class="text-sm font-bold">LIVE</span>
+                    </div>
+                    <div class="text-center py-6">
+                        <div class="text-sm font-medium opacity-80 mb-4">Premier League • Round 12</div>
+                        <div class="flex items-center justify-center space-x-6 mb-4">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                    <span class="text-2xl font-bold">TH</span>
+                                </div>
+                                <span class="font-bold">Thunder FC</span>
+                            </div>
+                            <div class="text-3xl font-bold">2 - 1</div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                    <span class="text-2xl font-bold">RC</span>
+                                </div>
+                                <span class="font-bold">Rapid City</span>
+                            </div>
+                        </div>
+                        <div class="text-sm opacity-80">67' Second Half</div>
+                    </div>
+                    <button class="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl py-3 font-bold hover:bg-white/30 transition-all duration-200">
+                        Watch Stream
+                    </button>
+                </div>
+
+                <!-- Match 2 - Upcoming -->
+                <div class="card-hover bg-white border-2 border-slate-200 rounded-2xl p-6 cursor-pointer">
+                    <div class="text-center py-6">
+                        <div class="text-sm font-medium text-slate-500 mb-4">Premier League • Round 13</div>
+                        <div class="flex items-center justify-center space-x-6 mb-4">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-slate-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-slate-700">TH</span>
+                                </div>
+                                <span class="font-bold text-slate-900">Thunder FC</span>
+                            </div>
+                            <div class="text-3xl font-bold text-slate-400">VS</div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-slate-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-slate-700">DS</span>
+                                </div>
+                                <span class="font-bold text-slate-900">Dream Squad</span>
+                            </div>
+                        </div>
+                        <div class="text-lg font-bold text-blue-600 mb-1">Saturday, Dec 14</div>
+                        <div class="text-sm text-slate-500">3:00 PM • Thunder Arena</div>
+                    </div>
+                    <button class="w-full bg-slate-100 text-slate-700 rounded-xl py-3 font-bold hover:bg-slate-200 transition-all duration-200">
+                        Get Tickets
+                    </button>
+                </div>
+
+                <!-- Match 3 - Upcoming -->
+                <div class="card-hover bg-white border-2 border-slate-200 rounded-2xl p-6 cursor-pointer">
+                    <div class="text-center py-6">
+                        <div class="text-sm font-medium text-slate-500 mb-4">Premier League • Round 14</div>
+                        <div class="flex items-center justify-center space-x-6 mb-4">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-slate-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-slate-700">TH</span>
+                                </div>
+                                <span class="font-bold text-slate-900">Thunder FC</span>
+                            </div>
+                            <div class="text-3xl font-bold text-slate-400">VS</div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-slate-100 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-slate-700">FC</span>
+                                </div>
+                                <span class="font-bold text-slate-900">FC Phoenix</span>
+                            </div>
+                        </div>
+                        <div class="text-lg font-bold text-blue-600 mb-1">Saturday, Dec 21</div>
+                        <div class="text-sm text-slate-500">5:00 PM • Phoenix Stadium</div>
+                    </div>
+                    <button class="w-full bg-slate-100 text-slate-700 rounded-xl py-3 font-bold hover:bg-slate-200 transition-all duration-200">
+                        Get Tickets
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Roster Section -->
+    <section id="team" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">MEET THE TEAM</h2>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto">The athletes who wear the Thunder badge with pride</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Player 1 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm cursor-pointer">
+                    <div class="h-64 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white/30" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-bold text-slate-900">MARCUS JOHNSON</h3>
+                            <span class="bg-blue-100 text-blue-700 text-sm font-bold px-3 py-1 rounded-full">#10</span>
+                        </div>
+                        <p class="text-slate-600 font-medium mb-3">Forward</p>
+                        <div class="flex items-center text-sm text-slate-500">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                            24 Goals • 12 Assists
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player 2 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm cursor-pointer">
+                    <div class="h-64 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white/30" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-bold text-slate-900">DAVID CHEN</h3>
+                            <span class="bg-orange-100 text-orange-700 text-sm font-bold px-3 py-1 rounded-full">#7</span>
+                        </div>
+                        <p class="text-slate-600 font-medium mb-3">Midfielder</p>
+                        <div class="flex items-center text-sm text-slate-500">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                            8 Goals • 28 Assists
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player 3 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm cursor-pointer">
+                    <div class="h-64 bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white/30" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-bold text-slate-900">JAMES WILSON</h3>
+                            <span class="bg-green-100 text-green-700 text-sm font-bold px-3 py-1 rounded-full">#4</span>
+                        </div>
+                        <p class="text-slate-600 font-medium mb-3">Defender</p>
+                        <div class="flex items-center text-sm text-slate-500">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                            89 Tackles • 42 Intercepts
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player 4 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm cursor-pointer">
+                    <div class="h-64 bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white/30" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-bold text-slate-900">MICHAEL TORRES</h3>
+                            <span class="bg-purple-100 text-purple-700 text-sm font-bold px-3 py-1 rounded-full">#1</span>
+                        </div>
+                        <p class="text-slate-600 font-medium mb-3">Goalkeeper</p>
+                        <div class="flex items-center text-sm text-slate-500">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                            67 Clean Sheets • 124 Saves
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <button class="btn-primary text-white px-8 py-4 rounded-xl font-bold text-lg cursor-pointer">
+                    View Full Roster
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">LATEST NEWS</h2>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto">Stay updated with Thunder FC updates and achievements</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- News 1 -->
+                <article class="card-hover bg-slate-50 rounded-2xl overflow-hidden cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-slate-500 mb-3">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            December 8, 2024
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Thunder FC Secures Championship Victory</h3>
+                        <p class="text-slate-600 mb-4">In an electrifying match, Thunder FC clinched the regional championship with a stunning 3-1 victory over rivals...</p>
+                        <span class="text-blue-600 font-semibold hover:text-blue-700 transition-colors">Read More →</span>
+                    </div>
+                </article>
+
+                <!-- News 2 -->
+                <article class="card-hover bg-slate-50 rounded-2xl overflow-hidden cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-orange-600 to-orange-700 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-slate-500 mb-3">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            December 5, 2024
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Youth Academy Opens Registration for 2025</h3>
+                        <p class="text-slate-600 mb-4">Thunder FC Youth Academy is now accepting applications for the 2025 season. Programs available for ages 8-18...</p>
+                        <span class="text-blue-600 font-semibold hover:text-blue-700 transition-colors">Read More →</span>
+                    </div>
+                </article>
+
+                <!-- News 3 -->
+                <article class="card-hover bg-slate-50 rounded-2xl overflow-hidden cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-green-600 to-green-700 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-slate-500 mb-3">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            December 1, 2024
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">New Training Facility Construction Begins</h3>
+                        <p class="text-slate-600 mb-4">Groundbreaking ceremony marks the start of our state-of-the-art training complex. Completion expected summer 2025...</p>
+                        <span class="text-blue-600 font-semibold hover:text-blue-700 transition-colors">Read More →</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-600 to-blue-700 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full" style="background-image: url('data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='1' fill='white' opacity='0.3'/></svg>'); background-size: 30px 30px;"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">READY TO BE PART OF THE THUNDER?</h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Join our community of passionate athletes and fans. Whether you want to play, support, or get involved, there's a place for you at Thunder FC.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all duration-200 cursor-pointer shadow-lg">
+                    Become a Member
+                </button>
+                <button class="bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-800 transition-all duration-200 cursor-pointer border-2 border-white/30">
+                    Volunteer Opportunities
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">GET IN TOUCH</h2>
+                    <p class="text-xl text-slate-600 mb-8">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">Location</h4>
+                                <p class="text-slate-600">Thunder Arena, 123 Championship Drive<br>Sportsville, ST 12345</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">Email</h4>
+                                <p class="text-slate-600">info@thunderfc.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">Phone</h4>
+                                <p class="text-slate-600">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-slate-900 mb-2">Full Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="John Doe">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-slate-900 mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="john@example.com">
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-sm font-semibold text-slate-900 mb-2">Subject</label>
+                            <select id="subject" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                <option>General Inquiry</option>
+                                <option>Membership Information</option>
+                                <option>Tryouts</option>
+                                <option>Sponsorship</option>
+                                <option>Media/Press</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-semibold text-slate-900 mb-2">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none" placeholder="Your message..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full btn-primary text-white px-8 py-4 rounded-xl font-bold text-lg cursor-pointer">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold" style="font-family: 'Barlow Condensed', sans-serif;">THUNDER FC</span>
+                    </div>
+                    <p class="text-slate-400 mb-4 max-w-md">Building champions on and off the field since 1999. Join our community and be part of something bigger.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors duration-200" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.77,7.46H14.5v-1.9c0-.9.6-1.1,1-1.1h3V.5h-4.33C10.24.5,9.5,3.44,9.5,5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-sky-500 transition-colors duration-200" aria-label="Twitter">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-colors duration-200" aria-label="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors duration-200" aria-label="YouTube">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">About Us</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Team Roster</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Schedule</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Tickets</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Shop</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Programs</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Youth Academy</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Adult League</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Training Camps</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Private Coaching</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-400 text-sm mb-4 md:mb-0">© 2024 Thunder FC. All rights reserved.</p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Privacy Policy</a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Terms of Service</a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

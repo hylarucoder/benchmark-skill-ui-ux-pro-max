@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamVault - Premium Video Streaming</title>
+    <meta name="description" content="Unlimited entertainment. Stream thousands of movies, TV shows, and originals. Start your free trial today.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Rubik', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#3B82F6',
+                            dark: '#2563EB',
+                            light: '#60A5FA'
+                        },
+                        secondary: '#60A5FA',
+                        cta: {
+                            DEFAULT: '#F97316',
+                            dark: '#EA580C',
+                            light: '#FB923C'
+                        },
+                        dark: {
+                            bg: '#121212',
+                            card: '#1E1E1E',
+                            border: '#2A2A2A'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-gradient': 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(249, 115, 22, 0.05) 50%, transparent 100%)',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'scale-in': 'scaleIn 0.4s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2A2A;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3B82F6;
+        }
+
+        /* Glass effect */
+        .glass {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Poster hover effect */
+        .poster-card {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .poster-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Play button overlay */
+        .play-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+        .poster-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .animate-fade-in,
+            .animate-slide-up,
+            .animate-scale-in {
+                animation: none;
+            }
+            .poster-card {
+                transition: none;
+            }
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 50%, #F97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="font-body bg-dark-bg text-gray-100 antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 glass rounded-2xl px-6 py-4 animate-fade-in">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <svg class="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+                <span class="font-heading font-bold text-2xl">StreamVault</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#features" class="text-gray-300 hover:text-white transition-colors duration-200">Features</a>
+                <a href="#content" class="text-gray-300 hover:text-white transition-colors duration-200">Content</a>
+                <a href="#pricing" class="text-gray-300 hover:text-white transition-colors duration-200">Plans</a>
+                <a href="#devices" class="text-gray-300 hover:text-white transition-colors duration-200">Devices</a>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex items-center gap-4">
+                <a href="#" class="hidden sm:block text-gray-300 hover:text-white transition-colors duration-200">Sign In</a>
+                <a href="#pricing" class="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-primary/30 cursor-pointer">
+                    Start Free Trial
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
+        <!-- Background gradient -->
+        <div class="absolute inset-0 bg-hero-gradient"></div>
+        <div class="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent"></div>
+
+        <!-- Animated background elements -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-cta/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 bg-dark-card border border-dark-border rounded-full px-4 py-2 mb-8 animate-slide-up">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-gray-300">Now streaming in 4K HDR</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="font-heading font-extrabold text-5xl sm:text-6xl lg:text-7xl xl:text-8xl mb-6 leading-tight animate-slide-up" style="animation-delay: 0.1s;">
+                    Unlimited
+                    <span class="gradient-text"> Entertainment</span>
+                    <br>At Your Fingertips
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto mb-10 animate-slide-up" style="animation-delay: 0.2s;">
+                    Stream thousands of movies, TV shows, and originals. Any device. Anytime.
+                    <span class="text-white font-semibold">Cancel anytime.</span>
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-slide-up" style="animation-delay: 0.3s;">
+                    <a href="#pricing" class="w-full sm:w-auto bg-cta hover:bg-cta-dark text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-200 hover:shadow-xl hover:shadow-cta/30 flex items-center justify-center gap-2 cursor-pointer group">
+                        <span>Start Your Free Trial</span>
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                    <a href="#content" class="w-full sm:w-auto bg-dark-card hover:bg-dark-border border border-dark-border text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <span>Browse Content</span>
+                    </a>
+                </div>
+
+                <!-- Trust badges -->
+                <div class="flex flex-wrap items-center justify-center gap-8 animate-slide-up" style="animation-delay: 0.4s;">
+                    <div class="flex items-center gap-2 text-gray-400">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span class="text-sm">No credit card required</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-400">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span class="text-sm">30-day free trial</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-400">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span class="text-sm">Cancel anytime</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Featured Content Section -->
+    <section id="content" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section header -->
+            <div class="text-center mb-16">
+                <h2 class="font-heading font-bold text-4xl sm:text-5xl mb-4">Trending Now</h2>
+                <p class="text-xl text-gray-400">Discover what everyone's watching</p>
+            </div>
+
+            <!-- Featured Banner -->
+            <div class="relative rounded-3xl overflow-hidden mb-12 group cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/80 to-transparent z-10"></div>
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1600&h=600&fit=crop" alt="Featured" class="w-full h-[400px] sm:h-[500px] object-cover">
+                <div class="absolute inset-0 z-20 flex items-center p-8 sm:p-16">
+                    <div class="max-w-2xl">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">NEW RELEASE</span>
+                            <span class="text-gray-300 text-sm">2024</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-3xl sm:text-4xl mb-4">The Last Horizon</h3>
+                        <p class="text-gray-300 mb-6 line-clamp-3">In a world where reality bends, one scientist discovers the truth that could save humanity—or destroy it forever. An epic journey through space and time.</p>
+                        <div class="flex items-center gap-4">
+                            <button class="bg-white text-dark-bg px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:bg-gray-100 transition-colors cursor-pointer">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                                Watch Now
+                            </button>
+                            <button class="bg-dark-bg/80 backdrop-blur text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:bg-dark-bg/100 transition-colors cursor-pointer border border-white/10">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                                My List
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Categories -->
+            <div class="space-y-12">
+                <!-- Category: Movies -->
+                <div>
+                    <h3 class="font-heading font-semibold text-2xl mb-6 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+                        </svg>
+                        Popular Movies
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <!-- Movie posters -->
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3]">
+                            <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=300&h=450&fit=crop" alt="Movie" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3]">
+                            <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?w=300&h=450&fit=crop" alt="Movie" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3]">
+                            <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=300&h=450&fit=crop" alt="Movie" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3]">
+                            <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=300&h=450&fit=crop" alt="Movie" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3] hidden md:block">
+                            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&h=450&fit=crop" alt="Movie" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3] hidden lg:block">
+                            <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=300&h=450&fit=crop" alt="Movie" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category: TV Shows -->
+                <div>
+                    <h3 class="font-heading font-semibold text-2xl mb-6 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/>
+                        </svg>
+                        Binge-Worthy TV Shows
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3]">
+                            <img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=300&h=450&fit=crop" alt="TV Show" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3]">
+                            <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=300&h=450&fit=crop" alt="TV Show" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3]">
+                            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=300&h=450&fit=crop" alt="TV Show" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3]">
+                            <img src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=300&h=450&fit=crop" alt="TV Show" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3] hidden md:block">
+                            <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=300&h=450&fit=crop" alt="TV Show" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poster-card relative rounded-xl overflow-hidden cursor-pointer bg-dark-card aspect-[2/3] hidden lg:block">
+                            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=300&h=450&fit=crop" alt="TV Show" class="w-full h-full object-cover">
+                            <div class="play-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 relative bg-dark-card/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section header -->
+            <div class="text-center mb-16">
+                <h2 class="font-heading font-bold text-4xl sm:text-5xl mb-4">Why StreamVault?</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Experience entertainment like never before with features designed for you</p>
+            </div>
+
+            <!-- Feature grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-8 hover:border-primary/50 transition-colors cursor-pointer group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl mb-3">Lightning Fast Streaming</h3>
+                    <p class="text-gray-400">Start watching instantly with our advanced streaming technology. No buffering, no waiting.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-8 hover:border-primary/50 transition-colors cursor-pointer group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl mb-3">4K HDR Quality</h3>
+                    <p class="text-gray-400">Crystal clear picture quality with support for 4K Ultra HD and HDR content.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-8 hover:border-primary/50 transition-colors cursor-pointer group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl mb-3">Secure & Private</h3>
+                    <p class="text-gray-400">Your viewing history is private. We use bank-level encryption to protect your data.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-8 hover:border-primary/50 transition-colors cursor-pointer group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl mb-3">Personalized For You</h3>
+                    <p class="text-gray-400">Smart recommendations based on your taste. The more you watch, the better it gets.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-8 hover:border-primary/50 transition-colors cursor-pointer group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl mb-3">Offline Downloads</h3>
+                    <p class="text-gray-400">Download shows and movies to watch offline. Perfect for travel or commutes.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-8 hover:border-primary/50 transition-colors cursor-pointer group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-semibold text-xl mb-3">Multiple Profiles</h3>
+                    <p class="text-gray-400">Create up to 5 profiles per account. Everyone gets their own personalized experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section header -->
+            <div class="text-center mb-16">
+                <h2 class="font-heading font-bold text-4xl sm:text-5xl mb-4">Choose Your Plan</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">No hidden fees. Cancel anytime. Start with our 30-day free trial.</p>
+            </div>
+
+            <!-- Pricing cards -->
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-dark-card border border-dark-border rounded-3xl p-8 hover:border-gray-500 transition-colors">
+                    <div class="mb-8">
+                        <h3 class="font-heading font-semibold text-2xl mb-2">Basic</h3>
+                        <p class="text-gray-400">Perfect for casual viewers</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-heading font-bold text-5xl">$8.99</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">720p HD streaming</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">1 screen at a time</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Limited downloads</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-dark-bg hover:bg-dark-border border border-dark-border text-white py-3 rounded-xl font-semibold transition-all cursor-pointer">
+                        Start Free Trial
+                    </button>
+                </div>
+
+                <!-- Premium Plan (Popular) -->
+                <div class="bg-dark-card border-2 border-primary rounded-3xl p-8 relative scale-105 shadow-2xl shadow-primary/20">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                        <span class="bg-primary text-white text-sm font-bold px-4 py-1.5 rounded-full">MOST POPULAR</span>
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="font-heading font-semibold text-2xl mb-2">Premium</h3>
+                        <p class="text-gray-400">Best value for families</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-heading font-bold text-5xl">$14.99</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">4K Ultra HD + HDR</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">4 screens at once</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Unlimited downloads</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">5 user profiles</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Dolby Atmos sound</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-xl font-semibold transition-all cursor-pointer shadow-lg shadow-primary/30">
+                        Start Free Trial
+                    </button>
+                </div>
+
+                <!-- Family Plan -->
+                <div class="bg-dark-card border border-dark-border rounded-3xl p-8 hover:border-gray-500 transition-colors">
+                    <div class="mb-8">
+                        <h3 class="font-heading font-semibold text-2xl mb-2">Family</h3>
+                        <p class="text-gray-400">Ultimate entertainment package</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-heading font-bold text-5xl">$19.99</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Everything in Premium</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Unlimited screens</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Parental controls</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Priority support</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-dark-bg hover:bg-dark-border border border-dark-border text-white py-3 rounded-xl font-semibold transition-all cursor-pointer">
+                        Start Free Trial
+                    </button>
+                </div>
+            </div>
+
+            <!-- Annual discount notice -->
+            <p class="text-center text-gray-400 mt-8">
+                <svg class="w-5 h-5 inline-block mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Save 20% with annual billing
+            </p>
+        </div>
+    </section>
+
+    <!-- Device Compatibility Section -->
+    <section id="devices" class="py-20 relative bg-dark-card/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Content -->
+                <div>
+                    <h2 class="font-heading font-bold text-4xl sm:text-5xl mb-6">Watch Anywhere</h2>
+                    <p class="text-xl text-gray-400 mb-8">Stream on your TV, laptop, phone, or tablet. Start watching on one device and pick up where you left off on another.</p>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">Smart TVs</h3>
+                                <p class="text-sm text-gray-400">Samsung, LG, Sony, Vizio</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">Mobile & Tablet</h3>
+                                <p class="text-sm text-gray-400">iOS & Android</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm14 0H6v12h12V6zm-2.5 3a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM8 9a1 1 0 00-1 1v4a1 1 0 001 1h8a1 1 0 001-1v-4a1 1 0 00-1-1H8z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">Streaming Devices</h3>
+                                <p class="text-sm text-gray-400">Roku, Fire TV, Apple TV, Chromecast</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">Gaming Consoles</h3>
+                                <p class="text-sm text-gray-400">PS5, Xbox, Switch</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Device illustration -->
+                <div class="relative">
+                    <div class="relative z-10">
+                        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0c?w=600&h=400&fit=crop" alt="Devices" class="rounded-3xl shadow-2xl">
+                    </div>
+                    <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+                    <div class="absolute -top-8 -left-8 w-32 h-32 bg-cta/20 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 relative overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark-bg to-cta/10"></div>
+        <div class="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">Ready to Start Watching?</h2>
+            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">Join millions of viewers enjoying unlimited entertainment. Your free trial is just a click away.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#pricing" class="w-full sm:w-auto bg-cta hover:bg-cta-dark text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-200 hover:shadow-xl hover:shadow-cta/30 cursor-pointer group flex items-center justify-center gap-2">
+                    <span>Start Your Free Trial</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                </a>
+                <a href="#" class="w-full sm:w-auto text-gray-300 hover:text-white px-8 py-4 font-semibold transition-colors cursor-pointer">
+                    Learn More
+                </a>
+            </div>
+            <p class="text-gray-500 mt-6 text-sm">No credit card required • Cancel anytime • 30-day free trial</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-dark-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <span class="font-heading font-bold text-xl">StreamVault</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Premium entertainment at your fingertips. Stream, watch, and enjoy.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer" aria-label="Twitter">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer" aria-label="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer" aria-label="YouTube">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Browse</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Movies</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">TV Shows</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">New & Popular</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">My List</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Account</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Supported Devices</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Cookie Preferences</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Corporate Info</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="pt-8 border-t border-dark-border flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-gray-500 text-sm">© 2024 StreamVault. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Privacy</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Terms</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for interactions -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-xl');
+            } else {
+                nav.classList.remove('shadow-xl');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

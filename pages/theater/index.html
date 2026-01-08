@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Cinema - Premium Theater Experience</title>
+    <meta name="description" content="Experience cinema like never before at Grand Cinema. Premium screens, Dolby Atmos sound, and luxury seating for the ultimate movie-going experience.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#F59E0B',
+                        secondary: '#D97706',
+                        accent: '#FBBF24',
+                        dark: '#0A0A0A',
+                        'dark-lighter': '#1A1A1A',
+                        'dark-card': '#242424',
+                    },
+                    backgroundImage: {
+                        'hero-gradient': 'linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(26,26,26,0.9) 50%, rgba(10,10,10,0.95) 100%)',
+                        'spotlight': 'radial-gradient(ellipse at center, rgba(245,158,11,0.15) 0%, transparent 70%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom spotlight effect */
+        .spotlight {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(245,158,11,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Smooth animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .movie-card:hover .movie-overlay {
+            opacity: 1;
+        }
+
+        .movie-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #F59E0B;
+            border-radius: 4px;
+        }
+
+        /* Focus visible for accessibility */
+        *:focus-visible {
+            outline: 2px solid #F59E0B;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-gray-100 font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark/95 backdrop-blur-sm border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+                    </svg>
+                    <span class="font-serif text-xl md:text-2xl font-bold text-white">Grand Cinema</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#movies" class="text-gray-300 hover:text-primary transition-colors duration-200 font-medium">Now Showing</a>
+                    <a href="#experience" class="text-gray-300 hover:text-primary transition-colors duration-200 font-medium">Experience</a>
+                    <a href="#location" class="text-gray-300 hover:text-primary transition-colors duration-200 font-medium">Location</a>
+                    <a href="#newsletter" class="text-gray-300 hover:text-primary transition-colors duration-200 font-medium">Newsletter</a>
+                    <a href="#booking" class="bg-primary hover:bg-secondary text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 cursor-pointer">Book Tickets</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white cursor-pointer p-2" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="#movies" class="text-gray-300 hover:text-primary transition-colors duration-200 font-medium py-2">Now Showing</a>
+                    <a href="#experience" class="text-gray-300 hover:text-primary transition-colors duration-200 font-medium py-2">Experience</a>
+                    <a href="#location" class="text-gray-300 hover:text-primary transition-colors duration-200 font-medium py-2">Location</a>
+                    <a href="#newsletter" class="text-gray-300 hover:text-primary transition-colors duration-200 font-medium py-2">Newsletter</a>
+                    <a href="#booking" class="bg-primary hover:bg-secondary text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 text-center">Book Tickets</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden spotlight">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1920&q=80" alt="Cinema auditorium" class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 bg-hero-gradient"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+            <div class="fade-in">
+                <p class="text-primary font-semibold tracking-wider uppercase text-sm mb-4">Welcome to</p>
+                <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+                    Grand Cinema
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto font-light">
+                    Experience movies in unparalleled luxury with state-of-the-art technology and premium comfort
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#booking" class="w-full sm:w-auto bg-primary hover:bg-secondary text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 text-lg cursor-pointer">
+                        Book Your Experience
+                    </a>
+                    <a href="#movies" class="w-full sm:w-auto border-2 border-white/30 hover:border-primary text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:bg-white/5 text-lg cursor-pointer">
+                        View Showtimes
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Now Showing Section -->
+    <section id="movies" class="py-20 md:py-32 bg-dark-lighter">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-primary font-semibold tracking-wider uppercase text-sm mb-3">Now Showing</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Featured Movies</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Discover the latest blockbusters and critically acclaimed films</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Movie Card 1 -->
+                <div class="movie-card group relative rounded-xl overflow-hidden cursor-pointer bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300">
+                    <div class="relative aspect-[2/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&q=80" alt="Movie poster" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="movie-overlay absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-0 transition-opacity duration-300 flex items-end p-6">
+                            <button class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 w-full">
+                                Book Tickets
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-serif text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">The Quantum Paradox</h3>
+                        <p class="text-gray-400 text-sm mb-3">Sci-Fi • Thriller • 2h 34m</p>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                                <span class="ml-1 text-white font-semibold">8.9</span>
+                            </div>
+                            <span class="text-gray-500">•</span>
+                            <span class="text-primary font-semibold">IMAX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movie Card 2 -->
+                <div class="movie-card group relative rounded-xl overflow-hidden cursor-pointer bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300">
+                    <div class="relative aspect-[2/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=600&q=80" alt="Movie poster" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="movie-overlay absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-0 transition-opacity duration-300 flex items-end p-6">
+                            <button class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 w-full">
+                                Book Tickets
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-serif text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">Midnight Serenade</h3>
+                        <p class="text-gray-400 text-sm mb-3">Romance • Drama • 2h 12m</p>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                                <span class="ml-1 text-white font-semibold">9.2</span>
+                            </div>
+                            <span class="text-gray-500">•</span>
+                            <span class="text-accent font-semibold">Dolby</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movie Card 3 -->
+                <div class="movie-card group relative rounded-xl overflow-hidden cursor-pointer bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300">
+                    <div class="relative aspect-[2/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Movie poster" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="movie-overlay absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-0 transition-opacity duration-300 flex items-end p-6">
+                            <button class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 w-full">
+                                Book Tickets
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-serif text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">Shadow Protocol</h3>
+                        <p class="text-gray-400 text-sm mb-3">Action • Adventure • 2h 28m</p>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                                <span class="ml-1 text-white font-semibold">8.7</span>
+                            </div>
+                            <span class="text-gray-500">•</span>
+                            <span class="text-primary font-semibold">4DX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movie Card 4 -->
+                <div class="movie-card group relative rounded-xl overflow-hidden cursor-pointer bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300">
+                    <div class="relative aspect-[2/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=600&q=80" alt="Movie poster" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="movie-overlay absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-0 transition-opacity duration-300 flex items-end p-6">
+                            <button class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 w-full">
+                                Book Tickets
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-serif text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">The Last Symphony</h3>
+                        <p class="text-gray-400 text-sm mb-3">Drama • Music • 2h 45m</p>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                                <span class="ml-1 text-white font-semibold">9.5</span>
+                            </div>
+                            <span class="text-gray-500">•</span>
+                            <span class="text-accent font-semibold">Dolby</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gap-2 text-primary hover:text-secondary font-semibold transition-colors duration-200 cursor-pointer">
+                    View All Movies
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 md:py-32 bg-dark relative overflow-hidden">
+        <div class="absolute inset-0 bg-spotlight opacity-30"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-primary font-semibold tracking-wider uppercase text-sm mb-3">Premium Features</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">The Grand Experience</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">State-of-the-art technology meets unparalleled comfort</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="group p-8 rounded-2xl bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300 hover:bg-dark-lighter">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-3">IMAX Laser</h3>
+                    <p class="text-gray-400 leading-relaxed">Experience crystal-clear 4K projection with stunning contrast and vibrant colors on our massive IMAX screens.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="group p-8 rounded-2xl bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300 hover:bg-dark-lighter">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-3">Dolby Atmos</h3>
+                    <p class="text-gray-400 leading-relaxed">Immersive, multidimensional sound that flows all around you, bringing every moment to life with breathtaking realism.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="group p-8 rounded-2xl bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300 hover:bg-dark-lighter">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-3">4DX Experience</h3>
+                    <p class="text-gray-400 leading-relaxed">Feel every moment with motion seats, wind, fog, and scent effects that synchronize perfectly with the on-screen action.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="group p-8 rounded-2xl bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300 hover:bg-dark-lighter">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-3">Premium Seating</h3>
+                    <p class="text-gray-400 leading-relaxed">Luxury recliner seats with extra legroom, heated cushions, and personal tray tables for maximum comfort.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="group p-8 rounded-2xl bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300 hover:bg-dark-lighter">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-3">VIP Lounges</h3>
+                    <p class="text-gray-400 leading-relaxed">Exclusive access to our VIP lounges with complimentary gourmet snacks and premium beverages before your show.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="group p-8 rounded-2xl bg-dark-card border border-white/5 hover:border-primary/50 transition-all duration-300 hover:bg-dark-lighter">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold text-white mb-3">Online Booking</h3>
+                    <p class="text-gray-400 leading-relaxed">Skip the lines with our seamless online booking system. Choose your seats, order concessions, and arrive in style.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="booking" class="py-20 md:py-32 bg-dark-lighter relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Ready for the Show?</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Book your tickets now and immerse yourself in the ultimate cinema experience.</p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <a href="#" class="w-full sm:w-auto bg-primary hover:bg-secondary text-white px-10 py-4 rounded-lg font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 text-lg cursor-pointer">
+                    Book Tickets Online
+                </a>
+                <a href="#" class="w-full sm:w-auto border-2 border-primary/50 text-primary hover:bg-primary hover:text-white px-10 py-4 rounded-lg font-semibold transition-all duration-300 text-lg cursor-pointer">
+                    Download App
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div class="text-4xl font-bold text-primary mb-2">12</div>
+                    <div class="text-gray-400">Premium Screens</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-primary mb-2">4K</div>
+                    <div class="text-gray-400">Laser Projection</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-primary mb-2">50K+</div>
+                    <div class="text-gray-400">Happy Moviegoers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-20 md:py-32 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-primary font-semibold tracking-wider uppercase text-sm mb-3">Visit Us</p>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Find Our Location</h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">Located in the heart of downtown, Grand Cinema is easily accessible by public transit and offers ample parking space.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-semibold text-lg mb-1">Address</h3>
+                                <p class="text-gray-400">123 Cinema Boulevard, Downtown District<br>New York, NY 10001</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-semibold text-lg mb-1">Opening Hours</h3>
+                                <p class="text-gray-400">Monday - Thursday: 10:00 AM - 11:00 PM<br>Friday - Sunday: 9:00 AM - 1:00 AM</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-semibold text-lg mb-1">Contact</h3>
+                                <p class="text-gray-400">Phone: (555) 123-4567<br>Email: info@grandcinema.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="aspect-square rounded-2xl overflow-hidden bg-dark-card border border-white/5">
+                        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=800&q=80" alt="Cinema exterior" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-xl shadow-xl">
+                        <div class="text-3xl font-bold mb-1">20+</div>
+                        <div class="text-sm opacity-90">Years of Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="py-20 md:py-32 bg-dark-lighter">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="p-8 md:p-12 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20">
+                <svg class="w-12 h-12 text-primary mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Stay Updated</h2>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for exclusive offers, early access to tickets, and the latest movie news.</p>
+
+                <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        required
+                        class="flex-1 px-6 py-4 rounded-lg bg-dark border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors duration-200"
+                        aria-label="Email address"
+                    >
+                    <button
+                        type="submit"
+                        class="whitespace-nowrap bg-primary hover:bg-secondary text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 cursor-pointer"
+                    >
+                        Subscribe
+                    </button>
+                </form>
+                <p class="text-gray-500 text-sm mt-4">No spam, unsubscribe anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+                        </svg>
+                        <span class="font-serif text-xl font-bold text-white">Grand Cinema</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Experience the magic of cinema in unparalleled luxury and comfort.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#movies" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Now Showing</a></li>
+                        <li><a href="#experience" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Experience</a></li>
+                        <li><a href="#booking" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Book Tickets</a></li>
+                        <li><a href="#location" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Location</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-200 text-sm">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-dark-card rounded-lg flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all duration-200 cursor-pointer" aria-label="Facebook">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-dark-card rounded-lg flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all duration-200 cursor-pointer" aria-label="Twitter">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-dark-card rounded-lg flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all duration-200 cursor-pointer" aria-label="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-dark-card rounded-lg flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all duration-200 cursor-pointer" aria-label="YouTube">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">&copy; 2025 Grand Cinema. All rights reserved.</p>
+                <p class="text-gray-500 text-sm">Designed with premium cinema experience in mind.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

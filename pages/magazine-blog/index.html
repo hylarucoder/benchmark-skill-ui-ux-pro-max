@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Edition - Stories That Matter</title>
+    <meta name="description" content="Curated stories, insightful articles, and thought-provoking content from the world's most inspiring voices.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#60A5FA',
+                        cta: '#F97316',
+                        background: '#F8FAFC',
+                        'text-primary': '#1E293B',
+                        'text-muted': '#475569',
+                        border: '#E2E8F0',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom styles */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #DBEAFE 100%);
+        }
+
+        .article-card:hover .article-image {
+            transform: scale(1.05);
+        }
+
+        .category-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-text-primary bg-background">
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 right-4 z-50 bg-white/90 backdrop-blur-md rounded-2xl shadow-sm border border-border/50">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#" class="font-serif text-2xl font-bold text-text-primary hover:text-primary transition-colors duration-200">
+                    The Edition
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#featured" class="text-sm font-medium text-text-primary hover:text-primary transition-colors duration-200">Featured</a>
+                    <a href="#categories" class="text-sm font-medium text-text-primary hover:text-primary transition-colors duration-200">Categories</a>
+                    <a href="#latest" class="text-sm font-medium text-text-primary hover:text-primary transition-colors duration-200">Latest</a>
+                    <a href="#newsletter" class="text-sm font-medium text-text-primary hover:text-primary transition-colors duration-200">Newsletter</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="flex items-center space-x-4">
+                    <a href="#subscribe" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-cta rounded-full hover:bg-orange-600 transition-colors duration-200 cursor-pointer">
+                        Subscribe
+                    </a>
+                    <!-- Mobile menu button -->
+                    <button type="button" class="md:hidden p-2 rounded-lg text-text-primary hover:bg-gray-100 transition-colors duration-200" aria-label="Open menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Tagline -->
+                <p class="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-primary bg-blue-50 rounded-full">
+                    Stories That Matter
+                </p>
+
+                <!-- Headline -->
+                <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-tight mb-6">
+                    Where Ideas Come to Life
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Discover thoughtfully curated articles, in-depth analyses, and inspiring stories from the world's most creative minds.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#featured" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-cta rounded-full hover:bg-orange-600 transition-all duration-200 cursor-pointer shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40">
+                        Start Reading
+                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                    <a href="#newsletter" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-text-primary bg-white border-2 border-border rounded-full hover:border-primary hover:text-primary transition-all duration-200 cursor-pointer">
+                        Get Weekly Digest
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+                    <div>
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-text-primary">50K+</p>
+                        <p class="text-sm text-text-muted mt-1">Readers</p>
+                    </div>
+                    <div>
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-text-primary">500+</p>
+                        <p class="text-sm text-text-muted mt-1">Articles</p>
+                    </div>
+                    <div>
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-text-primary">100+</p>
+                        <p class="text-sm text-text-muted mt-1">Writers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Articles Section -->
+    <section id="featured" class="py-16 sm:py-20 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <p class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Editor's Pick</p>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-text-primary">Featured Stories</h2>
+                </div>
+                <a href="#" class="hidden sm:flex items-center text-sm font-medium text-primary hover:text-secondary transition-colors duration-200 cursor-pointer">
+                    View All
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Featured Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Main Featured Article -->
+                <article class="article-card group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-2xl mb-5 aspect-[4/3] bg-gradient-to-br from-blue-100 to-indigo-100">
+                        <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=600&fit=crop" alt="Featured article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        <div class="absolute top-4 left-4">
+                            <span class="inline-block px-3 py-1.5 text-xs font-semibold text-white bg-primary rounded-full">Featured</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-sm font-medium text-primary">Technology</span>
+                            <span class="text-text-muted">·</span>
+                            <span class="text-sm text-text-muted">8 min read</span>
+                        </div>
+                        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-tight">
+                            The Future of AI: How Machine Learning is Reshaping Creative Industries
+                        </h3>
+                        <p class="text-text-muted line-clamp-2">
+                            Explore how artificial intelligence is revolutionizing the way we create, consume, and interact with creative content across various industries.
+                        </p>
+                        <div class="flex items-center space-x-3">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Author" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">James Wilson</p>
+                                <p class="text-xs text-text-muted">Dec 15, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Secondary Featured Articles -->
+                <div class="space-y-6">
+                    <!-- Article 2 -->
+                    <article class="article-card flex flex-col sm:flex-row gap-5 group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-xl aspect-[16/9] sm:aspect-[4/3] sm:w-48 bg-gradient-to-br from-amber-50 to-orange-100 flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=face" alt="Article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        </div>
+                        <div class="space-y-2 flex-1">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs font-medium text-primary">Design</span>
+                                <span class="text-text-muted text-xs">·</span>
+                                <span class="text-xs text-text-muted">5 min read</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-tight">
+                                Minimalist Design Principles for Modern Web Applications
+                            </h3>
+                            <p class="text-sm text-text-muted line-clamp-2">
+                                Learn how simplicity and clarity can transform user experience and create lasting impact.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Article 3 -->
+                    <article class="article-card flex flex-col sm:flex-row gap-5 group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-xl aspect-[16/9] sm:aspect-[4/3] sm:w-48 bg-gradient-to-br from-green-50 to-emerald-100 flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=400&h=300&fit=crop" alt="Article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        </div>
+                        <div class="space-y-2 flex-1">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs font-medium text-primary">Productivity</span>
+                                <span class="text-text-muted text-xs">·</span>
+                                <span class="text-xs text-text-muted">6 min read</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-tight">
+                                Building Deep Work Habits in a Distracted World
+                            </h3>
+                            <p class="text-sm text-text-muted line-clamp-2">
+                                Discover strategies to maintain focus and produce meaningful work in an age of constant connectivity.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Article 4 -->
+                    <article class="article-card flex flex-col sm:flex-row gap-5 group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-xl aspect-[16/9] sm:aspect-[4/3] sm:w-48 bg-gradient-to-br from-purple-50 to-violet-100 flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop" alt="Article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        </div>
+                        <div class="space-y-2 flex-1">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs font-medium text-primary">Leadership</span>
+                                <span class="text-text-muted text-xs">·</span>
+                                <span class="text-xs text-text-muted">7 min read</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-tight">
+                                Empathetic Leadership: The Key to Remote Team Success
+                            </h3>
+                            <p class="text-sm text-text-muted line-clamp-2">
+                                How understanding and emotional intelligence drive collaboration in distributed teams.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-16 sm:py-20 lg:py-24 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <p class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Explore Topics</p>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-text-primary mb-4">Browse by Category</h2>
+                <p class="text-text-muted">Find stories that match your interests and dive deep into the topics you care about.</p>
+            </div>
+
+            <!-- Categories Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                <a href="#" class="category-pill group p-6 bg-white rounded-2xl border border-border hover:border-primary transition-all duration-200 cursor-pointer text-center">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-blue-50 flex items-center justify-center group-hover:bg-primary transition-colors duration-200">
+                        <svg class="w-6 h-6 text-primary group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary group-hover:text-primary transition-colors duration-200">Technology</h3>
+                    <p class="text-xs text-text-muted mt-1">124 articles</p>
+                </a>
+
+                <a href="#" class="category-pill group p-6 bg-white rounded-2xl border border-border hover:border-primary transition-all duration-200 cursor-pointer text-center">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-purple-50 flex items-center justify-center group-hover:bg-primary transition-colors duration-200">
+                        <svg class="w-6 h-6 text-primary group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary group-hover:text-primary transition-colors duration-200">Design</h3>
+                    <p class="text-xs text-text-muted mt-1">98 articles</p>
+                </a>
+
+                <a href="#" class="category-pill group p-6 bg-white rounded-2xl border border-border hover:border-primary transition-all duration-200 cursor-pointer text-center">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-green-50 flex items-center justify-center group-hover:bg-primary transition-colors duration-200">
+                        <svg class="w-6 h-6 text-primary group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary group-hover:text-primary transition-colors duration-200">Business</h3>
+                    <p class="text-xs text-text-muted mt-1">156 articles</p>
+                </a>
+
+                <a href="#" class="category-pill group p-6 bg-white rounded-2xl border border-border hover:border-primary transition-all duration-200 cursor-pointer text-center">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-orange-50 flex items-center justify-center group-hover:bg-primary transition-colors duration-200">
+                        <svg class="w-6 h-6 text-primary group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary group-hover:text-primary transition-colors duration-200">Education</h3>
+                    <p class="text-xs text-text-muted mt-1">87 articles</p>
+                </a>
+
+                <a href="#" class="category-pill group p-6 bg-white rounded-2xl border border-border hover:border-primary transition-all duration-200 cursor-pointer text-center">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-red-50 flex items-center justify-center group-hover:bg-primary transition-colors duration-200">
+                        <svg class="w-6 h-6 text-primary group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary group-hover:text-primary transition-colors duration-200">Lifestyle</h3>
+                    <p class="text-xs text-text-muted mt-1">142 articles</p>
+                </a>
+
+                <a href="#" class="category-pill group p-6 bg-white rounded-2xl border border-border hover:border-primary transition-all duration-200 cursor-pointer text-center">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-indigo-50 flex items-center justify-center group-hover:bg-primary transition-colors duration-200">
+                        <svg class="w-6 h-6 text-primary group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary group-hover:text-primary transition-colors duration-200">Science</h3>
+                    <p class="text-xs text-text-muted mt-1">93 articles</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Articles Section -->
+    <section id="latest" class="py-16 sm:py-20 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <p class="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Stay Updated</p>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-text-primary">Latest Stories</h2>
+                </div>
+                <a href="#" class="hidden sm:flex items-center text-sm font-medium text-primary hover:text-secondary transition-colors duration-200 cursor-pointer">
+                    Load More
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <article class="article-card group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4 aspect-[16/10] bg-gradient-to-br from-blue-50 to-cyan-50">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop" alt="Article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        <div class="absolute top-3 left-3">
+                            <span class="inline-block px-2.5 py-1 text-xs font-semibold text-white bg-primary/90 rounded-full">Technology</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-text-muted">Dec 14, 2024</span>
+                            <span class="text-text-muted">·</span>
+                            <span class="text-xs text-text-muted">5 min read</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-snug line-clamp-2">
+                            The Rise of No-Code Platforms: Democratizing Software Development
+                        </h3>
+                        <p class="text-sm text-text-muted line-clamp-2">
+                            How no-code tools are empowering non-technical founders to bring their ideas to life.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4 aspect-[16/10] bg-gradient-to-br from-pink-50 to-rose-50">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=400&fit=crop" alt="Article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        <div class="absolute top-3 left-3">
+                            <span class="inline-block px-2.5 py-1 text-xs font-semibold text-white bg-secondary/90 rounded-full">Business</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-text-muted">Dec 13, 2024</span>
+                            <span class="text-text-muted">·</span>
+                            <span class="text-xs text-text-muted">7 min read</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-snug line-clamp-2">
+                            Building a Sustainable Business Model for the Modern Era
+                        </h3>
+                        <p class="text-sm text-text-muted line-clamp-2">
+                            Key strategies for creating long-term value in today's competitive landscape.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4 aspect-[16/10] bg-gradient-to-br from-emerald-50 to-green-50">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        <div class="absolute top-3 left-3">
+                            <span class="inline-block px-2.5 py-1 text-xs font-semibold text-white bg-green-600/90 rounded-full">Productivity</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-text-muted">Dec 12, 2024</span>
+                            <span class="text-text-muted">·</span>
+                            <span class="text-xs text-text-muted">4 min read</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-snug line-clamp-2">
+                            Morning Routines of Highly Successful Entrepreneurs
+                        </h3>
+                        <p class="text-sm text-text-muted line-clamp-2">
+                            Discover the habits that top performers swear by to start their day right.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="article-card group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4 aspect-[16/10] bg-gradient-to-br from-violet-50 to-purple-50">
+                        <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop" alt="Article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        <div class="absolute top-3 left-3">
+                            <span class="inline-block px-2.5 py-1 text-xs font-semibold text-white bg-purple-600/90 rounded-full">Design</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-text-muted">Dec 11, 2024</span>
+                            <span class="text-text-muted">·</span>
+                            <span class="text-xs text-text-muted">6 min read</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-snug line-clamp-2">
+                            Typography Trends That Will Define 2025 Web Design
+                        </h3>
+                        <p class="text-sm text-text-muted line-clamp-2">
+                            A deep dive into the fonts and type treatments gaining traction this year.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="article-card group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4 aspect-[16/10] bg-gradient-to-br from-amber-50 to-yellow-50">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=400&fit=crop" alt="Article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        <div class="absolute top-3 left-3">
+                            <span class="inline-block px-2.5 py-1 text-xs font-semibold text-white bg-amber-600/90 rounded-full">Education</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-text-muted">Dec 10, 2024</span>
+                            <span class="text-text-muted">·</span>
+                            <span class="text-xs text-text-muted">8 min read</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-snug line-clamp-2">
+                            The Future of Remote Learning: Opportunities and Challenges
+                        </h3>
+                        <p class="text-sm text-text-muted line-clamp-2">
+                            How education is evolving in the digital age and what it means for learners.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="article-card group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-xl mb-4 aspect-[16/10] bg-gradient-to-br from-cyan-50 to-sky-50">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop" alt="Article" class="article-image w-full h-full object-cover transition-transform duration-500 ease-out">
+                        <div class="absolute top-3 left-3">
+                            <span class="inline-block px-2.5 py-1 text-xs font-semibold text-white bg-sky-600/90 rounded-full">Leadership</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-text-muted">Dec 9, 2024</span>
+                            <span class="text-text-muted">·</span>
+                            <span class="text-xs text-text-muted">5 min read</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-text-primary group-hover:text-primary transition-colors duration-200 leading-snug line-clamp-2">
+                            Managing Change: Leading Teams Through Uncertain Times
+                        </h3>
+                        <p class="text-sm text-text-muted line-clamp-2">
+                            Essential leadership skills for navigating organizational transformation.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-slate-900 to-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Icon -->
+            <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-white/10">
+                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </div>
+
+            <!-- Headline -->
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+                Get the Weekly Digest
+            </h2>
+
+            <!-- Subheadline -->
+            <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8">
+                Join 50,000+ readers who receive our curated collection of the best stories, insights, and inspiration every Sunday morning.
+            </p>
+
+            <!-- Newsletter Form -->
+            <form class="max-w-md mx-auto" onsubmit="event.preventDefault();">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        required
+                        class="flex-1 px-5 py-3.5 text-base text-white placeholder-slate-400 bg-white/10 border border-white/20 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                    >
+                    <button
+                        type="submit"
+                        class="inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-white bg-cta rounded-full hover:bg-orange-600 transition-all duration-200 cursor-pointer shadow-lg shadow-orange-500/30 whitespace-nowrap"
+                    >
+                        Subscribe
+                    </button>
+                </div>
+                <p class="mt-4 text-sm text-slate-400">
+                    No spam, ever. Unsubscribe anytime. Read our <a href="#" class="text-primary hover:text-secondary transition-colors duration-200 underline">Privacy Policy</a>.
+                </p>
+            </form>
+
+            <!-- Trust Badges -->
+            <div class="mt-12 flex items-center justify-center space-x-8 opacity-60">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-sm text-white">Free forever</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-sm text-white">No spam</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-sm text-white">Curated content</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-border py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+                <!-- Brand Column -->
+                <div class="lg:col-span-1">
+                    <a href="#" class="font-serif text-2xl font-bold text-text-primary hover:text-primary transition-colors duration-200">
+                        The Edition
+                    </a>
+                    <p class="mt-4 text-sm text-text-muted leading-relaxed">
+                        Curated stories, insightful articles, and thought-provoking content from the world's most inspiring voices.
+                    </p>
+                    <!-- Social Links -->
+                    <div class="flex items-center space-x-4 mt-6">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-background text-text-muted hover:text-primary hover:bg-blue-50 transition-all duration-200 cursor-pointer" aria-label="Twitter">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-background text-text-muted hover:text-primary hover:bg-blue-50 transition-all duration-200 cursor-pointer" aria-label="LinkedIn">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-background text-text-muted hover:text-primary hover:bg-blue-50 transition-all duration-200 cursor-pointer" aria-label="RSS">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18a2 2 0 11-4 0 2 2 0 014 0zM6 12a6 6 0 016-6 2 2 0 012 2c0 4.418-4.03 8-9 8a2 2 0 01-2-2 6 6 0 016-6zm0-6a12 12 0 0112 12 2 2 0 01-2 2c-6.627 0-12-5.373-12-12a2 2 0 012-2z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Columns -->
+                <div>
+                    <h4 class="font-semibold text-text-primary mb-4">Explore</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Featured</a></li>
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Latest Stories</a></li>
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Categories</a></li>
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Writers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-text-primary mb-4">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">About Us</a></li>
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Careers</a></li>
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Advertise</a></li>
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-text-primary mb-4">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Privacy Policy</a></li>
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Terms of Service</a></li>
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Cookie Policy</a></li>
+                        <li><a href="#" class="text-sm text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="pt-8 mt-12 border-t border-border">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-sm text-text-muted">
+                        © 2024 The Edition. All rights reserved.
+                    </p>
+                    <p class="text-sm text-text-muted">
+                        Made with ❤️ for curious minds
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
